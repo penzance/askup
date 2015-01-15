@@ -1,0 +1,45 @@
+<div class="container">
+  <br>
+  <h3 class="center"><b>Questions</b></h3><br>
+
+  <% collapse_count = 1 %>
+
+  <% @questions.each do |question| %>
+
+    <% if question["user_id"] == current_user.id %>
+
+
+      <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <div class="row valign">
+              <div class="col-sm-11">
+                <b><%= link_to question["text"], "/questions/#{question["id"]}" %></b>
+              </div>
+              <div class="col-sm-1">
+                <!-- <a class="btn btn-theme btn-sm collapsed" style="margin-left:8px;cursor:pointer;" data-target=<%= "#collapse#{collapse_count}" %> data-toggle="collapse">
+                  Reveal
+                </a> -->
+              </div>
+            </div>
+          </h4>
+        </div>
+        <div id=<%= "collapse#{collapse_count}" %> class="panel-collapse collapse">
+          <div class="panel-body">
+            <% if question["answers"][0] %>
+              <%= question["answers"][0]["text"] %>
+            <% end %>
+
+          </div>
+        </div>
+
+      </div>
+      </div>
+      <% collapse_count += 1 %>
+    <% end %>
+  <% end %>
+
+<br>
+
+</div class="container">

@@ -1,0 +1,41 @@
+// Place all the styles related to the answers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#response {
+  .yes {
+    text-align: right;
+  }
+  a {
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    line-height: 75px;
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    &:hover {
+      color: white;
+    }
+  }
+  body {
+    color: white;
+  }
+}
+#answers {
+  .correct_div {
+    width: 95%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 5px;
+    .correct {
+    background: #27ad60;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    
+    } 
+  }
+  
+}
+
