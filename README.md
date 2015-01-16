@@ -4,6 +4,9 @@ AskUp is an application designed to improve learning and retention.
 
 ## Configuration
 
+### Ruby, rails
+* App has been developed thus far using Ruby 2.1.4 and Rails 4.2.0
+
 ### Settings files
 * Create .yml versions of all config/*.yml.example files
 * generate secret keys (see secrets.yml.example)
