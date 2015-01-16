@@ -12,8 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets 
-//= require custom
+//= require bootstrap-sprockets
 //= require home
 //= require answers
-//= require_tree .
+//= require global
+//= require jquery.easing.min
+//= require jquery.scrollTo
+//= require wow.min
+//= require custom
