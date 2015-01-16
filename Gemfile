@@ -7,7 +7,9 @@ gem 'font-awesome-sass'
 gem 'rest-client'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
-# Use postgresql as the database for Active Record
+# Use sqlite3 as the database for Active Record (for development, test, pilot)
+gem 'sqlite3'
+# Use postgresql as the database for Active Record (for production)
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
