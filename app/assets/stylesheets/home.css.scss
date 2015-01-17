@@ -7,7 +7,7 @@
   height: 52vw;
   color: white;
   //line-height: -35px;
-  
+
   h1 {
     font-family: $headers;
     font-weight: 800;
@@ -39,7 +39,7 @@
 }
 
 #twrap {
-  background: url('t-back.jpg') no-repeat center top;
+  background: image-url('t-back.jpg') no-repeat center top;
   margin-top: 0px;
   padding-top:60px;
   text-align:center;
@@ -47,7 +47,7 @@
   background-position: center center;
   min-height: 450px;
   width: 100%;
-  
+
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
