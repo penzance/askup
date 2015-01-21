@@ -109,27 +109,24 @@ a {
     margin-left: 30px;
     margin-right: 20px;
   }
-
+  .navbar-brand {
+    color: white;
+    font-family: $headers;
+    font-weight: 900;
+  }
+  .navbar-nav > li > a {
+    color: white;
+    &:hover, &:focus {
+      color: white;
+    }
+    &.offset {
+      color: $peach;
+      &:hover, &:focus {
+        color: $peach;
+      }
+    }
+  }
 }
-
-.navbar-inverse .navbar-nav > li > a {
-  color: white;
-
-}
-
-.navbar-inverse .navbar-brand {
-color: white;
-font-family: $headers;
-font-weight: 900;
-}
-
-.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-  color: white;
-}
-
-
-
-
 
 
 .one-edge-shadow {

@@ -22,8 +22,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-left">
-            <li><%= link_to 'Questions', questions_path, class: "float" %></li>
-            <li><%= link_to 'New Question', new_question_path, class: "float" %></li>
+            <li><%= link_to 'Review Questions', questions_path, class: "float" %></li>
+            <li><%= link_to 'Generate Question', new_question_path, class: "float" %></li>
+            <li><a class="float offset" href="mailto:help@askup.us">Feedback</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
            
@@ -45,14 +46,14 @@
 <div class="spacer_nav"></div>
     <% if flash[:notice] %>
       <div class="alert alert-success center">
-        <%= flash[:notice] %> &nbsp
+        <%= flash[:notice] %> &nbsp;
         <a href="#" class="close-alert grow"><%= icon('times-circle') %></a>
       </div>
       <% end %>
 
       <% if flash[:alert] %>
       <div class="alert alert-danger center">
-        <%= flash[:alert] %> &nbsp
+        <%= flash[:alert] %> &nbsp;
         <a href="#" class="close-alert grow"><%= icon('times-circle') %></a>
       </div>
     <% end %>
