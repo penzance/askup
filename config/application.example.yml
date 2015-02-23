@@ -1,6 +1,6 @@
 defaults: &defaults
   # 'qm' refers to 'Question Market' aka the question bank
-  qm_api_url: "http://localhost:3000/"
+  qm_api_url: "http://localhost:3001/"
   devise_mailer_sender: "askup@example.com"
 
 development:
