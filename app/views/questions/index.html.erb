@@ -1,15 +1,30 @@
+
 <div class="container">
   <br>
   <h3 class="center"><b>Questions</b></h3><br>
 
+  <div id = "all-mine-filter" class="btn-group" data-toggle="buttons">
+    <label class="btn btn-primary active" id="mine-radio">
+      <input type="radio" name="options"  autocomplete="off"> Mine
+    </label>
+    <label class="btn btn-primary" id="other-radio">
+      <input type="radio" name="options" autocomplete="off" checked> Other
+    </label>
+  </div>
+
   <% collapse_count = 1 %>
 
+  <div class = "question_list">
   <% @questions.each do |question| %>
 
-    <% if question["user_id"] == current_user.id %>
+      
+      <% if question['user_id'] == current_user.id %>
+      <div class = "panel-group my-question">
+      <% else %>
+      <div class = 'panel-group other-question hidden'>
+      <% end %>
 
 
-      <div class="panel-group">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
@@ -38,7 +53,9 @@
       </div>
       <% collapse_count += 1 %>
     <% end %>
-  <% end %>
+  </div>
+
+
 
 <br>
 
