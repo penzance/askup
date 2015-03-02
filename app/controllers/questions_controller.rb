@@ -5,7 +5,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @questions = get_question_list()
+    @questions = get_question_list().sort_by{|hash| hash['created_at']}.reverse!
+    @my_questions = @questions.select{|question| question["user_id"] == current_user.id}
   end
 
   def new
