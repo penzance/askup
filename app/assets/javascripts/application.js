@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require home
 //= require answers
+//= require questions
 //= require global
 //= require jquery.easing.min
 //= require jquery.scrollTo
