@@ -4,6 +4,7 @@
   <title>AskUp</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
 </head>
@@ -47,14 +48,14 @@
     <% if flash[:notice] %>
       <div class="alert alert-success center">
         <%= flash[:notice] %> &nbsp;
-        <a href="#" class="close-alert grow"><%= icon('times-circle') %></a>
+        <a href="#" class="close-alert grow"><i class="fa fa-times-circle"></i></a>
       </div>
       <% end %>
 
       <% if flash[:alert] %>
       <div class="alert alert-danger center">
         <%= flash[:alert] %> &nbsp;
-        <a href="#" class="close-alert grow"><%= icon('times-circle') %></a>
+        <a href="#" class="close-alert grow"><i class="fa fa-times-circle"></i></a>
       </div>
     <% end %>
 
