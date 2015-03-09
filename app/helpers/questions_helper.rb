@@ -11,5 +11,15 @@ module QuestionsHelper
     response = RestClient.post(ENV["qm_api_url"] + 'questions', json, :content_type => :json , :accept => :json)
     logger.debug "THIS IS THE #{response}"
   end
+
+  def next_question question_list, current_question_id
+    # find index of current_question_id in question_list
+    # return current_question_list[index+1]
+  end
+
+  def prev_question
+    question. where("id < ?", id).last
+  end 
+
 end
 

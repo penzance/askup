@@ -28,9 +28,17 @@ class QuestionsController < ApplicationController
     @question = @questions[(params[:id]).to_i - 1]["text"]
     @answers = @questions[(params[:id]).to_i - 1]["answers"]
     @answer = Answer.new
-
-
   end
+
+  def next
+    @questions = get_question_list()
+    @next_question_id = next_question(@questions, [params[:id]])
+  end 
+
+   def previous
+    @questions = get_question_list()
+    @prev_question_id = @question.prev_question[params[:id]]
+  end 
 
   def feedback
     user_knowledge = (params[:correct] == "yes" ? "knew" : "didn't know")
@@ -39,5 +47,7 @@ class QuestionsController < ApplicationController
         format.js { render :nothing => true }
     end
   end
+
+  
 
 end
