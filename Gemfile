@@ -2,7 +2,9 @@ source 'https://rubygems.org'
 
 gem 'devise'
 gem 'bootstrap-sass'
-gem 'font-awesome-sass'
+
+# for pilot, use thin web server so SSL is easy to set up
+gem 'thin'
 
 gem 'rest-client'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
