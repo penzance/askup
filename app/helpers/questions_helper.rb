@@ -11,5 +11,10 @@ module QuestionsHelper
     response = RestClient.post(ENV["qm_api_url"] + 'questions', json, :content_type => :json , :accept => :json)
     logger.debug "THIS IS THE #{response}"
   end
+
+
+  def htest
+   
+  end
 end
 
