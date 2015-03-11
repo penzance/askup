@@ -1,6 +1,5 @@
 class Answer < ActiveRecord::Base
   belongs_to :question
-  validates_length_of :answer, :minimum => 1           # more than 8 characters
 
   def respond(response)
     question = Question.find(self.question_id)
