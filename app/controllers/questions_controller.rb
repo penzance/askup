@@ -31,16 +31,6 @@ class QuestionsController < ApplicationController
     @answer = Answer.new
   end
 
-  def next
-    @questions = get_question_list()
-    @next_question_id = next_question(@questions, [params[:id]])
-  end 
-
-   def previous
-    @questions = get_question_list()
-    @prev_question_id = @question.prev_question[params[:id]]
-  end 
-
   def feedback
     user_knowledge = (params[:correct] == "yes" ? "knew" : "didn't know")
     analyzer.info("User #{current_user.id} #{user_knowledge} question #{params[:id]}")
