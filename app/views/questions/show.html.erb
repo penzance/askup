@@ -1,7 +1,7 @@
 <div class="alert alert-success center" style="display: none;">
   <div id="alert_text"> </div>
    &nbsp;
-  <a href="#" class="close-alert grow"><%= icon('times-circle') %></a>
+  <a href="#" class="close-alert grow"><i class="fa fa-times-circle"></i></a>
 </div>
 
 <div class="prettyform">
@@ -18,29 +18,36 @@
             <div class="center">
               <%= f.submit "Submit answer", class: 'btn btn-theme btn-xl', id: "submit_answer" %>
             </div>
-      <%end%>
-      <div id="response">
-        <br>
-        <h4 class="center"><b>Did you know the answer?</b></h4>
-        <div class="row">
-          <div class="col-xs-6 yes">
-            <a href="#" id="respond-yes" class="btn-flat btn-success"><%= icon('check') %></a>
-          </div>
-          <div class="col-xs-6">
-            <a href="#" id ="respond-no" class="btn-flat btn-pink"><%= icon('times') %></a>
-          </div>
+         <%end%>
 
         </div>
       </div>
     </div>
-    <br>
-    <div id="answers" class="box center">
-      <h3>Correct Answer</h3>
-      <div class="correct_div">
-        <h4 class="correct"><%= @answers[0]["text"] %></h4>
+    <div class="prettyform">
+      <div class="container newanswer">
+      <div id="answers" class="box center">
+        <h3>Correct Answer</h3>
+        <div class="correct_div">
+          <h4 class="correct"><%= @answers[0]["text"] %></h4>
+        </div>
       </div>
     </div>
+    </div>
+    <div id="response">
+        <br>
+        <h4 class="center"><b>Did you know the answer?</b></h4>
+        <div class="row">
+          <div class="col-xs-6 yes">
+            <a href="#" id="respond-yes" class="btn-flat btn-success"><i class="fa fa-check"></i></a>
+          </div>
+          <div class="col-xs-6">
+            <a href="#" id ="respond-no" class="btn-flat btn-pink"><i class="fa fa-times"></i></a>
+          </div>
+
+        </div>
+      </div>
     <br><br>
+  </div>
   </div>
 </div>
 

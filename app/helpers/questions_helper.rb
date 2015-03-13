@@ -12,9 +12,5 @@ module QuestionsHelper
     logger.debug "THIS IS THE #{response}"
   end
 
-
-  def htest
-   
-  end
 end
 
