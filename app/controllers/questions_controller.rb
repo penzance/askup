@@ -7,6 +7,8 @@ class QuestionsController < ApplicationController
   def index
     @questions = get_question_list().sort_by{|hash| hash['created_at']}.reverse!
     @my_questions = @questions.select{|question| question["user_id"] == current_user.id}
+    @question_limitations = ENV["limit_question_index_to_users_questions_only"]
+
   end
 
   def new
