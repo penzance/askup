@@ -4,13 +4,13 @@
   <title>AskUp</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
 </head>
 <body>
-
+<div class="container-fluid">
   <div class="navbar navbar-inverse navbar-fixed-top one-edge-shadow" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header=">
@@ -62,6 +62,6 @@
 
 <%= yield %>
 
-
+</div>
 </body>
 </html>
