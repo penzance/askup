@@ -7,6 +7,8 @@ class QuestionsController < ApplicationController
   def index
     @questions = get_question_list().sort_by{|hash| hash['created_at']}.reverse!
     @my_questions = @questions.select{|question| question["user_id"] == current_user.id}
+    @question_limitations = ENV["limit_question_index_to_users_questions_only"]
+
   end
 
   def new
@@ -30,16 +32,6 @@ class QuestionsController < ApplicationController
     @answers = @questions[(params[:id]).to_i - 1]["answers"]
     @answer = Answer.new
   end
-
-  def next
-    @questions = get_question_list()
-    @next_question_id = next_question(@questions, [params[:id]])
-  end 
-
-   def previous
-    @questions = get_question_list()
-    @prev_question_id = @question.prev_question[params[:id]]
-  end 
 
   def feedback
     user_knowledge = (params[:correct] == "yes" ? "knew" : "didn't know")
