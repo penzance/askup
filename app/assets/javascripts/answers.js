@@ -20,14 +20,10 @@ $(document).ready(function(e){
   $("#answers").hide();
   $("#response").hide();
 
-   if($('#answer_text').val() ==  "") 
-   $('#submit_answer').attr('disabled', true);
+  if ($('#answer_text').val() == "") {$('#submit_answer').attr('disabled', true);}
 
   $('#answer_text').keyup(function(){
-    if($('#answer_text').val() !=  "") 
-         $('#submit_answer').attr('disabled', false);    
-    else
-         $('#submit_answer').attr('disabled', true);   
+    $('#submit_answer').attr('disabled', !($('#answer_text').val()));
   });
 
   $("#submit_answer").click(function(){
@@ -35,7 +31,6 @@ $(document).ready(function(e){
        $("#submit_answer").hide("slow");
        $("#response").fadeIn();
   });
-
 
   $('#respond-yes').click(function(e) {
     provide_feedback("yes", "Great! Congrats! Try another question.");
