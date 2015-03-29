@@ -1,10 +1,10 @@
 <div class="prettyform">
-  <div class="container newquestion">
+  <div class="container newquestion nq-container-desktop">
 
     <div class="row">
       <div class="col-sm-7">
         <div class="box">
-          <h2 class="center">New Question</h2>
+          <h2 class="nq-title center">New Question</h2>
           <br>
             <%= form_for(@question) do |f| %>
               <%= f.text_field :text, placeholder: 'Question',  class: 'form-control' %>
@@ -12,8 +12,8 @@
                 <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
               <% end %>
         
-              <div class="center">
-                <%= f.submit "Submit question", class: 'btn btn-theme btn-xl' %>
+              <div class="center btn-div">
+                <%= f.submit "Submit question", class: 'btn btn-theme btn-lg' %>
               </div>
             <%end%>
           

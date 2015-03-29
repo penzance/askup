@@ -6,7 +6,6 @@
   margin-bottom: 15px;
 }
 
-
 .panel-title {
   .btn-flat {
     color: white;
@@ -14,17 +13,26 @@
       color: white;
     }
   }
+}
 
+.btn-div{
+  margin-top:1.2em;
 }
 
 .reveal_btn {
-  //float:right;
+  float:right;
   text-align: right;
-
 }
 
-.newquestion.container {
-  width: 75%;
+.newquestion.container, .newanswer.container {
+  width: 100%;
+  margin-top: 0px;
+}
+
+@media (min-width: 992px) {
+  .nq-container-desktop{
+    margin-top: 60px;
+  }
 }
 
 .newquestion {
@@ -32,6 +40,21 @@
     height: 110px;
   }
   .box {
-    min-height: 380px;
+    min-height: 80%;
   }
 }
+
+.nq-title, .show-question-title{
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 0em;
+}
+
+
+
+
+
+
+
+
+
