@@ -21,6 +21,3 @@
 
 # Ignore local asset pipline cache files
 /public/assets
-
-# Ignore idea files
-.idea/
