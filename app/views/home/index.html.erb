@@ -2,57 +2,48 @@
    HEADERWRAP
    ***************************************************************************************************************** -->
 <!-- Header -->
-<section class="jumbotron span-12 one-edge-shadow">
-  <div class="container">
-    <div class="row">
-      <h1>Ask<span>Up</span></h1>
-      <h3>Learn better, together.</h3>
-    </div><br><br>
-    <div class="row">
-      <div class="col-sm-4  center">
-        <div class="row"><%= link_to "Generate Question", new_question_path, class: "btn btn-theme btn-lg" %></div>
 
+    <div class="row jumbotron one-edge-shadow">
+        <div class="container-row">
+          <div class="cell">
+            <h1>Ask<span>Up</span></h1>
+            <h3>Learn better, together.</h3>
+          </div>
+          <div class="question-cell">
+            <div class="center"><%= link_to "Generate Question", new_question_path, class: "btn btn-theme btn-lg" %></div>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-8  center"></div>
 
-    </div><div class="spacer6"></div><div class="spacer6"></div><div class="spacer6"></div><div class="spacer3"></div>
-    <div class="row center"><%= link_to '#home-scroll-down', id: 'home-scroll-down' do %><i class="fa fa-angle-double-down"></i><% end %></div>
-  </div>
-</section>
 
   <!-- *****************************************************************************************************************
    SERVICE LOGOS
    ***************************************************************************************************************** -->
    <div id="intro">
-    <div class="container">
       <div class="row center">
         <div class="col-md-4">
           <i class="fa fa-pencil"></i>
           <h3>What is AskUp?</h3>
           <p>AskUp is an educational tool to help you make sense and remember material you learn in class, at home, or in the hospital. It uses evidence-based principles to improve your learning.</p>
-          <!--<p><br/><a href="#" class="btn btn-theme">More Info</a></p> -->
         </div>
         <div class="col-md-4">
           <i class="fa fa-list-alt"></i>
           <h3>What to do?</h3>
           <p>After any educational event—a lecture, a reading, a patient encounter, a video-generate your own question and answer. Periodically, test yourself on these questions to make sure you remember the material. If your classmates also create questions on AskUp, quiz yourself on their questions as well.</p>
-          <!-- <p><br/><a href="#" class="btn btn-theme">More Info</a></p> -->
         </div>
         <div class="col-md-4">
           <i class="fa fa-university"></i>
           <h3>Why does it work?</h3>
           <p>Self-testing has been shown to be one of the most effective learning strategies. Generating questions will require you to recall information, identify the main points, reflect on how it relates to things you’ve previously learned, and generate your own answer—powerful techniques for learning!</p>
-          <!-- <p><br/><a href="#" class="btn btn-theme">More Info</a></p> -->
         </div>
       </div>
-    </div><!--/container -->
-   </div><!--/service -->
+    </div>
+
 
     <!-- *****************************************************************************************************************
    TESTIMONIALS
    ***************************************************************************************************************** -->
    <div id="twrap">
-    <div class="container center">
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
         <i class="fa fa-comment-o"></i>
@@ -60,15 +51,13 @@
         <h4><br/>Jonathan S. Hausmann, MD</h4>
         <p>HARVARD MEDICAL SCHOOL</p>
         </div>
-      </div><!--/row -->
-    </div><!--/container -->
-   </div><!--/twrap -->
+      </div>
+   </div>
 
    <!-- *****************************************************************************************************************
    FOOTER
    ***************************************************************************************************************** -->
    <div id="footerwrap">
-    <div class="container">
       <div class="row">
         <div class="col-lg-4">
           <h4>About</h4>
@@ -94,6 +83,6 @@
           <p>&copy; 2015 Harvard TLT</p>
         </div>
 
-      </div><!--/row -->
-    </div><!--/container -->
-   </div><!--/footerwrap -->
+      </div>
+   </div>
+
