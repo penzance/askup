@@ -19,8 +19,25 @@ $(document).ready(function(e){
   //if you wish to keep both the divs hidden by default then dont forget to hide //them
   $("#answers").hide();
   $("#response").hide();
+ 
+ 
+  
+//enableSubmitAnswer(); 
 
-  if ($('#answer_text').val() == "") {$('#submit_answer').attr('disabled', true);}
+function enableSubmitAnswer() {
+  if ($('#answer_text').val()) {$('#submit_answer').attr('disabled', false);}
+  else {$('#submit_answer').attr('disabled', true);}
+  //$('#submit_answer').attr('disabled', !($('#answer_text').val()));
+}
+
+enableSubmitAnswer(); 
+
+
+  // runs each time the user presses a key in the #answer_text form field
+('#answer_text').keyup(enableSubmitAnswer()); 
+
+
+  // if (!($('#answer_text').val()) {$('#submit_answer').attr('disabled', true);}
 
   $('#answer_text').keyup(function(){
     $('#submit_answer').attr('disabled', !($('#answer_text').val()));
