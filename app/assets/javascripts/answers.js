@@ -28,10 +28,12 @@ $(document).ready(function(e){
 
   $('#respond-yes').click(function(e) {
     provide_feedback("yes", "Great! Congrats! Try another question.");
+    $('#response').addClass('hidden');
   });
 
   $('#respond-no').click(function(e) {
     provide_feedback("no", "No worries. You'll get it next time. Onwards!");
+    $('#response').addClass('hidden');
   });
 
 });
