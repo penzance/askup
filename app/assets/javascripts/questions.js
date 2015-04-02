@@ -10,23 +10,18 @@ $(document).ready(function(q){
       $('.other-question').removeClass('hidden');
     });
 
-// function enableSumbit() {
-//   if ($('#question_text').val()) {$('#submit_answer').attr('disabled', false);}
-//   else {$('#submit_answer').attr('disabled', true);}
-// }
 
-//  enableSumbit()
+// Defines function that disables/enables submit button depending on if there is text in the question and answer boxes
+function enableSubmitQuestion() {
+  if ($('#question_text').val() && $('#question_answers_attributes_0_text').val()) {
+    $('#submit_question').attr('disabled', false);
+  } else {
+    $('#submit_question').attr('disabled', true);
+  }
+}
 
-// ('#question_text').keyup(enableSubmit); 
+// Function is called as soon as page is loaded so that submit button can be disabled initially 
+enableSubmitQuestion(); 
 
-// // Runs when the page loads and disables the submit button. Checks that both the answer and question text boxes are blank
-if ($('#question_text').val() || $('#question_answers_attributes_0_text').val() == "") 
-  {$('#submit_question').attr('disabled', true);}
-
-// // Every time a key is pressed, this code runs and checks the contents of the answer and question text boxes. If both are full then the submit button is enabled 
-$('#question_text, #question_answers_attributes_0_text').keyup(function(){
-  if($('#question_text').val() && $('#question_answers_attributes_0_text').val() !=  ""){ 
-  $('#submit_question').attr('disabled', false);    
-}else{
-  $('#submit_question').attr('disabled', true);   
-}}); 
+// runs each time the user presses a key in the #answer_text form field
+$('#question_text, #question_answers_attributes_0_text').keyup(enableSubmitQuestion); 
