@@ -11,9 +11,9 @@
               <%= f.fields_for :answers do |a| %>
                 <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
               <% end %>
-        
+
               <div class="center">
-                <%= f.submit "Submit question", class: 'btn btn-theme btn-xl', id: "submit_question" %>
+                <%= f.submit "Submit question", class: 'btn btn-theme btn-xl', id: 'submit_question' %>
               </div>
             <%end%>
           
