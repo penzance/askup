@@ -32,8 +32,28 @@
           <h4 class="panel-title">
             <div class="row valign">
               <div class="col-sm-11">
-                <b><%= link_to question["text"], "/questions/#{question["id"]}" %></b>
+
+                <!-- Make this link to a modal, not a new page -->
+                <a data-toggle="modal" data-target="#question_display_Modal" data-question= <%= @question %>><%= question["text"]%>
+                </a>
+
+                <!-- Defines how the modal will look -->
+<div class="modal fade" id="question_display_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+</div>
+
+                <!-- <b><%= link_to question["text"], "/questions/#{question["id"]}" %></b> -->
               </div>
+
               <div class="col-sm-1">
                 <!-- <a class="btn btn-theme btn-sm collapsed" style="margin-left:8px;cursor:pointer;" data-target=<%= "#collapse#{collapse_count}" %> data-toggle="collapse">
                   Reveal
