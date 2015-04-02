@@ -56,13 +56,13 @@
 }
 
 
-.signin-form{
+.signin-form {
   margin: 0 auto;
   width:85%;
   margin-bottom: 1em;
 }
 
-#signin-box{
+.maxwidth-box {
   margin: 0 auto;
   max-width: 500px;
 }
@@ -80,12 +80,14 @@
   }
 }
 
-.signin-title {
+.fixed-title {
   font-size: 2em;
   font-weight: bold;
-  margin-bottom: 0em;
 }
 
+.user-link {
+  margin-top: 10px;
+}
 
 
 // .form-control {
