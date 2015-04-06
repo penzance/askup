@@ -2,19 +2,21 @@
 
 <div class="prettyform">
   <div class="container con-format" id="signin">
-    <div class="box">
+    <div class="box" id="signin-box">
       <h2 class="signin-title center">Sign in</h2><br>
 
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'center'}) do |f| %>
         <div class="center">
-        <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email" %></div>
-      
-      
+        <%= f.email_field :email, autofocus: true, class: "signin-form form-control", placeholder: "Email" %></div>
+   
         <div class="center">
-          <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password" %></div>
-        <div class = "center">
-        <div>
+          <%= f.password_field :password, autocomplete: "off", class: "signin-form form-control", placeholder: "Password" %>
+        </div>
+      
 
+
+        <div class = "center">
+        <div class = "center">
           <%= f.submit "Sign in", class: 'btn btn-theme' %>
         <% end %>
 
