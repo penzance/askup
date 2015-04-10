@@ -52,23 +52,41 @@
     -webkit-box-shadow: none;
     box-shadow: none;
   }
-  border-radius: 5px;
-    
+  border-radius: 5px;    
+}
+
+
+.signin-form{
+  margin: 0 auto;
+  width:85%;
+  margin-bottom: 1em;
+}
+
+#signin-box{
+  margin: 0 auto;
+  max-width: 500px;
 }
 
 .newanswer, .newquestion {
   .form-control {
     width: 97%;
   }
-
 }
 
 #signin {
-  width: 40%;
+  width: 100%;
   .btn {
     margin-left: 10px;
   }
 }
+
+.signin-title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 0em;
+}
+
+
 
 // .form-control {
 // border: 2px solid #bdc3c7;

@@ -7,7 +7,7 @@
           <h2 class="nq-title center">New Question</h2>
           <br>
             <%= form_for(@question) do |f| %>
-              <%= f.text_field :text, placeholder: 'Question',  class: 'form-control' %>
+              <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>
               <%= f.fields_for :answers do |a| %>
                 <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
               <% end %>
