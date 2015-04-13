@@ -17,6 +17,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :first_name << :last_name
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    if user_signed_in?
+      redirect_to root_path, alert: exception.message
+    else
+      redirect_to new_user_session_path , alert: "Please sign up to access this page."
+    end
+  end
+
 end
 
 

@@ -11,8 +11,6 @@ class Question < ActiveRecord::Base
     logger.debug "THIS IS THE #{response}"
   end
 
-  def get_question_list
-    JSON.parse(RestClient.get(ENV["qm_api_url"] + "questions"))
-  end
+
   
 end

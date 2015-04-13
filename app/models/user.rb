@@ -9,4 +9,9 @@ class User < ActiveRecord::Base
   def full_name
     first_name + " " + last_name
   end
+
+  def role?(role)
+    self.role.to_s == role.to_s
+  end
+
 end

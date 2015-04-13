@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   include QuestionsHelper
-load_and_authorize_resource
+  authorize_resource
 
   before_action :authenticate_user!
 
@@ -25,11 +25,12 @@ load_and_authorize_resource
   end
 
   def show
-    @questions = question.get_question_list()
+    @questions = get_question_list()
     @question_id = params[:id]
     @question = @questions[(params[:id]).to_i - 1]["text"]
     @answers = @questions[(params[:id]).to_i - 1]["answers"]
     @answer = Answer.new
+    # authorize! :show, @question
   end
 
   def feedback
