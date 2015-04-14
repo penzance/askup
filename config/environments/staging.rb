@@ -20,7 +20,7 @@ Rails.application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  # set to true only for serving uncompressed assets in pilot stage
+  # set to true only for serving uncompressed assets in this environment
   # false means requests to static assets don't have to hit the Rails server
   config.serve_static_assets = true
 
