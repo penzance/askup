@@ -40,7 +40,7 @@ $('#answer_text').keyup(enableSubmitAnswer);
 
 // When a user submits an answer. The real answer and response form fade in. 
   $("#submit_answer").click(function(ev){
-      // prevents the program from automatically adding a hidden attribute to the "respnse" so that it can be resused in later modals
+      // prevents bootstrap from automatically adding a hidden attribute; we are explicitly hiding and showing using jquery instead
        ev.preventDefault(); 
        $("#answers").fadeIn();
        $("#submit_answer").hide("slow");
@@ -48,13 +48,13 @@ $('#answer_text').keyup(enableSubmitAnswer);
   });
 
   $('#respond-yes').click(function(ev) {
-    ev.preventDefault(); // to allow this form to be used again 
+    ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
     provide_feedback("yes", "Great! Congrats! Try another question.", $('#respond-yes').data('q_id'));
     $('#response').hide("slow");
   });
 
   $('#respond-no').click(function(ev) {
-    ev.preventDefault(); // to allow this form to be used again
+    ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
     provide_feedback("no", "No worries. You'll get it next time. Onwards!", $('#respond-no').data('q_id'));
     $('#response').hide("slow");
   });

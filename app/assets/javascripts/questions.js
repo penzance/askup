@@ -47,13 +47,13 @@ $('#question_display_Modal').on('show.bs.modal', function (event) {
   $("#answers").hide();
   $("#alert_text_container").hide();
 
-  var question_link = $(event.relatedTarget) // Button that triggered the modal. question_link is populated with the data from the click 
+  var question_link = $(event.relatedTarget) // element that triggered the modal. question_link is populated with the data from the click 
 
   // Creates variables with data that we will later use to populate certain parts of the modal 
   var text_question = question_link.data('question') 
   var first_answer = question_link.data('answer')  
   
-  // Setting up the response buttons to have the correct q_id to send to the analytics.log and to also have the 
+  // Setting up the response buttons to have the correct q_id to send to the analytics.log and to also trigger the right feedback form
   $('#respond-yes').data('q_id', question_link.data('q_id')); 
   $('#respond-no').data('q_id', question_link.data('q_id'));  
 
