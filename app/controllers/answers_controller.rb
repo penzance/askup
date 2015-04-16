@@ -9,7 +9,7 @@ class AnswersController < ApplicationController
   
   def create
     answer = Answer.new(params.require(:answer)
-      .permit(:text, :question_id, :user_id))
+      .permit(:text, :question_id))
     add_answer(answer)
     @question_id = params[:question_id]
     @answer = Answer.new
