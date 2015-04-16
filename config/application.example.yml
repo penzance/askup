@@ -3,7 +3,11 @@ defaults: &defaults
   qm_api_url: "http://localhost:3001/"
   devise_mailer_sender: "askup@example.com"
   limit_question_index_to_users_questions_only: "true"
-  
+  mail_host_address: "mailhost.com"
+  mail_host_port: "587"
+  mail_host_username: "username"
+  mail_host_password: "password"
+
 development:
   analytics_log_file: "/log/development_analytics.log"
   <<: *defaults
@@ -12,8 +16,8 @@ test:
   analytics_log_file: "/log/test_analytics.log"
   <<: *defaults
 
-pilot:
-  analytics_log_file: "/log/pilot_analytics.log"
+staging:
+  analytics_log_file: "/log/staging_analytics.log"
   <<: *defaults
 
 production:
