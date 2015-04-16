@@ -3,13 +3,12 @@ source 'https://rubygems.org'
 gem 'devise'
 gem 'bootstrap-sass'
 
-# for pilot, use thin web server so SSL is easy to set up
 gem 'thin'
 
 gem 'rest-client'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
-# Use sqlite3 as the database for Active Record (for development, test, pilot)
+# Use sqlite3 as the database for Active Record (for non-production environments)
 gem 'sqlite3'
 # Use postgresql as the database for Active Record (for production)
 gem 'pg'

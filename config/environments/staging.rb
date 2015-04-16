@@ -20,7 +20,7 @@ Rails.application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  # set to true only for serving uncompressed assets in pilot stage
+  # set to true only for serving uncompressed assets in this environment
   # false means requests to static assets don't have to hit the Rails server
   config.serve_static_assets = true
 
@@ -47,7 +47,9 @@ Rails.application.configure do
   config.force_ssl = true
 
   # Set to :debug to see everything in the log.
-  config.log_level = :debug
+  # Set to :warn or higher to avoid issues with Devise leaking password reset tokens
+  # (cf https://github.com/plataformatec/devise#password-reset-tokens-and-rails-logs)
+  config.log_level = :warn
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]

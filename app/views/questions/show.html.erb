@@ -13,7 +13,7 @@
 
       <%= form_for @answer, :url => question_answers_path(@question_id), remote: true do |f| %>
 
-            <%= f.text_area :text, placeholder: 'Type your answer here',  class: 'form-control' %>
+            <%= f.text_area :text, autofocus: true, placeholder: 'Type your answer here', class: 'form-control' %>
 
             <div class="center btn-div">
               <%= f.submit "Submit answer", class: 'btn btn-theme btn-lg', id: 'submit_answer' %>

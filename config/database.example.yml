@@ -14,9 +14,9 @@ test:
   <<: *default
   database: db/test.sqlite3
 
-pilot:
+staging:
   <<: *default
-  database: db/pilot.sqlite3
+  database: db/staging.sqlite3
 
 production:
   <<: *default
