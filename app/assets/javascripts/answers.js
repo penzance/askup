@@ -1,9 +1,11 @@
 //hide and show answers
 $(document).ready(function(e){
 
-    function provide_feedback(is_correct, notice_text) {
+// Defines function that gives the user feedback once they state whether or not they have gotten the question right. 
+// This function also stores the user response in the development_analytics.log using an ajax call. 
+    function provide_feedback(is_correct, notice_text, q_id) {
       $.ajax({
-        url: window.location.pathname + "/feedback",
+        url: window.location.pathname + "/" + q_id + "/feedback",
         type: "POST",
         data: { correct: is_correct }
       })
@@ -16,7 +18,7 @@ $(document).ready(function(e){
       });
     };
 
-  //if you wish to keep both the divs hidden by default then dont forget to hide //them
+  // initially hides the answers and response form in th modal 
   $("#answers").hide();
   $("#response").hide();
  
@@ -36,21 +38,25 @@ enableSubmitAnswer();
 // runs each time the user presses a key in the #answer_text form field
 $('#answer_text').keyup(enableSubmitAnswer); 
 
-
-  $("#submit_answer").click(function(){
+// When a user submits an answer. The real answer and response form fade in. 
+  $("#submit_answer").click(function(ev){
+      // prevents bootstrap from automatically adding a hidden attribute; we are explicitly hiding and showing using jquery instead
+       ev.preventDefault(); 
        $("#answers").fadeIn();
        $("#submit_answer").hide("slow");
        $("#response").fadeIn();
   });
 
-  $('#respond-yes').click(function(e) {
-    provide_feedback("yes", "Great! Congrats! Try another question.");
-    $('#response').addClass('hidden');
+  $('#respond-yes').click(function(ev) {
+    ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
+    provide_feedback("yes", "Great! Congrats! Try another question.", $('#respond-yes').data('q_id'));
+    $('#response').hide("slow");
   });
 
-  $('#respond-no').click(function(e) {
-    provide_feedback("no", "No worries. You'll get it next time. Onwards!");
-    $('#response').addClass('hidden');
+  $('#respond-no').click(function(ev) {
+    ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
+    provide_feedback("no", "No worries. You'll get it next time. Onwards!", $('#respond-no').data('q_id'));
+    $('#response').hide("slow");
   });
 
 });
