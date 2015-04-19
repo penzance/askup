@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   include QuestionsHelper
-
+  authorize_resource
 
   before_action :authenticate_user!
 
@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
       .permit(:text,
         answers_attributes:[:text]))
     question.user_id = current_user.id
-    post_question(question)
+    question.post_question(question)
     redirect_to new_question_path, notice: "Your question has been submitted! Enter another if you would like."
   end
 
@@ -39,7 +39,6 @@ class QuestionsController < ApplicationController
         format.js { render :nothing => true }
     end
   end
-
   
 
 end
