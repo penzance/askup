@@ -14,6 +14,6 @@ class Ability
     else
       can :create, User
     end
-
   end
+
 end
