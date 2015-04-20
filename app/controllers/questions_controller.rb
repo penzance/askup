@@ -10,9 +10,18 @@ class QuestionsController < ApplicationController
     @question_limitations = ENV["limit_question_index_to_users_questions_only"]
   end
 
+  def show
+    @questions = get_question_list()
+    @question_id = params[:id]
+    @question = @questions[(params[:id]).to_i - 1]["text"]
+    @answers = @questions[(params[:id]).to_i - 1]["answers"]
+    @answer = Answer.new
+  end
+
   def new
     @question = Question.new
     @question.answers.build
+    logger.debug "@question from new is #{@question}"
   end
 
   def create
@@ -24,13 +33,13 @@ class QuestionsController < ApplicationController
     redirect_to new_question_path, notice: "Your question has been submitted! Enter another if you would like."
   end
 
-  def show
-    @questions = get_question_list()
-    @question_id = params[:id]
-    @question = @questions[(params[:id]).to_i - 1]["text"]
-    @answers = @questions[(params[:id]).to_i - 1]["answers"]
-    @answer = Answer.new
+
+  def destroy
+    logger.debug "PARAMS in question's destroy: #{params}"
+    @question = Question.find(params[:id])
+
   end
+
 
   def feedback
     user_knowledge = (params[:correct] == "yes" ? "knew" : "didn't know")

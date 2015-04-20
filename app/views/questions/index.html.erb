@@ -34,7 +34,15 @@
                     data-target="#question_display_Modal" 
                     data-answer="<%=question["answers"][0]["text"]%>" 
                     data-qid="<%=question["id"]%>" 
-                    data-question="<%= question["text"]%>"><%= question["text"]%>
+                    data-question="<%= question["text"]%>">
+                      <%= question["text"]%>
+                      <% if question['user_id'] == current_user.id %>
+                        <%= link_to "Delete", question_path(question), confirm: 'Are you sure you want to delete this?', method: :delete, class: 'btn-mini btn-danger btn' do%>
+                          <i class = "glyphicon glyphicon-trash"></i>
+                        <% end %>
+                        <%#= link_to "Delete", question_path(question), method: :delete %>
+                      <% end %>
+                      
                   </a> 
                 </span>
               </div>

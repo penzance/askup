@@ -11,6 +11,10 @@ class Question < ActiveRecord::Base
     logger.debug "RESPONSE for question from post_question: #{response}"
   end
 
+  def destroy_question question
+    json = question.to_json(:include => :answers)
 
+    
+  end
   
 end

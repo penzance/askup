@@ -19,4 +19,11 @@ class AnswersController < ApplicationController
     render "questions/show"
     
   end
+
+  def destroy
+    logger.debug "PARAMS in answer's destroy: #{params}"
+    # @answer = Answer.find(params)
+
+  end
+
 end
