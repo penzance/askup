@@ -37,10 +37,11 @@
                     data-question="<%= question["text"]%>">
                       <%= question["text"]%>
                       <% if question['user_id'] == current_user.id %>
-                        <%= link_to "Delete", question_path(question), confirm: 'Are you sure you want to delete this?', method: :delete, class: 'btn-mini btn-danger btn' do%>
-                          <i class = "glyphicon glyphicon-trash"></i>
+
+                        <%= link_to question_path(question), method: :delete, class:'btn pull-right delete-button' do%>
+                          <span class="glyphicon glyphicon-trash delete-button-glyphicon"></span>
                         <% end %>
-                        <%#= link_to "Delete", question_path(question), method: :delete %>
+
                       <% end %>
                       
                   </a> 
