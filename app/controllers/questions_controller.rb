@@ -14,6 +14,9 @@ class QuestionsController < ApplicationController
     @questions = get_question_list()
     @question_id = params[:id]
     @question = @questions[(params[:id]).to_i - 1]["text"]
+
+    logger.debug "QUESTION's type in question's show: #{@questions[(params[:id]).to_i - 1].class}"
+
     @answers = @questions[(params[:id]).to_i - 1]["answers"]
     @answer = Answer.new
   end
@@ -28,16 +31,39 @@ class QuestionsController < ApplicationController
     question = Question.new(params.require(:question)
       .permit(:text,
         answers_attributes:[:text]))
+
+    logger.debug "QUESTION's type in question's create: #{question.class}"
+
     question.user_id = current_user.id
     question.post_question(question)
+
+    logger.debug "@QUESTION's type in question's destroy: #{@question.class}"
+
     redirect_to new_question_path, notice: "Your question has been submitted! Enter another if you would like."
   end
+
+  # def show
+  #   @questions = get_question_list()
+  #   @question_id = params[:id]
+  #   @question = @questions[(params[:id]).to_i - 1]["text"]
+  #   @answers = @questions[(params[:id]).to_i - 1]["answers"]
+  #   @answer = Answer.new
+  # end
 
 
   def destroy
     logger.debug "PARAMS in question's destroy: #{params}"
-    @question = Question.find(params[:id])
+    @questions = get_question_list()
+    @question_id = params[:id]
+    @question = @questions[(params[:id].to_i-1)]
 
+    logger.debug "@QUESTIONS LIST TYPE in question's destroy: #{@questions.class}"
+    logger.debug "@QUESTIONS LIST'S ATTRIBUTES in question's destroy: #{@questions.class}"
+    logger.debug "@QUESTION in question's destroy: #{@question}"
+    logger.debug "@QUESTION's type in question's destroy: #{@question.class}"
+
+    destroy_question(@question)
+    redirect_to questions_path
   end
 
 
