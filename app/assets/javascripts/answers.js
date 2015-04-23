@@ -17,10 +17,6 @@ $(document).ready(function(e){
           $('.alert').slideDown();
       });
     };
-
-  // initially hides the answers and response form in th modal 
-  $("#answers").hide();
-  $("#response").hide();
  
  
 // Defines function that disables/enables submit button depending on if there is text in the answer box
@@ -43,8 +39,6 @@ $('#answer_text').keyup(enableSubmitAnswer);
       // prevents bootstrap from automatically adding a hidden attribute; we are explicitly hiding and showing using jquery instead
        ev.preventDefault(); 
        $("#answers").fadeIn();
-       $('#respond-no').fadeIn();
-       $('#respond-yes').fadeIn();
        $("#submit_answer").hide("slow");
        $("#response").fadeIn();
   });
