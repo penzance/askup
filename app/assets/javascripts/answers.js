@@ -17,10 +17,6 @@ $(document).ready(function(e){
           $('.alert').slideDown();
       });
     };
-
-  // initially hides the answers and response form in th modal 
-  $("#answers").hide();
-  $("#response").hide();
  
  
 // Defines function that disables/enables submit button depending on if there is text in the answer box
@@ -48,12 +44,14 @@ $('#answer_text').keyup(enableSubmitAnswer);
   });
 
   $('#respond-yes').click(function(ev) {
+    $('#respond-yes').fadeIn();
     ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
     provide_feedback("yes", "Great! Congrats! Try another question.", $('#respond-yes').data('q_id'));
     $('#response').hide("slow");
   });
 
   $('#respond-no').click(function(ev) {
+    $('#respond-no').fadeIn();
     ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
     provide_feedback("no", "No worries. You'll get it next time. Onwards!", $('#respond-no').data('q_id'));
     $('#response').hide("slow");
