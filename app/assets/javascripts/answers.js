@@ -43,17 +43,21 @@ $('#answer_text').keyup(enableSubmitAnswer);
       // prevents bootstrap from automatically adding a hidden attribute; we are explicitly hiding and showing using jquery instead
        ev.preventDefault(); 
        $("#answers").fadeIn();
+       $('#respond-no').fadeIn();
+       $('#respond-yes').fadeIn();
        $("#submit_answer").hide("slow");
        $("#response").fadeIn();
   });
 
   $('#respond-yes').click(function(ev) {
+    $('#respond-yes').fadeIn();
     ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
     provide_feedback("yes", "Great! Congrats! Try another question.", $('#respond-yes').data('q_id'));
     $('#response').hide("slow");
   });
 
   $('#respond-no').click(function(ev) {
+    $('#respond-no').fadeIn();
     ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
     provide_feedback("no", "No worries. You'll get it next time. Onwards!", $('#respond-no').data('q_id'));
     $('#response').hide("slow");

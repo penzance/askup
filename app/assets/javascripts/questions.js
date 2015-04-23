@@ -42,8 +42,12 @@ $('#question_display_Modal').on('show.bs.modal', function (event) {
   // Creates the initial view of the modal. The submit answer is shown as well as an empty text box. 
   // The answer is initally hidden and so is the response + alert forms. 
   $("#submit_answer").show();
-  $('#answer_text').val(""); 
-  enableSubmitAnswer(); 
+  $('#answer_text').val("");
+    // initially hides the answers and response form in the modal 
+  $("#response").hide();
+  $('#respond-no').hide();
+  $('#respond-yes').hide();
+  enableSubmitAnswer();  
   $("#answers").hide();
   $("#alert_text_container").hide();
 
