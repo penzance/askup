@@ -14,7 +14,6 @@ class Ability
       can :read, Question
       can :create, Question
       can :manage, Question, user_id: current_user.id
-      # can :manage, Answer, question_id: 
     else
       can :create, User
       can :read, Question
