@@ -74,6 +74,10 @@ function enableSubmitQuestion() {
   }
 }
 
+enableSubmitQuestion(); 
+
+// runs each time the user presses a key in the #answer_text form field
+$('#question_text, #question_answers_attributes_0_text').keyup(enableSubmitQuestion);
 
 }); 
 
