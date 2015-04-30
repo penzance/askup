@@ -15,4 +15,5 @@ class Answer < ActiveRecord::Base
       Their answer was #{self.text}")
   end
 
+
 end
