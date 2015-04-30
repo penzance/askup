@@ -7,17 +7,9 @@ module QuestionsHelper
   end
 
   def destroy_question question
-    json = question.to_json(:include => :answers)
-    
-    logger.debug "JSON in destroy_question helper: #{json}"
-
-    logger.debug "PARAMS in destroy_question helper: #{params}"
-
-    logger.debug "PARAMS['id'] in destroy_question helper: #{params[:id]}"
-
     response = RestClient.delete(ENV["qm_api_url"] + 'questions/' + params[:id], :content_type => :json , :accept => :json)
 
-    logger.debug "RESPONSE for question from destroy_question helper: #{response}"
+    logger.debug "RESPONSE from AskUp destroy_question: #{response}"
 
   end
 

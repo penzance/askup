@@ -15,15 +15,10 @@ class AnswersController < ApplicationController
     @answer = Answer.new
     @questions = get_question_list()
     @question = @questions[(params[:question_id]).to_i - 1]["text"]
-    @answers = @questions[(params[:question_id]).to_i - 1]["answers"]
+    @answers = @question["answers"]
     render "questions/show"
     
   end
 
-  def destroy
-    logger.debug "PARAMS in answer's destroy: #{params}"
-    # @answer = Answer.find(params)
-
-  end
 
 end

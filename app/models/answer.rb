@@ -15,9 +15,5 @@ class Answer < ActiveRecord::Base
       Their answer was #{self.text}")
   end
 
-  def destroy_answer answer
-    json = answer.to_json
-
-  end
 
 end
