@@ -9,6 +9,7 @@ class Ability
       can :read, Question
       can :create, Question
       can :manage, Question
+      can :manage, User, id: user.id
     elsif user.role? :contributor
       can :read, Question
       can :create, Question
