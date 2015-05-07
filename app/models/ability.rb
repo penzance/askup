@@ -8,6 +8,7 @@ class Ability
     if user.role? :admin
       can :read, Question
       can :create, Question
+      can :manage, User, id: user.id
     elsif user.role? :contributor
       can :read, Question
       can :create, Question
