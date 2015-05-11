@@ -64,6 +64,22 @@ $('#question_display_Modal').on('show.bs.modal', function (event) {
   modal.find('.first-answer').text(first_answer)
 })
 
+$('#social_display_Modal').on('show.bs.modal', function (event) {
+  var social_link = $(event.relatedTarget)
+  var title = social_link.data('website')
+  var text_question = social_link.data('question')
+  var url_link = social_link.data('url')
+  var hyperlink = social_link.data('hyperlink')
+  var hyperlinktext = social_link.data('hyperlinktext')
+
+  var modal = $(this)
+  modal.find('.modal-title').text(title)
+  modal.find('.modal-body input').val(text_question + " ➡" + "Follow the link to find out the solution: " + url_link)
+  modal.find('.hyperlink').attr("href", hyperlink)
+  modal.find('.hyperlink').text(hyperlinktext)
+})
+
+
 
 // Defines function that disables/enables submit button depending on if there is text in the question and answer boxes
 function enableSubmitQuestion() {
@@ -74,10 +90,15 @@ function enableSubmitQuestion() {
   }
 }
 
-enableSubmitQuestion(); 
+// enableSubmitQuestion(); 
 
 // runs each time the user presses a key in the #answer_text form field
-$('#question_text, #question_answers_attributes_0_text').keyup(enableSubmitQuestion);
+// $('#question_text, #question_answers_attributes_0_text').keyup(enableSubmitQuestion);
+
+
+
+
+
 
 }); 
 
