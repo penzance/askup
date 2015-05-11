@@ -1,8 +1,7 @@
 class QuestionsController < ApplicationController
   include QuestionsHelper
   authorize_resource
-
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     @questions = get_question_list().sort_by{|hash| hash['created_at']}.reverse!
