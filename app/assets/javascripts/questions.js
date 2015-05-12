@@ -36,7 +36,7 @@ function enableSubmitAnswer() {
     });
   };
 
-// Creates the javscript for the modal that allows it to be populated with the data recieved upon clicking the modal link
+// Creates the javscript for the Question modal that allows it to be populated with the data recieved upon clicking the modal link
 $('#question_display_Modal').on('show.bs.modal', function (event) {
   
   // Creates the initial view of the modal. The submit answer is shown as well as an empty text box. 
@@ -64,19 +64,24 @@ $('#question_display_Modal').on('show.bs.modal', function (event) {
   modal.find('.first-answer').text(first_answer)
 })
 
+
+// Creates the javscript for the Social modal that allows it to be populated with the data recieved upon clicking the modal link
 $('#social_display_Modal').on('show.bs.modal', function (event) {
-  var social_link = $(event.relatedTarget)
+  var social_link = $(event.relatedTarget) // element that triggered the modal. social_link is populated with the data from the click 
+  
+  // Creates variables with data that we will later use to populate certain parts of the modal 
   var title = social_link.data('website')
   var text_question = social_link.data('question')
   var url_link = social_link.data('url')
   var hyperlink = social_link.data('hyperlink')
   var hyperlinktext = social_link.data('hyperlinktext')
 
+  // Searches the modal and populates the indicated classes with the data recieved when the modal was clicked
   var modal = $(this)
-  modal.find('.modal-title').text(title)
-  modal.find('.modal-body input').val(text_question + " ➡" + "Follow the link to find out the solution: " + url_link)
-  modal.find('.hyperlink').attr("href", hyperlink)
-  modal.find('.hyperlink').text(hyperlinktext)
+  modal.find('.modal-title').text(title) // sets the title 
+  modal.find('.modal-body input').val(text_question + " ➡" + "Follow the link to find out the solution: " + url_link) // creates the text that includes the question and url for user to copy to clipboard
+  modal.find('.hyperlink').attr("href", hyperlink) // updates the href to the appropriate social platform
+  modal.find('.hyperlink').text(hyperlinktext) // creates the text that the hyperlink will show up as 
 })
 
 
@@ -90,10 +95,11 @@ function enableSubmitQuestion() {
   }
 }
 
-// enableSubmitQuestion(); 
+// allows the function to be enabled on the generate-question page 
+enableSubmitQuestion(); 
 
 // runs each time the user presses a key in the #answer_text form field
-// $('#question_text, #question_answers_attributes_0_text').keyup(enableSubmitQuestion);
+$('#question_text, #question_answers_attributes_0_text').keyup(enableSubmitQuestion);
 
 
 

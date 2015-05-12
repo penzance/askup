@@ -28,7 +28,7 @@
           <h4 class="panel-title">
             <div class="row valign">
               <div class="col-sm-11">
-                <!-- Toggles the modal. Data that is included: question answer, question text, and question ID -->
+                <!-- Toggles the Question modal. Data that is included: question answer, question text, and question ID -->
                 <span style="cursor:default">
                   <a data-toggle="modal" 
                     data-target="#question_display_Modal" 
@@ -36,27 +36,25 @@
                     data-qid="<%=question["id"]%>" 
                     data-question="<%= question["text"]%>"><%= question["text"]%>
                   </a> 
+                  <!-- Toggles the Twitter modal. Data that is included: share-able url, question text, and hyperlink -->
                   <a data-toggle="modal" 
-                    data-target="#social_display_Modal" 
-                    data-answer="<%=question["answers"][0]["text"]%>" 
-                    data-qid="<%=question["id"]%>" 
+                    data-target="#social_display_Modal"  
                     data-url= "<%= url_for(controller: 'questions', action: 'show', id:question["id"], host:request.base_url) %>"
                     data-website="Share on Twitter" 
                     data-hyperlink="https://www.twitter.com"
                     data-hyperlinktext= "Twitter"
                     data-question="<%= question["text"]%>"><i class="fa fa-twitter-square"></i>
                   </a> 
+                  <!-- Toggles the Twitter modal. Data that is included: share-able url, question text, and hyperlink -->
                    <a data-toggle="modal" 
-                    data-target="#social_display_Modal" 
-                    data-answer="<%=question["answers"][0]["text"]%>" 
-                    data-qid="<%=question["id"]%>" 
+                    data-target="#social_display_Modal"  
                     data-url= "<%= url_for(controller: 'questions', action: 'show', id:question["id"], host:request.base_url) %>"
                     data-website="Share on Facebook" 
                     data-hyperlink="https://www.facebook.com"
                     data-hyperlinktext="Facebook"
                     data-question="<%= question["text"]%>"><i class="fa fa-facebook-square"></i>
                   </a> 
-                  <%= question["text"]%>
+                      <!-- Creates the delete option for each question -->
                       <% if question['user_id'] == current_user.id %>
 
                         <%= link_to question_path(question), method: :delete, class:'btn pull-right delete-button' do%>
@@ -90,7 +88,7 @@
   <br>
   </div>
 
-                <!-- Defines how the modal will look -->
+                <!-- Defines how the Question modal will look -->
 <div class="modal fade" id="question_display_Modal" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -168,27 +166,31 @@
     </div>
   </div>
 
-<div class="modal fade" id="social_display_Modal" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="padding:35px 50px; background-color: #00b3fe; color: #FFFFFF">
-        <!-- Close button -->
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <!-- Displays the question at the top of the modal. Javascript finds the "modal-title" class and populates it with the question contents. -->
-        <h4 class="modal-title"></h4>
+    <!-- Defines how the modal will look -->
+  <div class="modal fade" id="social_display_Modal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Sets the style of the modal header  -->
+        <div class="modal-header" style="padding:35px 50px; background-color: #00b3fe; color: #FFFFFF">
+          <!-- Close button -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <!-- Displays the question at the top of the modal. Javascript finds the "modal-title" class and populates it with the question contents. -->
+          <h4 class="modal-title"></h4>
+          </div>
+          <div class="modal-body" style="padding:40px 50px;">
+            <!-- Creates the form for the question + url text that the user will copy to clipboard -->
+            <form role="form">
+              <div class="form-group">
+                <label for="question"> Step 1: Copy the question and the link to the answer to your clipboard </label>
+                <input type="text" class="form-control" id="question">
+              </div>
+            <!-- Creates the form for the hyperlink to the social media platform -->
+              <div class ="form-group">
+                <label for="question"> Step 2: Follow the link to the social media platform and share what's saved on your clipboard </label>
+              </br>
+              <a class="hyperlink" ></a>
+          </div>
         </div>
-        <div class="modal-body" style="padding:40px 50px;">
-          <form role="form">
-            <div class="form-group">
-              <label for="question"> Step 1: Copy the question and the link to the solution to your clipboard </label>
-              <input type="text" class="form-control" id="question">
-            </div>
-          <div class ="form-group">
-          <label for="question"> Step 2: Follow the link to the social media platform and share what's saved on your clipboard </label>
-        </br>
-          <a class="hyperlink" ></a>
-        </div>
-      </div>
     </div>
   </div>
 
