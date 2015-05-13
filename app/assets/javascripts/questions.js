@@ -79,7 +79,7 @@ $('#social_display_Modal').on('show.bs.modal', function (event) {
   var modal = $(this);
   modal.find('.modal-title').text(title); // sets the title 
   modal.find('.modal-body-social input').val(text_question + " ➡" + "Follow the link to find out the answer: " + url_link); // creates the text that includes the question and url for user to copy to clipboard
-  modal.find('.hyperlink').attr("href", hyperlink).attr("target", "_blank"); // updates the href to the appropriate social platform the second attribute allows the social site to be opened on a new page 
+  modal.find('.hyperlink').attr("href", hyperlink); // updates the href to the appropriate social platform the second attribute allows the social site to be opened on a new page 
   modal.find('.hyperlink').text(hyperlinktext); // creates the text that the hyperlink will show up as 
 })
 
