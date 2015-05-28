@@ -1,25 +1,39 @@
 <div class="prettyform">
   <div class="container" id="new-user">
     <div class="box maxwidth-box">
+      <h2 class="fixed-title center">Sign Up</h2>
 
-      <h2 class="fixed-title center">Sign up</h2>
-
-      <div class="center">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'center'}) do |f| %>
         <%= devise_error_messages! %>
 
-        <%= f.text_field :first_name, autofocus: true, class: "form-control", placeholder: "First Name" %>
-        <%= f.text_field :last_name, class: "form-control", placeholder: "Last Name" %>
-        <%= f.email_field :email, class: "form-control", placeholder: "Email"  %>
-        <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password (minimum 8 characters)"  %>
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "Confirm password" %>
-        <div><%= f.submit "Sign up", class: "btn btn-theme btn-success" %></div>
+        <div class="center">
+        <%= f.text_field :first_name, autofocus: true, class: "center-form form-control", placeholder: "First Name" %>
+        </div>
+
+        <div class="center">
+        <%= f.text_field :last_name, class: "center-form form-control", placeholder: "Last Name" %>
+        </div>
+
+        <div class="center">
+        <%= f.email_field :email, class: "center-form form-control", placeholder: "Email"  %>
+        </div>
+
+        <div class="center">
+        <%= f.password_field :password, autocomplete: "off", class: "center-form form-control", placeholder: "Password (minimum 8 characters)"  %>
+        </div>
+
+        <div class="center">
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "center-form form-control", placeholder: "Confirm password" %>
+        </div>
+
+        <div class="center"><%= f.submit "Sign up", class: "btn btn-theme btn-success" %></div>
 
         <div class="user-link">
           <%= link_to "Already a user? Sign in", new_session_path(resource_name) %>
         </div>
         <% end %>
-      </div>
+    
 
     </div>
   </div>
