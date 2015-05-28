@@ -4,6 +4,7 @@
       <h2 class="fixed-title center">Sign In</h2>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'center'}) do |f| %>
+      
         <div class="center">
         <%= f.email_field :email, autofocus: true, class: "center-form form-control", placeholder: "Email" %></div>
    
