@@ -19,23 +19,6 @@ function enableSubmitAnswer() {
   }
 }
 
-// Defines function that gives the user feedback once they state whether or not they have gotten the question right. 
-// This function also stores the user response in the development_analytics.log using an ajax call. 
- function provide_feedback(is_correct, notice_text, qid) {
-   $.ajax({
-    url: window.location.pathname +  "/" + q_id + "/feedback",
-     type: "POST",
-        data: { correct: is_correct }
-    })
-    .done(function( data ) {
-      if ( console && console.log ) {
-        console.log( "Sample of data:", data.slice( 0, 100 ) );
-      }
-      $('#alert_text').text(notice_text);
-      $('.alert').slideDown();
-    });
-  };
-
 // Creates the javscript for the modal that allows it to be populated with the data recieved upon clicking the modal link
 $('#question_display_Modal').on('show.bs.modal', function (event) {
   

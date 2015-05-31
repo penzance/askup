@@ -1,5 +1,5 @@
 <div class="alert alert-success center" style="display: none;">
-  <div id="alert_text"> </div>
+  <div id= "single_alert_text"> </div>
    &nbsp;
   <a href="#" class="close-alert grow"><i class="fa fa-times-circle"></i></a>
 </div>
@@ -13,10 +13,10 @@
 
       <%= form_for @answer, :url => question_answers_path(@question_id), remote: true do |f| %>
 
-            <%= f.text_area :text, autofocus: true, placeholder: 'Type your answer here', class: 'form-control' %>
+            <%= f.text_area :text, autofocus: true, placeholder: 'Type your answer here', class: 'form-control', id: 'single-answer-text' %>
 
             <div class="center btn-div">
-              <%= f.submit "Submit answer", class: 'btn btn-theme btn-lg', id: 'submit_answer' %>
+              <%= f.submit "Submit answer", class: 'btn btn-theme btn-lg', id: 'single-submit-answer' %>
             </div>
          <%end%>
 
@@ -25,23 +25,23 @@
     </div>
     <div class="prettyform">
       <div class="container newanswer">
-      <div id="answers" class="box center">
+      <div id="single-answers" class="box center">
         <h3>Answer:</h3>
         <div class="correct_div">
           <h4 class="correct"><%= @answers[0]["text"] %></h4>
-        </div>
+        </div> 
       </div>
     </div>
     </div>
-    <div id="response">
+    <div id="single-response">
         <br>
         <h4 class="center"><b>Did you know the answer?</b></h4>
         <div class="row">
           <div class="col-xs-6 yes">
-            <a href="#" id="respond-yes" class="btn-flat btn-success"><i class="fa fa-check"></i></a>
+            <a id="single-respond-yes" class="btn-flat btn-success"><i class="fa fa-check"></i></a>
           </div>
           <div class="col-xs-6">
-            <a href="#" id ="respond-no" class="btn-flat btn-pink"><i class="fa fa-times"></i></a>
+            <a id ="single-respond-no" class="btn-flat btn-pink"><i class="fa fa-times"></i></a>
           </div>
 
         </div>
