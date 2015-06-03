@@ -98,7 +98,7 @@ $('#single-answer-text').keyup(single_enableSubmitAnswer);
       // prevents bootstrap from automatically adding a hidden attribute; we are explicitly hiding and showing using jquery instead
        ev.preventDefault(); 
        $("#single-answers").fadeIn();
-       $("#submit_answer").hide("slow");
+       $("#single-submit-answer").hide("slow");
        $("#single-response").fadeIn();
   });
 
