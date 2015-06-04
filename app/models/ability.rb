@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     unless user
       can :read, Question
-      unless ENV['abilities_unauth_user_can_manage_questions'] == 'true'
+      unless ENV['abilities_unauth_user_can_index_questions'] == 'true'
         cannot :index, Question
       end
     else
