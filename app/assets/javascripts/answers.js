@@ -4,11 +4,12 @@ $(document).ready(function(e){
 // Defines function that gives the user feedback once they state whether or not they have gotten the question right. 
 // This function also stores the user response in the development_analytics.log using an ajax call. 
   function provide_feedback(is_correct, notice_text, q_id) {
-    $.ajax({
-      url: window.location.pathname + "/" + q_id + "/feedback",
-      type: "POST",
-      data: { correct: is_correct }
-    })
+    
+      $.ajax({
+        url: window.location.pathname + "/" + q_id + "/feedback",
+        type: "POST",
+        data: { correct: is_correct }
+      })
       .done(function( data ) {
         if ( console && console.log ) {
           console.log( "Sample of data:", data.slice( 0, 100 ) );
@@ -20,11 +21,12 @@ $(document).ready(function(e){
 
   //provide_feedback function for the STANDALONE page
   function single_provide_feedback(is_correct, notice_text) {
-    $.ajax({
-      url: window.location.pathname + "/feedback",
-      type: "POST",
-      data: { correct: is_correct }
-    })
+    
+      $.ajax({
+        url: window.location.pathname + "/feedback",
+        type: "POST",
+        data: { correct: is_correct }
+      })
       .done(function( data ) {
         if ( console && console.log ) {
           console.log( "Sample of data:", data.slice( 0, 100 ) );
@@ -64,6 +66,7 @@ $('#respond-yes').click(function(ev) {
   ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
   provide_feedback("yes", "Great! Congrats! Try another question.", $('#respond-yes').data('q_id'));
   $('#response').hide("slow");
+  $('#alert_text_container').addClass("alert-success");
 });
 
 $('#respond-no').click(function(ev) {
@@ -71,6 +74,7 @@ $('#respond-no').click(function(ev) {
   ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
   provide_feedback("no", "No worries. You'll get it next time. Onwards!", $('#respond-no').data('q_id'));
   $('#response').hide("slow");
+  $('#alert_text_container').addClass("alert-danger");
 });
 
 //JAVASCRIPT FOR THE STANDALONE PAGE
@@ -107,6 +111,7 @@ $('#single-answer-text').keyup(single_enableSubmitAnswer);
     ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
     single_provide_feedback("yes", "Great! Congrats! Try another question.");
     $('#single-response').hide("slow");
+    $('#single-alert-text-container').addClass("alert-success");
   });
 
   $('#single-respond-no').click(function(ev) {
@@ -114,6 +119,7 @@ $('#single-answer-text').keyup(single_enableSubmitAnswer);
     ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
     single_provide_feedback("no", "No worries. You'll get it next time. Onwards!");
     $('#single-response').hide("slow");
+    $('#single-alert-text-container').addClass("alert-danger");
   });
 
 });
