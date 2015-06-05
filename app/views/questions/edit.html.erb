@@ -1,17 +1,20 @@
 <div class="prettyform">
-  <div class="full-width-container newquestion nq-container-desktop">
+  <div class="full-width-container editquestion eq-container-desktop">
     <div class="row">
       <div class="col-sm-7">
         <div class="box">
-          <h2 class="nq-title center">New Question</h2>
+          <h2 class="eq-title center">Edit Question</h2>
           <br>
-            <%= form_for(@question) do |f| %>
+            <%= form_for @question, url: question_path(@question), method: :patch, html: { class: "edit_question", id: "edit_question_#{@question.id}" } do |f| %>
               <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>
               <%= f.fields_for :answers do |a| %>
                 <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
+                <%= a.hidden_field :id %>
+                <%= a.hidden_field :question_id %>
               <% end %>
               <div class="center btn-div">
-                <%= f.submit "Submit question", class: 'btn btn-theme btn-lg', id: 'submit_question' %>
+                <%= f.submit "Save question", class: 'btn btn-theme btn-lg', id: 'save_question' %>
+                <%# todo: add cancel button? %>
               </div>
             <%end%>
         </div>
@@ -20,7 +23,7 @@
         <div class="box">
           <h4 class="center"><b>How to write good questions</b></h4>
           Try to use some of these useful question stems to formulate your questions:<br>
-          <ul>
+            <ul>
             <li>How would you use ___ to ___?</li>
             <li>What would happen if ___?</li>
             <li>What are risks and benefits of ___?</li>
