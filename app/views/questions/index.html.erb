@@ -5,10 +5,12 @@
 
  <% if @question_limitations != "true" %>
   <div id = "all-mine-filter" class="btn-group" data-toggle="buttons">
-    <label class="btn btn-primary active" id="mine-radio">
-      <input type="radio" name="options"  autocomplete="off"> Mine
-    </label>
-    <label class="btn btn-primary" id="other-radio">
+    <% if current_user %>
+      <label class="btn btn-primary active" id="mine-radio">
+        <input type="radio" name="options" autocomplete="off"> Mine
+      </label>
+    <% end %>
+    <label class="btn btn-primary <% unless current_user %>active<% end %>" id="other-radio">
       <input type="radio" name="options" autocomplete="off" checked> Other
     </label>
   </div>
@@ -18,10 +20,10 @@
 
   <div class = "question_list">
   <% @questions.each do |question| %>    
-      <% if question['user_id'] == current_user.id %>
+      <% if current_user and question['user_id'] == current_user.id %>
     <div class = "panel-group my-question">
       <% else %>
-    <div class = 'panel-group other-question hidden'>
+    <div class = 'panel-group other-question <% if current_user %>hidden<% end %>'>
       <% end %>
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -60,15 +62,21 @@
                     data-hyperlinktext="Facebook"
                     data-question="<%= question["text"]%>">
                       <i class="fa fa-facebook-square"></i>
-                  </a> 
-                      <!-- Creates the delete option for each question -->
-                      <% if question['user_id'] == current_user.id %>
+                  </a>
+                  <div class="pull-right">
+                      <!-- Creates the edit and delete options for each question -->
+                      <% if current_user and question['user_id'] == current_user.id or current_user.role == 'admin' %>
 
-                        <%= link_to question_path(question), method: :delete, class:'btn pull-right delete-button' do%>
+                        <%= link_to edit_question_path(question), class:'btn edit-button' do%>
+                          <span class="glyphicon glyphicon-edit edit-button-glyphicon"></span>
+                        <% end %>
+
+                        <%= link_to question_path(question), method: :delete, class:'btn delete-button' do%>
                           <span class="glyphicon glyphicon-trash delete-button-glyphicon"></span>
                         <% end %>
 
                       <% end %>
+                  </div>
                 </span>
               </div>
             </div> 

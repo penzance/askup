@@ -8,6 +8,9 @@ defaults: &defaults
   mail_host_username: "username"
   mail_host_password: "password"
 
+  # change to toggle access to parts of the application (currently must use strings, not YAML booleans)
+  abilities_unauth_user_can_index_questions: "true"
+
 development:
   analytics_log_file: "/log/development_analytics.log"
   <<: *defaults

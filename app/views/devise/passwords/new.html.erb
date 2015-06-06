@@ -7,14 +7,11 @@
         <%= devise_error_messages! %>
 
         <div class="center">
-          <span style="margin-right: 10px;">
-          <%= f.label :email %>
-            </span>
-          <%= f.email_field :email, autofocus: true %>
+          <%= f.email_field :email, autofocus: true, class: "center-form form-control", placeholder: "Email" %>
         </div>
 
         <div class="center user-link">
-          <%= f.submit "Send me reset password instructions", class: 'btn btn-theme' %>
+          <%= f.submit "Reset password", class: 'btn btn-theme' %>
         </div>
 
       <% end %>
