@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
   authorize_resource
 
   # loads the review questions page, which has a modal for showing individual questions
+  
   def index
     @questions = get_question_list.sort_by{|hash| hash['created_at']}.reverse!
     @question_limitations = ENV["limit_question_index_to_users_questions_only"]
