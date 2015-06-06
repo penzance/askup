@@ -3,7 +3,7 @@ $(document).ready(function(e){
 
 // Defines function that gives the user feedback once they state whether or not they have gotten the question right. 
 // This function also stores the user response in the development_analytics.log using an ajax call. 
-  function provide_feedback(is_correct, notice_text, q_id) {
+  function provide_feedback(is_correct, notice_text, q_id, color_class) {
     
       $.ajax({
         url: window.location.pathname + "/" + q_id + "/feedback",
@@ -14,13 +14,15 @@ $(document).ready(function(e){
         if ( console && console.log ) {
           console.log( "Sample of data:", data.slice( 0, 100 ) );
         }
+        $('#alert_text_container').addClass(color_class);
         $('#alert_text').text(notice_text);
         $('.alert').slideDown();
     });
+       $('#alert_text_container').removeClass("alert-danger").addClass("alert-success");
   };
 
   //provide_feedback function for the STANDALONE page
-  function single_provide_feedback(is_correct, notice_text) {
+  function single_provide_feedback(is_correct, notice_text, color_class) {
     
       $.ajax({
         url: window.location.pathname + "/feedback",
@@ -31,6 +33,7 @@ $(document).ready(function(e){
         if ( console && console.log ) {
           console.log( "Sample of data:", data.slice( 0, 100 ) );
         }
+        $('#single-alert-text-container').addClass(color_class);
         $('#single_alert_text').text(notice_text);
         $('.alert').slideDown();
     });
@@ -64,17 +67,15 @@ $("#submit_answer").click(function(ev){
 $('#respond-yes').click(function(ev) {
   $('#respond-yes').fadeIn();
   ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
-  provide_feedback("yes", "Great! Congrats! Try another question.", $('#respond-yes').data('q_id'));
+  provide_feedback("yes", "Great! Congrats! Try another question.", $('#respond-yes').data('q_id'),"alert-success");
   $('#response').hide("slow");
-  $('#alert_text_container').addClass("alert-success");
 });
 
 $('#respond-no').click(function(ev) {
   $('#respond-no').fadeIn();
   ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
-  provide_feedback("no", "No worries. You'll get it next time. Onwards!", $('#respond-no').data('q_id'));
+  provide_feedback("no", "No worries. You'll get it next time. Onwards!", $('#respond-no').data('q_id'),"alert-danger");
   $('#response').hide("slow");
-  $('#alert_text_container').addClass("alert-danger");
 });
 
 //JAVASCRIPT FOR THE STANDALONE PAGE
@@ -104,22 +105,21 @@ $('#single-answer-text').keyup(single_enableSubmitAnswer);
        $("#single-answers").fadeIn();
        $("#single-submit-answer").hide("slow");
        $("#single-response").fadeIn();
+
   });
 
   $('#single-respond-yes').click(function(ev) {
     $('#single-respond-yes').fadeIn();
     ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
-    single_provide_feedback("yes", "Great! Congrats! Try another question.");
+    single_provide_feedback("yes", "Great! Congrats! Try another question.", "alert-success");
     $('#single-response').hide("slow");
-    $('#single-alert-text-container').addClass("alert-success");
   });
 
   $('#single-respond-no').click(function(ev) {
     $('#single-respond-no').fadeIn();
     ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
-    single_provide_feedback("no", "No worries. You'll get it next time. Onwards!");
+    single_provide_feedback("no", "No worries. You'll get it next time. Onwards!", "alert-danger");
     $('#single-response').hide("slow");
-    $('#single-alert-text-container').addClass("alert-danger");
   });
 
 });
