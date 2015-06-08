@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-7">
         <div class="box">
-          <h2 class="eq-title center">Edit Question</h2>
+          <h2 class="title-no-margin center">Edit Question</h2>
           <br>
             <%= form_for @question, url: question_path(@question), method: :patch, html: { class: "edit_question", id: "edit_question_#{@question.id}" } do |f| %>
               <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>

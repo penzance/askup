@@ -1,9 +1,9 @@
 <div class="prettyform">
-  <div class="full-width-container newquestion nq-container-desktop">
+  <div class="full-width-container newquestion">
     <div class="row">
       <div class="col-sm-7">
         <div class="box">
-          <h2 class="nq-title center">New Question</h2>
+          <h2 class="title-no-margin center">New Question</h2>
           <br>
             <%= form_for(@question) do |f| %>
               <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>

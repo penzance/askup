@@ -5,54 +5,47 @@
 </div>
 
 <div class="prettyform">
-  <div class="container newanswer">
-    <div class="box">
-
-      <h3 class="center show-question-title"><%= @question %></h3>
+  <div class="container">
+    <!--<div class="row">-->
+      <!--<div class="col-sm-7">-->
+    <div class="box center">
+      <h2 class="title-no-margin"><%= @question %></h2>
       <br>
-
       <%= form_for @answer, :url => question_answers_path(@question_id), remote: true do |f| %>
-
-            <%= f.text_area :text, autofocus: true, placeholder: 'Type your answer here', class: 'form-control', id: 'single-answer-text' %>
-
-            <div class="center btn-div">
-              <%= f.submit "Submit answer", class: 'btn btn-theme btn-lg', id: 'single-submit-answer' %>
-            </div>
-         <%end%>
-
+        <%= f.text_area :text, autofocus: true, placeholder: 'Type your answer here', class: 'form-control', id: 'single-answer-text' %>
+        <div class="btn-div">
+          <%= f.submit "Submit answer", class: 'btn btn-theme btn-lg', id: 'single-submit-answer' %>
         </div>
-      </div>
+     <%end%>
     </div>
-    <div class="prettyform">
-      <div class="container newanswer">
-      <div id="single-answers" class="box center">
-        <h3>Answer:</h3>
-        <div class="correct_div">
-          <h4 class="correct"><%= @answers[0]["text"] %></h4>
-        </div> 
-      </div>
-    </div>
-    </div>
-    <div id="single-response">
-        <br>
-        <h4 class="center"><b>Did you know the answer?</b></h4>
-        <div class="row">
-          <div class="col-xs-6 yes">
-            <a id="single-respond-yes" class="btn-flat btn-success"><i class="fa fa-check"></i></a>
-          </div>
-          <div class="col-xs-6">
-            <a id ="single-respond-no" class="btn-flat btn-pink"><i class="fa fa-times"></i></a>
-          </div>
-
-        </div>
-      </div>
-    <br><br>
   </div>
+</div>
+<div class="prettyform">
+  <div class="container">
+    <div id="single-answers" class="box center">
+      <h3>Answer:</h3>
+      <div class="correct_div">
+        <h4 class="correct"><%= @answers[0]["text"] %></h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="single-response">
+  <br>
+  <h4 class="center"><b>Did you know the answer?</b></h4>
+  <div class="row">
+    <div class="col-xs-6 yes">
+      <a id="single-respond-yes" class="btn-flat btn-success"><i class="fa fa-check"></i></a>
+    </div>
+    <div class="col-xs-6">
+      <a id ="single-respond-no" class="btn-flat btn-pink"><i class="fa fa-times"></i></a>
+    </div>
   </div>
 </div>
 
-
-<!-- In javascript (see answers.js): call respond method with corresponding response, launch appropriate modal
-        Yes: "Great job! Keep at it" then a button "Answer another question"
-        No: "Keep studying, you can do it!" then a button "Answer another question"
-      Both buttons go to questions index -->
+<% if false %>
+  In javascript (see answers.js): call respond method with corresponding response, launch appropriate modal
+    Yes: "Great job! Keep at it" then a button "Answer another question"
+    No: "Keep studying, you can do it!" then a button "Answer another question"
+  Both buttons go to questions index
+<% end %>
