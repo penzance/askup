@@ -50,20 +50,15 @@
   margin-bottom: 0em;
 }
 
-.delete-button, .edit-button {
+.shortcut-button-link {
   padding: 0;
 }
 
-.delete-button-glyphicon, .edit-button-glyphicon {
+.shortcut-button-glyphicon {
   color:black;
-}
-
-.delete-button-glyphicon:hover{
-  color:gray;
-}
-
-.edit-button-glyphicon:hover {
-  color:gray;
+  &:hover {
+    color: gray;
+  }
 }
 
 .modal-body-social{

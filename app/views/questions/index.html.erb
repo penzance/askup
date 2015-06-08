@@ -67,12 +67,12 @@
                       <!-- Creates the edit and delete options for each question -->
                       <% if current_user and question['user_id'] == current_user.id or current_user.role == 'admin' %>
 
-                        <%= link_to edit_question_path(question), class:'btn edit-button' do%>
-                          <span class="glyphicon glyphicon-edit edit-button-glyphicon"></span>
+                        <%= link_to edit_question_path(question), class:'btn shortcut-button-link' do%>
+                          <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
                         <% end %>
 
-                        <%= link_to question_path(question), method: :delete, class:'btn delete-button' do%>
-                          <span class="glyphicon glyphicon-trash delete-button-glyphicon"></span>
+                        <%= link_to question_path(question), method: :delete, class:'btn shortcut-button-link' do%>
+                          <span class="glyphicon glyphicon-trash shortcut-button-glyphicon"></span>
                         <% end %>
 
                       <% end %>
