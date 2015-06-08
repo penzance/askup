@@ -18,14 +18,13 @@ module QuestionsHelper
   end
 
   def update_question_by_id(id, params)
-    logger.debug "update_question_by_id calling PATCH on question #{id} with params #{params}"
     response = RestClient.patch("#{ENV['qm_api_url']}questions/#{id}", params, :content_type => :json , :accept => :json)
     logger.debug "update_question_by_id received the following response from the question market: #{response}"
   end
 
-  def destroy_question question
-    response = RestClient.delete(ENV["qm_api_url"] + 'questions/' + params[:id], :content_type => :json , :accept => :json)
-    logger.debug "RESPONSE from AskUp destroy_question: #{response}"
+  def destroy_question_by_id(id)
+    response = RestClient.delete("#{ENV['qm_api_url']}questions/#{id}", :content_type => :json , :accept => :json)
+    logger.debug "destroy_question_by_id received the following response from the question market: #{response}"
   end
 
 end

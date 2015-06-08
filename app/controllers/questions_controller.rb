@@ -73,20 +73,17 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    logger.debug "PARAMS in question's destroy: #{params}"
-    @questions = get_question_list()
-    @question_id = params[:id]
-    @question = @questions[(params[:id].to_i-1)]
-
-    logger.debug "@QUESTIONS LIST TYPE in question's destroy: #{@questions.class}"
-    logger.debug "@QUESTIONS LIST'S ATTRIBUTES in question's destroy: #{@questions.class}"
-    logger.debug "@QUESTION in question's destroy: #{@question}"
-    logger.debug "@QUESTION's type in question's destroy: #{@question.class}"
-
-    destroy_question(@question)
+    # the question market API doesn't currently support user sessions, and we can't send a payload as part of the
+    # standard HTTP DELETE request, so this is the only place to check for security violations at the moment.
+    # Check the user ID of the question against the current user's ID if the current user isn't an admin
+    question_to_delete = get_question(params[:id])
+    if current_user.role != :admin and question_to_delete.user_id != current_user.id
+      flash[:alert] = "Something went wrong; could not complete your request."
+    else
+      destroy_question_by_id(params[:id])
+    end
     redirect_to questions_path
   end
-
 
   def feedback
     user_knowledge = (params[:correct] == "yes" ? "knew" : "didn't know")
