@@ -14,4 +14,7 @@ class User < ActiveRecord::Base
     self.role.to_s == role.to_s
   end
 
+  def to_s
+    self.to_json
+  end
 end

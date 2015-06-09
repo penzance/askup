@@ -27,4 +27,8 @@ class Answer < ActiveRecord::Base
     logger.debug "answer.update received the following response from the question market: #{response}"
   end
 
+  def to_s
+    self.to_json
+  end
+
 end
