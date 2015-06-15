@@ -14,7 +14,7 @@ class Question < ActiveRecord::Base
   #   this is also very similar to other model update methods, may also be refactored to be more DRY
   def update(user_hash)
     json_payload_hash = Hash.new
-    json_payload_hash['question'] = self.as_json(:only => [:text, :user_id])
+    json_payload_hash['question'] = self.as_json(:only => [:text, :user_id, :question_group_id])
     json_payload_hash['user'] = user_hash
     json_payload = ActiveSupport::JSON.encode(json_payload_hash)
     logger.debug "payload to update question: #{json_payload}"
@@ -22,4 +22,7 @@ class Question < ActiveRecord::Base
     logger.debug "question.update received the following response from the question market: #{response}"
   end
 
+  def to_s
+    self.to_json(:include => :answers)
+  end
 end

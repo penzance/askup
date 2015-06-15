@@ -3,12 +3,21 @@ class QuestionsController < ApplicationController
   authorize_resource
 
   # loads the review questions page, which has a modal for showing individual questions
-  
   def index
-    @questions = get_question_list.sort_by{|hash| hash['created_at']}.reverse!
-    @question_limitations = ENV["limit_question_index_to_users_questions_only"]
-    if current_user
-      @my_questions = @questions.select{|question| question["user_id"] == current_user.id}
+    @current_question_group_id = qgid_from_request(params)
+    unordered_questions = get_question_list
+    filtered_questions = unordered_questions.select{|q| q['question_group_id'] == @current_question_group_id}
+    @questions = filtered_questions.sort_by{|hash| [hash['created_at']]}.reverse!
+    question_groups = get_question_groups
+    if valid_group?(question_groups, @current_question_group_id)
+      @is_question_group_deletable = @current_question_group_id != ROOT_QUESTION_GROUP_ID
+      @question_group_context = get_question_group_context(question_groups, @current_question_group_id)
+      @children_option_list = get_question_group_children_option_list(question_groups, @current_question_group_id)
+      @question_limitations = ENV["limit_question_index_to_users_questions_only"]
+      @my_questions = @questions.select{|question| question["user_id"] == current_user.id} if current_user
+    else
+      # fixme: if ROOT_QUESTION_GROUP_ID is invalid this will cause an infinite loop
+      redirect_to questions_path, alert: "There was a problem with your request."
     end
   end
 
@@ -30,33 +39,33 @@ class QuestionsController < ApplicationController
     authorize! :update, @question
     @answers = @question.answers
     @answer = @answers[0]
+    @question_groups = get_question_group_option_list(get_question_groups)
+    @current_question_group_id = qgid_from_session
   end
 
   # loads the new question page, allowing user to enter a new question/answer combo in a form
   def new
     @question = Question.new
+    @current_question_group_id = qgid_from_request(params)
+    @question.question_group_id = @current_question_group_id
     @question.answers.build
-    logger.debug "@question from new is #{@question}"
+    @question_groups = get_question_group_option_list(get_question_groups)
   end
 
   # handles the request to save a new question to the backend (called from the new question page)
   def create
     question = Question.new(params.require(:question)
-      .permit(:text,
+      .permit(:text, :question_group_id,
         answers_attributes:[:text]))
-
-    logger.debug "QUESTION's type in question's create: #{question.class}"
-
     question.user_id = current_user.id
     question.post_question(question)
-
-    redirect_to new_question_path, notice: "Your question has been submitted! Enter another if you would like."
+    msg = "Your question has been submitted! Enter another if you would like."
+    redirect_to new_question_path(question_group_id: question.question_group_id), notice: msg
   end
 
   # handles the request to update an existing question to the backend (called from the edit question page)
   def update
-    question = Question.new(params.require(:question).permit(:id, :text))
-    question.id = params[:id]
+    question = Question.new(params.require(:question).permit(:id, :text, :question_group_id))
     question.user_id = current_user.id
     answer = Answer.new
     # there's probably some way to build this from the params, but couldn't figure it out, so using this
@@ -92,6 +101,5 @@ class QuestionsController < ApplicationController
         format.js { render :nothing => true }
     end
   end
-  
 
 end

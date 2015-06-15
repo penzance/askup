@@ -1,0 +1,29 @@
+<!-- Defines how the Social modal will look -->
+<div class="modal fade" id="social_display_Modal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Sets the style of the modal header  -->
+      <div class="modal-header-social">
+        <!-- Close button -->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <!-- Displays the question at the top of the modal. Javascript finds the "modal-title" class and populates it with the question contents. -->
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body-social">
+        <!-- Creates the form for the question + url text that the user will copy to clipboard -->
+        <form role="form">
+          <div class="form-group">
+            <label for="question"> Step 1: Copy the question and the link to the answer to your clipboard </label>
+            <input type="text" class="form-control" id="question" />
+          </div>
+          <!-- Creates the form for the hyperlink to the social media platform -->
+          <div class ="form-group">
+            <label for="question"> Step 2: Follow the link to the social media platform and share what's saved on your clipboard </label>
+            <br/>
+            <a class="hyperlink" target="_blank"></a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

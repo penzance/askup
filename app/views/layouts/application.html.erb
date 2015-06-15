@@ -24,8 +24,13 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-left">
-            <li><%= link_to 'Review Questions', questions_path, class: "float" %></li>
-            <li><%= link_to 'Generate Question', new_question_path, class: "float" %></li>
+            <% if session[:question_index_question_group_id].nil? %>
+              <li><%= link_to 'Review Questions', questions_path, class: "float" %></li>
+              <li><%= link_to 'Generate Question', new_question_path, class: "float" %></li>
+            <% else %>
+              <li><%= link_to 'Review Questions', questions_path(question_group_id: session[:question_index_question_group_id]), class: "float" %></li>
+              <li><%= link_to 'Generate Question', new_question_path(question_group_id: session[:question_index_question_group_id]), class: "float" %></li>
+            <% end %>
             <li><a class="float offset" href="mailto:feedback@askup.net">Feedback</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">

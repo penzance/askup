@@ -1,0 +1,21 @@
+<span id="question_group_context">
+  <h4>Question Group</h4>
+  <% @question_group_context.each do |group| %>
+    &gt;
+    <% if group['id'] == @current_question_group_id %>
+      <% if current_user and current_user.role?(:admin) %>
+        <a class="underlined-link" id="edit-question-group" data-toggle="modal" data-target="#modal-edit-question-group">
+          <%= group['name'] %>
+        </a>
+      <% else %>
+        <span class="underlined-link"> <%= group['name'] %> </span>
+      <% end %>
+    <% else %>
+      <%= link_to group['name'], questions_path(question_group_id: group['id']) %>
+    <% end %>
+  <% end %>
+  <% unless @children_option_list.empty? %>
+    &gt;
+    <%= select_tag(:question_groups, options_for_select(@children_option_list), id: 'question-groups') %>
+  <% end %>
+</span>
