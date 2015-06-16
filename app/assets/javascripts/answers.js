@@ -11,9 +11,6 @@ $(document).ready(function(e){
         data: { correct: is_correct }
       })
       .done(function( data ) {
-        if ( console && console.log ) {
-          console.log( "Sample of data:", data.slice( 0, 100 ) );
-        }
         $('#alert_text_container').addClass(color_class);
         $('#alert_text').text(notice_text);
         $('.alert').slideDown();
@@ -30,9 +27,6 @@ $(document).ready(function(e){
         data: { correct: is_correct }
       })
       .done(function( data ) {
-        if ( console && console.log ) {
-          console.log( "Sample of data:", data.slice( 0, 100 ) );
-        }
         $('#single-alert-text-container').addClass(color_class);
         $('#single_alert_text').text(notice_text);
         $('.alert').slideDown();
