@@ -13,7 +13,7 @@
                 <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
               <% end %>
               <div class="center btn-div">
-                <%= f.submit "Submit question", class: 'btn btn-theme btn-lg', id: 'submit_question' %>
+                <%= f.submit "Submit question", class: 'btn btn-theme btn-lg submit-question' %>
               </div>
             <%end%>
         </div>
@@ -24,3 +24,9 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function(){
+    initEditQuestion();
+  });
+</script>

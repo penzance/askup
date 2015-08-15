@@ -16,7 +16,7 @@
                 <%= a.hidden_field :question_id %>
               <% end %>
               <div class="center btn-div">
-                <%= f.submit "Save question", class: 'btn btn-theme btn-lg', id: 'save_question' %>
+                <%= f.submit "Save question", class: 'btn btn-theme btn-lg submit-question' %>
                 <%= link_to "Cancel", questions_path(question_group_id: @current_question_group_id), class: "btn btn-flat btn-lg" %>
               </div>
             <%end%>
@@ -28,3 +28,9 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function(){
+    initEditQuestion();
+  });
+</script>

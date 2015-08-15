@@ -1,5 +1,5 @@
-<div id="single-alert-text-container" class="alert center" style="display: none;">
-  <div id= "single_alert_text"> </div>
+<div class="alert feedback-alert center" style="display: none;">
+  <div class="alert-text feedback-alert-text"> </div>
    &nbsp;
   <a href="#" class="close-alert grow"><i class="fa fa-times-circle"></i></a>
 </div>
@@ -12,36 +12,53 @@
       <h2 class="title-no-margin"><%= @question %></h2>
       <br>
       <%= form_for @answer, :url => question_answers_path(@question_id), remote: true do |f| %>
-        <%= f.text_area :text, autofocus: true, placeholder: 'Type your answer here', class: 'form-control', id: 'single-answer-text' %>
+        <%= f.text_area :text, autofocus: true, placeholder: 'Type your answer here', class: 'form-control answer-text', id: 'single-answer-text' %>
         <div class="btn-div">
-          <%= f.submit "Submit answer", class: 'btn btn-theme btn-lg', id: 'single-submit-answer' %>
+          <%= f.submit "Submit answer", class: 'btn btn-theme btn-lg submit-answer', id: 'single-submit-answer' %>
         </div>
      <%end%>
     </div>
   </div>
 </div>
-<div class="prettyform">
+<div class="prettyform answers" style="display:none">
   <div class="container">
-    <div id="single-answers" class="box center">
+    <div class="box center">
       <h3>Answer:</h3>
-      <div class="correct_div">
+      <div class="correct-container">
         <h4 class="correct"><%= @answers[0]["text"] %></h4>
       </div>
     </div>
   </div>
 </div>
-<div id="single-response">
+<div class="response" style="display:none">
   <br>
   <h4 class="center"><b>Did you know the answer?</b></h4>
   <div class="row">
     <div class="col-xs-6 yes">
-      <a id="single-respond-yes" class="btn-flat btn-success"><i class="fa fa-check"></i></a>
+      <a class="btn-flat btn-success feedback-button"
+         data-feedback-active="<%= !!current_user %>"
+         data-feedback-string="yes"
+         data-feedback-qid="<%= @question_id %>">
+        <i class="fa fa-check"></i>
+      </a>
     </div>
     <div class="col-xs-6">
-      <a id ="single-respond-no" class="btn-flat btn-pink"><i class="fa fa-times"></i></a>
+      <a class="btn-flat btn-success feedback-button"
+         data-feedback-active="<%= !!current_user %>"
+         data-feedback-string="no"
+         data-feedback-qid="<%= @question_id %>">
+        <i class="fa fa-times"></i>
+      </a>
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function(e) {
+    initAnswerButton();
+    initUserFeedback();
+  });
+</script>
 
 <% if false %>
   In javascript (see answers.js): call respond method with corresponding response, launch appropriate modal
