@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#single-response, #response {
+.response {
   .yes {
     text-align: right;
   }
@@ -22,8 +22,8 @@
     color: white;
   }
 }
-#single-answers, #answers {
-  .correct_div {
+.answers {
+  .correct-container {
     width: 95%;
     margin-right: auto;
     margin-left: auto;
@@ -39,7 +39,7 @@
   
 }
 
-#single-respond-yes, #single-respond-no {
+.feedback-button {
   cursor: pointer;
 }
 

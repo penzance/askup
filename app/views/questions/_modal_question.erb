@@ -20,10 +20,9 @@
           <div style="display:none">
             <input name="utf8" type="hidden" value="✓" />
           </div>
-          <textarea class="form-control" id="answer_text" name="answer[text]" placeholder="Type your answer here"></textarea>
+          <textarea class="form-control answer-text" name="answer[text]" placeholder="Type your answer here"></textarea>
           <div class="center btn-div">
-            <input class="btn btn-theme btn-lg"
-                   id="submit_answer"
+            <input class="btn btn-theme btn-lg submit-answer"
                    name="commit"
                    type="submit"
                    value="Submit answer" />
@@ -31,7 +30,7 @@
         </form>
 
         <!-- Displays the correct answer to the question once the user submits their answer -->
-        <div id="answers" class="prettyform">
+        <div class="prettyform answers">
           <div class="container">
             <div class="box center" style="display: block;">
               <h3>Answer:</h3>
@@ -41,23 +40,31 @@
         </div>
 
         <!-- Allows the user to note whether or not they got the question right. Creates two buttons, of which the user presses one (yes/no).-->
-        <div id="response">
+        <div class="response">
           <br>
           <h4 class="center"><b>Did you know the answer?</b></h4>
           <div class="row">
             <div class="col-xs-6 yes">
-              <a id="respond-yes" class="btn-flat btn-success"><i class="fa fa-check"></i></a>
+              <a id="respond-yes" class="btn-flat btn-success feedback-button"
+                 data-feedback-active="<%= !!current_user %>"
+                 data-feedback-string="yes">
+                <i class="fa fa-check"></i>
+              </a>
             </div>
-            <div class="col-xs-6">
-              <a id="respond-no" class="btn-flat btn-pink"><i class="fa fa-times"></i></a>
+            <div class="col-xs-6 no">
+              <a id="respond-no" class="btn-flat btn-pink feedback-button"
+                data-feedback-active="<%= !!current_user %>"
+                data-feedback-string="no">
+                <i class="fa fa-times"></i>
+              </a>
             </div>
           </div>
         </div>
         <br>
 
         <!-- Alert box appears after the user answers whether or not they got the question right  -->
-        <div id="alert_text_container" class="alert center" style>
-          <div id="alert_text"> </div>
+        <div class="alert feedback-alert center">
+          <div class="feedback-alert-text"> </div>
           &nbsp;
           <a class="close-alert grow"><i class="fa fa-times-circle"></i></a>
         </div>
@@ -65,3 +72,13 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function(){
+    // Creates the javascript for the Question modal that allows it to be populated with the data received upon clicking the modal link
+    $('#question_display_Modal').on('show.bs.modal', function (event) {
+      var $question_link = $(event.relatedTarget); // element that triggered the modal. $question_link is populated with the data from the click
+      initQuestionDisplayModal($(this), $question_link);
+    })
+  });
+</script>
