@@ -47,3 +47,6 @@ gem 'cancancan', '~> 1.10'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# for question groups
+gem 'acts_as_tree'
+
