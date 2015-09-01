@@ -1,22 +1,22 @@
 class QuestionsController < ApplicationController
+  # todo: helper should only have View helper code, not business logic, so work to remove the dependency here
   include QuestionsHelper
   authorize_resource
 
   # loads the review questions page, which has a modal for showing individual questions
   def index
     @current_question_group_id = qgid_from_request(params)
-    unordered_questions = get_question_list
-    filtered_questions = unordered_questions.select{|q| q['question_group_id'] == @current_question_group_id}
-    @questions = filtered_questions.sort_by{|hash| [hash['created_at']]}.reverse!
-    question_groups = get_question_groups
+    @questions = Question.includes(:answers).where(question_group_id: @current_question_group_id).order(created_at: :desc)
+    question_groups = QuestionGroup.all
     if valid_group?(question_groups, @current_question_group_id)
-      @is_question_group_deletable = @current_question_group_id != ROOT_QUESTION_GROUP_ID
+      # todo: refactor to use .parent, and move this logic into the View?
+      @is_question_group_deletable = true
       @question_group_context = get_question_group_context(question_groups, @current_question_group_id)
       @children_option_list = get_question_group_children_option_list(question_groups, @current_question_group_id)
       @question_limitations = ENV["limit_question_index_to_users_questions_only"]
       @my_questions = @questions.select{|question| question["user_id"] == current_user.id} if current_user
     else
-      # fixme: if ROOT_QUESTION_GROUP_ID is invalid this will cause an infinite loop
+      # fixme: if ROOT_QUESTION_GROUP_ID is invalid this will cause an infinite loop (should be fixed by QG refactoring)
       redirect_to questions_path, alert: "There was a problem with your request."
     end
   end
@@ -25,21 +25,20 @@ class QuestionsController < ApplicationController
   #   can review the answer and specify whether he/she knew the answer
   def show
     @question_id = params[:id]
-    question = get_question(@question_id)
+    question = Question.find(@question_id)
     @question = question.text
     @answers = question.answers
     @answer = Answer.new
   end
 
   # loads the edit page, allowing user to edit a question/answer combo
-  #   authorization uses models/ability.rb, but we need to get the question
-  #   object from the QuestionMarket before we can authorize
   def edit
-    @question = get_question(params[:id])
+    @question = Question.find(params[:id])
+    # todo: move this check back into ability.rb
     authorize! :update, @question
     @answers = @question.answers
     @answer = @answers[0]
-    @question_groups = get_question_group_option_list(get_question_groups)
+    @question_groups = get_question_group_option_list(QuestionGroup.all)
     @current_question_group_id = qgid_from_session
   end
 
@@ -49,47 +48,37 @@ class QuestionsController < ApplicationController
     @current_question_group_id = qgid_from_request(params)
     @question.question_group_id = @current_question_group_id
     @question.answers.build
-    @question_groups = get_question_group_option_list(get_question_groups)
+    @question_groups = get_question_group_option_list(QuestionGroup.all)
   end
 
-  # handles the request to save a new question to the backend (called from the new question page)
+  # handles the request to save a new question (called from the new question page)
   def create
-    question = Question.new(params.require(:question)
-      .permit(:text, :question_group_id,
-        answers_attributes:[:text]))
+    question = Question.new(question_params)
     question.user_id = current_user.id
-    question.post_question(question)
+    question.save
     msg = "Your question has been submitted! Enter another if you would like."
     redirect_to new_question_path(question_group_id: question.question_group_id), notice: msg
   end
 
-  # handles the request to update an existing question to the backend (called from the edit question page)
+  # handles the request to update an existing question (called from the edit question page)
+  # Note: when question or answer is modified (updated_at changes), the other one doesn't necessarily get modified.
+  #   If we wanted to change both every time either changed, we could use PUT instead of PATCH. However, we might
+  #   not want to update both, because it would be good to know when the question has changed so the answer is now
+  #   out-of-date, for example.
   def update
-    question = Question.new(params.require(:question).permit(:id, :text, :question_group_id))
+    question = Question.find(params[:id])
     question.user_id = current_user.id
-    answer = Answer.new
-    # there's probably some way to build this from the params, but couldn't figure it out, so using this
-    #   explicit encode + implicit decode workaround for the moment
-    answer.from_json(ActiveSupport::JSON.encode(params['question']['answers_attributes']['0']))
-    # there's probably some way to update the answer as part of the question, since it is an associated
-    #   object, but couldn't figure it out so using this two-step update for now
-    #   note that we don't have enough (reliable) information on the frontend to authorize before calling
-    #   the backend, so we need to rely on the backend to authorize the action, so we send along info
-    #   about the current user as well
-    question.update current_user.as_json
-    answer.update current_user.as_json
+    question.update(question_params)
     redirect_to edit_question_path(params[:id]), notice: "Your question has been updated!"
   end
 
   def destroy
-    # the question market API doesn't currently support user sessions, and we can't send a payload as part of the
-    # standard HTTP DELETE request, so this is the only place to check for security violations at the moment.
-    # Check the user ID of the question against the current user's ID if the current user isn't an admin
-    question_to_delete = get_question(params[:id])
+    question_to_delete = Question.find(params[:id])
+    # todo: move this check into ability.rb
     if current_user.role != :admin and question_to_delete.user_id != current_user.id
       flash[:alert] = "Something went wrong; could not complete your request."
     else
-      destroy_question_by_id(params[:id])
+      question_to_delete.destroy
     end
     redirect_to questions_path
   end
@@ -102,4 +91,9 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # todo: do we need to remove :id for the create params, so you can't create a specific answer or question id?
+  private
+  def question_params
+    params.require(:question).permit(:id, :text, :question_group_id, answers_attributes: [:id, :text, '_destroy'])
+  end
 end

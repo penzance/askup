@@ -1,42 +1,37 @@
 class QuestionGroupsController < ApplicationController
-  require 'json'
-  # Note: this is not authorized by cancancan as it is not an actual model/resource
+  authorize_resource
 
-  # handles the request to save a new question group to the backend (called from the new question group modal)
+  # handles the request to save a new question group
+  # (called from the new question group modal)
   def create
-    group_params = params.permit(:name, :parent_id)
-    question_group = {:name => group_params[:name], :parent_id => group_params[:parent_id]}
-    response = RestClient.post(ENV["qm_api_url"] + 'question_groups',
-                               question_group.to_json, :content_type => :json , :accept => :json)
-    logger.debug "RESPONSE from question market: #{response}"
-    response_hash = JSON.parse response
-    redirect_to questions_path(question_group_id: response_hash['id']),
-                notice: "Question group '#{response_hash['name']}' created."
+    create_group_params = params.permit(:name, :parent_id)
+    question_group = QuestionGroup.new(create_group_params)
+    question_group.save
+    redirect_to questions_path(question_group_id: question_group.id),
+                notice: "Question group '#{question_group.name}' created."
   end
 
-  # handles the request to update an existing question group to the backend (called from the edit question group modal)
+  # handles the request to update an existing question group
+  # (called from the edit question group modal)
   def update
-    # note: parent_id is not changeable via this UI, so not permitted and not sent to Question Market
-    group_params = params.permit(:id, :name)
-    question_group = {:id => group_params[:id], :name => group_params[:name]}
-    logger.debug "payload to update question group: #{question_group.to_json}"
-    response = RestClient.patch("#{ENV['qm_api_url']}question_groups/#{group_params[:id]}",
-                                question_group.to_json, :content_type => :json , :accept => :json)
-    logger.debug "RESPONSE from question market: #{response}"
-    response_hash = JSON.parse response
-    msg = "Question group '#{response_hash['name']}' saved."
-    redirect_to questions_path(question_group_id: response_hash['id']), notice: msg
+    # note: parent_id is not changeable via this UI
+    update_group_params = params.permit(:id, :name)
+    question_group = QuestionGroup.find(params[:id])
+    question_group.update(update_group_params)
+    msg = "Question group '#{question_group.name}' saved."
+    redirect_to questions_path(question_group_id: question_group.id), notice: msg
   end
 
   def destroy
-    unless current_user.role?(:admin)
-      flash[:alert] = "Something went wrong; could not complete your request."
+    delete_group_params = params.permit(:id)
+    question_group = QuestionGroup.find(params[:id])
+    parent_id = question_group.parent_id
+    if question_group.destroy
+      redirect_to questions_path(question_group_id: parent_id),
+                  notice: "Question group deleted."
     else
-      response = RestClient.delete("#{ENV['qm_api_url']}question_groups/#{params[:id]}",
-                                   :content_type => :json , :accept => :json)
-      logger.debug "Response from question market: #{response}"
-      flash[:notice] = "Question group deleted."
+      redirect_to questions_path(question_group_id: params[:id]),
+                  alert: "Question group could not be deleted."
     end
-    redirect_to questions_path
   end
 end

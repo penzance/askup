@@ -12,11 +12,13 @@ class Ability
         can :read, Question
         can :create, Question
         can :manage, Question
+        can :manage, QuestionGroup
         can :manage, User
       elsif user.role? :contributor
         can :read, Question
         can :create, Question
-        can :manage, Question, :user_id => user.id  # further checks in controller, backend
+        can :manage, Question, :user_id => user.id
+        can :read, QuestionGroup
         can :manage, User, :id => user.id
       end
     end
