@@ -27,3 +27,14 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function(){
+    // Creates the javascript for the Social modal that allows it to be populated with the data received upon clicking the modal link
+    $('#social_display_Modal').on('show.bs.modal', function (event) {
+      var $modal = $(this);
+      var $social_link = $(event.relatedTarget); // element that triggered the modal. $social_link is populated with the data from the click
+      initSocialModal($modal, $social_link);
+    })
+  });
+</script>

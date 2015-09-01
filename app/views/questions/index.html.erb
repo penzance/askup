@@ -41,37 +41,37 @@
                   <a data-toggle="modal"
                     href="#"
                     data-target="#question_display_Modal"
-                    data-answer="<%=question["answers"][0]["text"]%>"
-                    data-qid="<%=question["id"]%>"
-                    data-question="<%= question["text"]%>">
-                      <%= question["text"]%>
+                    data-answer="<%= question.answers[0].text %>"
+                    data-qid="<%= question.id %>"
+                    data-question="<%= question.text %>">
+                      <%= question.text %>
                   </a>
                 <br/>
                   <!-- Toggles the Twitter modal. Data that is included: share-able url, question text, and hyperlink -->
                   <a data-toggle="modal"
                     href="#"
                     data-target="#social_display_Modal"
-                    data-url= "<%= url_for(controller: 'questions', action: 'show', id:question["id"], host:request.base_url) %>"
+                    data-url= "<%= url_for(controller: 'questions', action: 'show', id:question.id, host:request.base_url) %>"
                     data-website="Share on Twitter"
                     data-hyperlink="https://www.twitter.com"
                     data-hyperlinktext= "Twitter"
-                    data-question="<%= question["text"]%>">
+                    data-question="<%= question.text%>">
                       <i class="fa fa-twitter-square"></i>
                   </a>
                   <!-- Toggles the Facebook modal. Data that is included: share-able url, question text, and hyperlink -->
                    <a data-toggle="modal"
                     href="#"
                     data-target="#social_display_Modal"
-                    data-url= "<%= url_for(controller: 'questions', action: 'show', id:question["id"], host:request.base_url) %>"
+                    data-url= "<%= url_for(controller: 'questions', action: 'show', id:question.id, host:request.base_url) %>"
                     data-website="Share on Facebook"
                     data-hyperlink="https://www.facebook.com"
                     data-hyperlinktext="Facebook"
-                    data-question="<%= question["text"]%>">
+                    data-question="<%= question.text%>">
                       <i class="fa fa-facebook-square"></i>
                   </a>
                   <div class="pull-right">
                       <!-- Creates the edit and delete options for each question -->
-                      <% if current_user and (question['user_id'] == current_user.id or current_user.role?(:admin)) %>
+                      <% if current_user and (question.user_id == current_user.id or current_user.role?(:admin)) %>
 
                         <%= link_to edit_question_path(question), class:'btn shortcut-button-link' do%>
                           <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
@@ -88,13 +88,6 @@
             </div>
           </h4>
         </div>
-        <div id=<%= "collapse#{index}" %> class="panel-collapse collapse">
-          <div class="panel-body">
-            <% if question["answers"][0] %>
-              <%= question["answers"][0]["text"] %>
-            <% end %>
-          </div>
-        </div>
       </div> <!-- .panel panel-default -->
       </div> <!-- .panel-group -->
     <% end %>
@@ -108,3 +101,10 @@
   <%= render "modal_edit_question_group" %>
   <%= render "modal_new_question_group" %>
 <% end %>
+
+<script>
+  $(document).ready(function(){
+    initQuestionGroups();
+    initQuestionFilter();
+  });
+</script>
