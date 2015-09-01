@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
 
   # loads the review questions page, which has a modal for showing individual questions
   def index
+    @feedback_active = !!current_user
     @current_question_group_id = qgid_from_request(params)
     @questions = Question.includes(:answers).where(question_group_id: @current_question_group_id).order(created_at: :desc)
     question_groups = QuestionGroup.all
@@ -24,6 +25,7 @@ class QuestionsController < ApplicationController
   # loads the page showing details for a single question so that a user
   #   can review the answer and specify whether he/she knew the answer
   def show
+    @feedback_active = !!current_user
     @question = Question.find(params[:id])
     @new_answer = Answer.new
   end

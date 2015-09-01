@@ -36,7 +36,7 @@
   <div class="row">
     <div class="col-xs-6 yes">
       <a class="btn-flat btn-success feedback-button"
-         data-feedback-active="<%= !!current_user %>"
+         data-feedback-active="<%= @feedback_active %>"
          data-feedback-string="yes"
          data-feedback-qid="<%= @question.id %>">
         <i class="fa fa-check"></i>
@@ -44,7 +44,7 @@
     </div>
     <div class="col-xs-6">
       <a class="btn-flat btn-success feedback-button"
-         data-feedback-active="<%= !!current_user %>"
+         data-feedback-active="<%= @feedback_active %>"
          data-feedback-string="no"
          data-feedback-qid="<%= @question.id %>">
         <i class="fa fa-times"></i>

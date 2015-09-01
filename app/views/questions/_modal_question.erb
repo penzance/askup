@@ -46,14 +46,14 @@
           <div class="row">
             <div class="col-xs-6 yes">
               <a id="respond-yes" class="btn-flat btn-success feedback-button"
-                 data-feedback-active="<%= !!current_user %>"
+                 data-feedback-active="<%= @feedback_active %>"
                  data-feedback-string="yes">
                 <i class="fa fa-check"></i>
               </a>
             </div>
             <div class="col-xs-6 no">
               <a id="respond-no" class="btn-flat btn-pink feedback-button"
-                data-feedback-active="<%= !!current_user %>"
+                data-feedback-active="<%= @feedback_active %>"
                 data-feedback-string="no">
                 <i class="fa fa-times"></i>
               </a>
