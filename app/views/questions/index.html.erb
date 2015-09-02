@@ -5,7 +5,7 @@
 
   <div class="row">
     <div class="col-sm-8">
-      <%= render "question_group_context" %>
+      <%= render "qset_context" %>
     </div>
 
     <div class="col-sm-4 right">
@@ -98,13 +98,13 @@
 <%= render "modal_question" %>
 <%= render "modal_social" %>
 <% if current_user and current_user.role?(:admin) %>
-  <%= render "modal_edit_question_group" %>
-  <%= render "modal_new_question_group" %>
+  <%= render "modal_edit_qset" %>
+  <%= render "modal_new_qset" %>
 <% end %>
 
 <script>
   $(document).ready(function(){
-    initQuestionGroups();
+    initQsets();
     initQuestionFilter();
   });
 </script>

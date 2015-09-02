@@ -35,11 +35,11 @@ question_groups, questions, and answers tables if you don't want to start over.
           
           cp db/development.sqlite3 db/development-backup.sqlite3
 
-2. Run migrations. (This is needed to add the question groups table to AskUp.)
+2. Run migrations. (This is needed to add the qsets table to AskUp.)
 
           bundle exec rake db:migrate
 
-3. _(optional)_ Dump your questions, answers, and question groups from your
+3. _(optional)_ Dump your questions, answers, and qsets from your
 Question Market (QM) database into your AskUp (AU) database.
     * Open the *QM database* in the sqlite3 shell, then dump the tables.
   

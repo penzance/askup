@@ -12,13 +12,13 @@ class Ability
         can :read, Question
         can :create, Question
         can :manage, Question
-        can :manage, QuestionGroup
+        can :manage, Qset
         can :manage, User
       elsif user.role? :contributor
         can :read, Question
         can :create, Question
         can :manage, Question, :user_id => user.id
-        can :read, QuestionGroup
+        can :read, Qset
         can :manage, User, :id => user.id
       end
     end

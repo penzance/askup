@@ -7,8 +7,8 @@
           <br>
             <%= form_for(@question) do |f| %>
               <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>
-              <%= f.label :question_group_id, 'Question Group' %>
-              <%= f.select :question_group_id, @question_groups %>
+              <%= f.label :qset_id, 'Qset' %>
+              <%= f.select :qset_id, @qsets %>
               <%= f.fields_for :answers do |a| %>
                 <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
               <% end %>

@@ -51,23 +51,23 @@ function initSocialModal($modal, $social_link) {
   $modal.find('.hyperlink').text(hyperlinktext); // creates the text that the hyperlink will show up as
 }
 
-function initQuestionGroups() {
+function initQsets() {
   $('#question-groups').on('change', function(event) {
     var val = $(this).val();
     if (val == 'new') {
       $('#modal-new-question-group').modal();
     } else {
-      window.open('questions?question_group_id=' + val, '_self');
+      window.open('questions?qset_id=' + val, '_self');
     }
   });
 
   $('#modal-new-question-group').on('show.bs.modal', function (event) {
     var $modal = $(this);
-    var currentQuestionGroupName = $('#edit-question-group').text().trim();
+    var currentQsetName = $('#edit-question-group').text().trim();
     $modal.find('input[name="name"]').val('');
-    $modal.find('input[name="parent"]').val(currentQuestionGroupName);
+    $modal.find('input[name="parent"]').val(currentQsetName);
   }).on('hide.bs.modal', function (event) {
-    $('#question-groups').val('');  // reset the question group dropdown
+    $('#question-groups').val('');  // reset the qset dropdown
   });
 
   $('#edit-question-group').on('click', function (event) {

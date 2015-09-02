@@ -47,6 +47,6 @@ gem 'cancancan', '~> 1.10'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# for question groups
+# for qsets
 gem 'acts_as_tree'
 

@@ -8,8 +8,8 @@
             <%= form_for @question, url: question_path(@question), method: :patch, html: { class: "edit_question", id: "edit_question_#{@question.id}" } do |f| %>
               <%= f.hidden_field :id %>
               <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>
-              <%= f.label :question_group_id, 'Question Group' %>
-              <%= f.select :question_group_id, @question_groups %>
+              <%= f.label :qset_id, 'Qset' %>
+              <%= f.select :qset_id, @qsets %>
               <%= f.fields_for :answers do |a| %>
                 <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
                 <%= a.hidden_field :id %>
@@ -17,7 +17,7 @@
               <% end %>
               <div class="center btn-div">
                 <%= f.submit "Save question", class: 'btn btn-theme btn-lg submit-question' %>
-                <%= link_to "Cancel", questions_path(question_group_id: @current_question_group_id), class: "btn btn-flat btn-lg" %>
+                <%= link_to "Cancel", questions_path(qset_id: @current_qset_id), class: "btn btn-flat btn-lg" %>
               </div>
             <%end%>
         </div>

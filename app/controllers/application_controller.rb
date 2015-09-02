@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
 
-  # this is the base question group that will have no parent ID
-  # and which is the final ancestor for all other question groups
-  # note: this will have to match the base QuestionGroup ID in Question Market
-  ROOT_QUESTION_GROUP_ID = 1
+  # this is the base qset that will have no parent ID
+  # and which is the final ancestor for all other qsets
+  # note: this will have to match the base Qset ID in Question Market
+  ROOT_qset_ID = 1
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
