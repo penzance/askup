@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
 
   # loads the review questions page, which has a modal for showing individual questions
   def index
+    @feedback_active = !!current_user
     @current_question_group_id = qgid_from_request(params)
     @questions = Question.includes(:answers).where(question_group_id: @current_question_group_id).order(created_at: :desc)
     question_groups = QuestionGroup.all
@@ -24,11 +25,9 @@ class QuestionsController < ApplicationController
   # loads the page showing details for a single question so that a user
   #   can review the answer and specify whether he/she knew the answer
   def show
-    @question_id = params[:id]
-    question = Question.find(@question_id)
-    @question = question.text
-    @answers = question.answers
-    @answer = Answer.new
+    @feedback_active = !!current_user
+    @question = Question.find(params[:id])
+    @new_answer = Answer.new
   end
 
   # loads the edit page, allowing user to edit a question/answer combo
@@ -36,8 +35,6 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     # todo: move this check back into ability.rb
     authorize! :update, @question
-    @answers = @question.answers
-    @answer = @answers[0]
     @question_groups = get_question_group_option_list(QuestionGroup.all)
     @current_question_group_id = qgid_from_session
   end
@@ -85,7 +82,7 @@ class QuestionsController < ApplicationController
 
   def feedback
     user_knowledge = (params[:correct] == "yes" ? "knew" : "didn't know")
-    analyzer.info("User #{current_user.id} #{user_knowledge} question #{params[:id]}")
+    analyzer.info {"User #{current_user.id} #{user_knowledge} question #{params[:id]}"}
     respond_to do |format|
         format.js { render :nothing => true }
     end

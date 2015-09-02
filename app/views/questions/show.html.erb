@@ -9,9 +9,9 @@
     <!--<div class="row">-->
       <!--<div class="col-sm-7">-->
     <div class="box center">
-      <h2 class="title-no-margin"><%= @question %></h2>
+      <h2 class="title-no-margin"><%= @question.text %></h2>
       <br>
-      <%= form_for @answer, :url => question_answers_path(@question_id), remote: true do |f| %>
+      <%= form_for @new_answer, :url => question_answers_path(@question.id), remote: true do |f| %>
         <%= f.text_area :text, autofocus: true, placeholder: 'Type your answer here', class: 'form-control answer-text', id: 'single-answer-text' %>
         <div class="btn-div">
           <%= f.submit "Submit answer", class: 'btn btn-theme btn-lg submit-answer', id: 'single-submit-answer' %>
@@ -25,7 +25,7 @@
     <div class="box center">
       <h3>Answer:</h3>
       <div class="correct-container">
-        <h4 class="correct"><%= @answers[0].text %></h4>
+        <h4 class="correct"><%= @question.answers[0].text %></h4>
       </div>
     </div>
   </div>
@@ -36,17 +36,17 @@
   <div class="row">
     <div class="col-xs-6 yes">
       <a class="btn-flat btn-success feedback-button"
-         data-feedback-active="<%= !!current_user %>"
+         data-feedback-active="<%= @feedback_active %>"
          data-feedback-string="yes"
-         data-feedback-qid="<%= @question_id %>">
+         data-feedback-qid="<%= @question.id %>">
         <i class="fa fa-check"></i>
       </a>
     </div>
     <div class="col-xs-6">
       <a class="btn-flat btn-success feedback-button"
-         data-feedback-active="<%= !!current_user %>"
+         data-feedback-active="<%= @feedback_active %>"
          data-feedback-string="no"
-         data-feedback-qid="<%= @question_id %>">
+         data-feedback-qid="<%= @question.id %>">
         <i class="fa fa-times"></i>
       </a>
     </div>

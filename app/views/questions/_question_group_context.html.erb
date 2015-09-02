@@ -3,7 +3,7 @@
   <% @question_group_context.each do |group| %>
     &gt;
     <% if group['id'] == @current_question_group_id %>
-      <% if current_user and current_user.role?(:admin) %>
+      <% if can? :update, QuestionGroup %>
         <a class="underlined-link" id="edit-question-group" data-toggle="modal" data-target="#modal-edit-question-group">
           <%= group['name'] %>
         </a>
