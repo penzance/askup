@@ -47,9 +47,9 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # todo: do we need to remove :id for the create params, so you can't create a specific answer or question id?
   private
   def question_params
-    params.require(:question).permit(:id, :text, :qset_id, answers_attributes: [:id, :text, '_destroy'])
+    # todo: we may need to validate answers_attribute :id so user cannot update someone else's answers
+    params.require(:question).permit(:text, :qset_id, answers_attributes: [:id, :text, '_destroy'])
   end
 end

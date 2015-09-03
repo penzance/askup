@@ -3,14 +3,12 @@ class QsetsController < ApplicationController
 
   # shows all qsets
   def index
-    # todo: strong params
     @qsets = @qsets.order(:name)
     @question_counts = Question.all.group(:qset_id).count
   end
 
   # handles the request to show all questions in a qset
   def show
-    # todo: strong params
     @questions = Question.includes(:answers).where(qset_id: @qset.id).order(created_at: :desc)
     # todo: define in some central configuration area on init / load of app
     @question_limitations = ENV["limit_question_index_to_users_questions_only"]
