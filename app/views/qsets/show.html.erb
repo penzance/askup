@@ -97,7 +97,7 @@
 
 <%= render "modal_question" %>
 <%= render "modal_social" %>
-<% if current_user and current_user.role?(:admin) %>
+<% if can? :manage, Qset %>
   <%= render "modal_edit_qset" %>
   <%= render "modal_new_qset" %>
 <% end %>

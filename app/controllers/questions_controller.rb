@@ -1,24 +1,15 @@
 class QuestionsController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource
 
   # loads the page showing details for a single question so that a user
   #   can review the answer and specify whether he/she knew the answer
   def show
     @feedback_active = !!current_user
-    @question = Question.find(params[:id])
     @new_answer = Answer.new
-  end
-
-  # loads the edit page, allowing user to edit a question/answer combo
-  def edit
-    @question = Question.find(params[:id])
-    # todo: move this check back into ability.rb
-    authorize! :update, @question
   end
 
   # loads the new question page, allowing user to enter a new question/answer combo in a form
   def new
-    @question = Question.new
     @question.answers.build
     @qsets = Qset.all
   end
@@ -38,21 +29,14 @@ class QuestionsController < ApplicationController
   #   not want to update both, because it would be good to know when the question has changed so the answer is now
   #   out-of-date, for example.
   def update
-    question = Question.find(params[:id])
-    question.user_id = current_user.id
-    question.update(question_params)
-    redirect_to edit_question_path(params[:id]), notice: "Your question has been updated!"
+    @question.user_id = current_user.id
+    @question.update(question_params)
+    redirect_to edit_question_path(@question), notice: "Your question has been updated!"
   end
 
   def destroy
-    question_to_delete = Question.find(params[:id])
-    # todo: move this check into ability.rb
-    if current_user.role != :admin and question_to_delete.user_id != current_user.id
-      flash[:alert] = "Something went wrong; could not complete your request."
-    else
-      question_to_delete.destroy
-    end
-    redirect_to questions_path
+    @question.destroy
+    redirect_to qset_path(@question.qset_id)
   end
 
   def feedback

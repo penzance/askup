@@ -1,7 +1,7 @@
 <span id="qset_context">
   <h4>
     Qset: <%= @qset.name %>
-    <% if can? :manage, Qset %>
+    <% if can? :update, Qset %>
       <a class="btn shortcut-button-link"
          id="edit-qset"
          data-toggle="modal"
@@ -19,12 +19,14 @@
     &gt;
     <%= select(@qset, :qset_id, @qset.children.map {|qs| [qs.name, qs.id, {:'data-qset-url' => qset_path(qs.id)}]}, {prompt: "sub-qsets"}, :id => 'qsets') %>
   <% end %>
-  &gt;
-  <a class="btn shortcut-button-link"
-     id="new-qset"
-     data-toggle="modal"
-     data-target="#modal-new-qset">
-    <span class="glyphicon glyphicon-plus-sign shortcut-button-glyphicon"></span>
-  </a>
+  <% if can? :create, Qset %>
+    &gt;
+    <a class="btn shortcut-button-link"
+       id="new-qset"
+       data-toggle="modal"
+       data-target="#modal-new-qset">
+      <span class="glyphicon glyphicon-plus-sign shortcut-button-glyphicon"></span>
+    </a>
+  <% end %>
 
 </span>
