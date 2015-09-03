@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   devise_for :users
+  # this needs to appear before `resources :questions` block so it overrides questions#index
+  # todo: is it possible to not have the duplicated questions/ route?
+  get 'questions/', to: redirect('qsets/')
   resources :questions do
     resources :answers
   end
@@ -15,8 +18,6 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
-  get 'questions/:id' => 'answers#new'
-  post 'questions/:id' => 'answers#create'
   post 'questions/:id/feedback' => 'questions#feedback'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

@@ -1,6 +1,4 @@
 class QuestionsController < ApplicationController
-  # todo: helper should only have View helper code, not business logic, so work to remove the dependency here
-  include QuestionsHelper
   authorize_resource
 
   # loads the page showing details for a single question so that a user

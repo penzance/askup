@@ -1,6 +1,13 @@
 class QsetsController < ApplicationController
   authorize_resource
 
+  # shows all qsets
+  def index
+    # todo: strong params
+    @qsets = Qset.all.order(:name)
+    @question_counts = Question.all.group(:qset_id).count
+  end
+
   # handles the request to show all questions in a qset
   def show
     # todo: strong params
