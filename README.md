@@ -6,17 +6,21 @@ AskUp is an application designed to improve learning and retention.
 
 ### Ruby, rails
 * App has been developed thus far using Ruby 2.1.4 and Rails 4.2.0
+* AskUp uses bundler for dependencies
 
 ### Settings files
 * Create .yml versions of all config/*.yml.example files
 * generate secret keys (see secrets.yml.example)
-** `rake secret | pbcopy` (or equivalent) and put the secret key into secure ENV variable (e.g. `export ASKUP_SECRET_KEY_BASE=...`)
+** `bundle exec rake secret | pbcopy` (or equivalent) and put the secret key into secure ENV variable (e.g. `export ASKUP_SECRET_KEY_BASE=...`)
 
-### Database
+### Database and seed data
 * install postgres
 * run postgres (set up agent, or run manually)
-* rake db:create:all
-* rake db:migrate -- or use taps gem if required to pull records from another (e.g. sqlite3) db
+* `bundle exec rake db:setup` to set up your development database, or `bundle exec rake db:create:all` 
+  to also create prod, etc.
+* `bundle exec rake db:migrate` -- or use taps gem if required to pull records from another (e.g. sqlite3) db
+* `bundle exec rake bootstrap:all` if you wish to start with some basic seed data 
+  (one test admin, one test contributor, and a root Qset)
 
 ### Devise (user authentication)
 * [Devise setup](https://github.com/plataformatec/devise#getting-started)
