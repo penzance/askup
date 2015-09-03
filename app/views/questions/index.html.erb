@@ -26,7 +26,7 @@
 
   <div class="row question_list">
     <% @questions.each_with_index do |question, index| %>
-      <% if current_user and question['user_id'] == current_user.id %>
+      <% if question.belongs_to?(current_user) %>
         <div class = "panel-group my-question">
       <% else %>
         <div class = 'panel-group other-question <% if current_user %>hidden<% end %>'>
@@ -71,7 +71,7 @@
                   </a>
                   <div class="pull-right">
                       <!-- Creates the edit and delete options for each question -->
-                      <% if current_user and (question.user_id == current_user.id or current_user.role?(:admin)) %>
+                      <% if can? :update, question %>
 
                         <%= link_to edit_question_path(question), class:'btn shortcut-button-link' do%>
                           <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
@@ -97,7 +97,7 @@
 
 <%= render "modal_question" %>
 <%= render "modal_social" %>
-<% if current_user and current_user.role?(:admin) %>
+<% if can? :update, QuestionGroup %>
   <%= render "modal_edit_qset" %>
   <%= render "modal_new_qset" %>
 <% end %>
