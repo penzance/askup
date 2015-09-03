@@ -16,6 +16,7 @@
 //= require home
 //= require answers
 //= require questions
+//= require qsets
 //= require global
 //= require jquery.easing.min
 //= require jquery.scrollTo

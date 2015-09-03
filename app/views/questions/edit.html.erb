@@ -9,7 +9,7 @@
               <%= f.hidden_field :id %>
               <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>
               <%= f.label :qset_id, 'Qset' %>
-              <%= f.select :qset_id, @qsets %>
+              <%= f.collection_select(:qset_id, Qset.all, :id, :name) %>
               <%= f.fields_for :answers do |a| %>
                 <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
                 <%= a.hidden_field :id %>

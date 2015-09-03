@@ -6,6 +6,11 @@ class Qset < ActiveRecord::Base
   before_destroy :prevent_root_node_destroy
   after_destroy :move_orphans_to_parent
 
+  def is_destroyable?
+    # todo: if a qset has no parent, should it be destroyable?
+    self.children.empty?
+  end
+
   def to_s
     self.to_json
   end

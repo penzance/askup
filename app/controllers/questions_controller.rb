@@ -3,24 +3,6 @@ class QuestionsController < ApplicationController
   include QuestionsHelper
   authorize_resource
 
-  # loads the review questions page, which has a modal for showing individual questions
-  def index
-    @current_qset_id = qgid_from_request(params)
-    @questions = Question.includes(:answers).where(qset_id: @current_qset_id).order(created_at: :desc)
-    qsets = Qset.all
-    if valid_group?(qsets, @current_qset_id)
-      # todo: refactor to use .parent, and move this logic into the View?
-      @is_qset_deletable = true
-      @qset_context = get_qset_context(qsets, @current_qset_id)
-      @children_option_list = get_qset_children_option_list(qsets, @current_qset_id)
-      @question_limitations = ENV["limit_question_index_to_users_questions_only"]
-      @my_questions = @questions.select{|question| question["user_id"] == current_user.id} if current_user
-    else
-      # fixme: if ROOT_qset_ID is invalid this will cause an infinite loop (should be fixed by QG refactoring)
-      redirect_to questions_path, alert: "There was a problem with your request."
-    end
-  end
-
   # loads the page showing details for a single question so that a user
   #   can review the answer and specify whether he/she knew the answer
   def show
@@ -37,18 +19,13 @@ class QuestionsController < ApplicationController
     # todo: move this check back into ability.rb
     authorize! :update, @question
     @answers = @question.answers
-    @answer = @answers[0]
-    @qsets = get_qset_option_list(Qset.all)
-    @current_qset_id = qgid_from_session
   end
 
   # loads the new question page, allowing user to enter a new question/answer combo in a form
   def new
     @question = Question.new
-    @current_qset_id = qgid_from_request(params)
-    @question.qset_id = @current_qset_id
     @question.answers.build
-    @qsets = get_qset_option_list(Qset.all)
+    @qsets = Qset.all
   end
 
   # handles the request to save a new question (called from the new question page)
@@ -57,7 +34,7 @@ class QuestionsController < ApplicationController
     question.user_id = current_user.id
     question.save
     msg = "Your question has been submitted! Enter another if you would like."
-    redirect_to new_question_path(qset_id: question.qset_id), notice: msg
+    redirect_to new_question_path, notice: msg
   end
 
   # handles the request to update an existing question (called from the edit question page)

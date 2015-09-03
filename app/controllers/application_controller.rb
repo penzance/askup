@@ -1,11 +1,6 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
 
-  # this is the base qset that will have no parent ID
-  # and which is the final ancestor for all other qsets
-  # note: this will have to match the base Qset ID in Question Market
-  ROOT_qset_ID = 1
-
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # Prevent CSRF attacks by raising an exception.
