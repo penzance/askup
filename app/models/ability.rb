@@ -9,11 +9,7 @@ class Ability
       end
     else
       if user.role? :admin
-        can :read, Question
-        can :create, Question
-        can :manage, Question
-        can :manage, QuestionGroup
-        can :manage, User
+        can :manage, :all
       elsif user.role? :contributor
         can :read, Question
         can :create, Question
