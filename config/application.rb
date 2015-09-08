@@ -29,15 +29,19 @@ module AskUp
     end
 
     # Mail server configuration for all environments, can override these values in config/environments/*.rb
+    config.action_mailer.default_url_options = {
+      host: ENV['askup_url_options_host'],
+      protocol: ENV['askup_url_options_protocol']
+    }
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-      address: ENV["mail_host_address"],
-      port: ENV["mail_host_port"],
-      domain: ENV["mail_domain"],
-      authentication: "plain",
+      address: ENV['askup_mail_host_address'],
+      port: ENV['askup_mail_host_port'],
+      domain: ENV['askup_mail_host_domain'],
+      authentication: :plain,
       enable_starttls_auto: true,
-      user_name: ENV["mail_host_username"],
-      password: ENV["mail_host_password"]
+      user_name: ENV['askup_mail_host_username'],
+      password: ENV['askup_mail_host_password']
     }
   end
 end

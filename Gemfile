@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
+ruby '2.1.4'
 
 gem 'rails', '4.1.4'
+gem 'puma'
 gem 'turbolinks'
 gem 'acts_as_tree'
 gem 'cancancan', '~> 1.10'
@@ -14,18 +16,10 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'spring'
-end
-
-group :development, :test, :staging do
   gem 'sqlite3'
 end
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
 end
-
-group :staging, :production do
-  gem 'thin'
-end
-
-
