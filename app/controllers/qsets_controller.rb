@@ -9,6 +9,7 @@ class QsetsController < ApplicationController
 
   # handles the request to show all questions in a qset
   def show
+    @feedback_active = !!current_user
     @questions = Question.includes(:answers).where(qset_id: @qset.id).order(created_at: :desc)
     # todo: define in some central configuration area on init / load of app
     @question_limitations = ENV["limit_question_index_to_users_questions_only"]
