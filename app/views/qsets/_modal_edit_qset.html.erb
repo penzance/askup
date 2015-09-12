@@ -1,23 +1,25 @@
-<div class="modal fade" id="modal-edit-question-group" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modal-edit-qset" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Edit Question Group</h4>
+        <h4 class="modal-title">Edit Qset</h4>
       </div>
       <div class="modal-body">
-        <form role="form" action="/question_groups/<%= @current_question_group_id %>" method="post">
+        <!-- todo: this can be made more rails-like -->
+        <form role="form" action="/qsets/<%= @qset.id %>" method="post">
           <input name="_method" type="hidden" value="patch" />
           <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
           <div class="form-group">
-            <label for="text"> Change the name of this question group </label>
-            <input type="text" class="form-control" name="name" />
+            <label for="text"> Change the name of this qset </label>
+            <input type="text" class="form-control" name="name" value="<%= @qset.name %>" />
           </div>
-          <button type="submit" class="btn btn-theme" id="edit-question-group-submit" aria-label="Save question group">
+          <button type="submit" class="btn btn-theme" id="edit-qset-submit" aria-label="Save qset">
             Save
           </button>
-          <% if @is_question_group_deletable %>
-            <button type="button" class="btn btn-flat" id="edit-question-group-delete" aria-label="Delete question group">
+          <!-- todo: just grey it out and have some popup text showing it's not destroyable -->
+          <% if @qset.is_destroyable? %>
+            <button type="button" class="btn btn-flat" id="edit-qset-delete" aria-label="Delete qset">
               Delete
             </button>
           <% end %>
@@ -25,12 +27,12 @@
             Cancel
           </button>
         </form>
-        <% if @is_question_group_deletable %>
+        <% if @qset.is_destroyable? %>
           <div id="delete_confirmation_form_container" style="display:none;">
-            <form role="form" action="/question_groups/<%= @current_question_group_id %>" method="post">
+            <form role="form" action="/qsets/<%= @qset.id %>" method="post">
               <input name="_method" type="hidden" value="delete" />
               <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
-              <p> Are you sure you want to delete this question group? </p>
+              <p> Are you sure you want to delete this qset? </p>
               <p><i> All questions in this group will be moved into the parent group. </i></p>
               <button type="submit" class="btn btn-pink" aria-label="Confirm delete">
                 Confirm delete

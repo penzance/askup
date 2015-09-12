@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629000000) do
+ActiveRecord::Schema.define(version: 20150902000001) do
 
   create_table "answers", force: true do |t|
     t.datetime "created_at"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150629000000) do
     t.string   "text"
   end
 
-  create_table "question_groups", force: true do |t|
+  create_table "qsets", force: true do |t|
     t.string  "name"
     t.integer "parent_id"
   end
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150629000000) do
     t.datetime "updated_at"
     t.string   "text"
     t.integer  "user_id"
-    t.integer  "question_group_id"
+    t.integer  "qset_id"
   end
 
   create_table "users", force: true do |t|

@@ -51,37 +51,6 @@ function initSocialModal($modal, $social_link) {
   $modal.find('.hyperlink').text(hyperlinktext); // creates the text that the hyperlink will show up as
 }
 
-function initQuestionGroups() {
-  $('#question-groups').on('change', function(event) {
-    var val = $(this).val();
-    if (val == 'new') {
-      $('#modal-new-question-group').modal();
-    } else {
-      window.open('questions?question_group_id=' + val, '_self');
-    }
-  });
-
-  $('#modal-new-question-group').on('show.bs.modal', function (event) {
-    var $modal = $(this);
-    var currentQuestionGroupName = $('#edit-question-group').text().trim();
-    $modal.find('input[name="name"]').val('');
-    $modal.find('input[name="parent"]').val(currentQuestionGroupName);
-  }).on('hide.bs.modal', function (event) {
-    $('#question-groups').val('');  // reset the question group dropdown
-  });
-
-  $('#edit-question-group').on('click', function (event) {
-    var $modal = $('#modal-edit-question-group');
-    var $link = $(event.target);
-    $modal.find('input[name="name"]').val($link.text().trim());
-    $('#delete_confirmation_form_container').hide();
-  });
-
-  $('#edit-question-group-delete').on('click', function (event) {
-    $('#delete_confirmation_form_container').show();
-  });
-}
-
 function initEditQuestion() {
   // initialize the submit button
   validateEditQuestionInput();

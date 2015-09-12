@@ -1,23 +1,23 @@
-<div class="modal fade" id="modal-new-question-group" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modal-new-qset" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">New Question Group</h4>
+        <h4 class="modal-title">New Qset</h4>
       </div>
       <div class="modal-body">
-        <form role="form" action="/question_groups" method="post">
+        <form role="form" action="/qsets" method="post">
           <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
-          <input type="hidden" name="parent_id" value="<%= @current_question_group_id %>"/>
+          <input type="hidden" name="parent_id" value="<%= @qset.id %>"/>
           <div class="form-group">
-            <label for="text"> What name would you like for this new question group? </label>
+            <label for="text"> What name would you like for this new qset? </label>
             <input type="text" class="form-control" name="name" />
           </div>
           <div class="form-group">
-            <label for="text"> This question group will be created under the parent group: </label>
-            <input type="text" class="form-control" name="parent" value="" disabled />
+            <label for="text"> This qset will be created under the parent group: </label>
+            <input type="text" class="form-control" name="parent" value="<%= @qset.name %>" disabled />
           </div>
-          <button type="submit" class="btn btn-theme" id="new-question-group-submit" aria-label="Create question group">
+          <button type="submit" class="btn btn-theme" id="new-qset-submit" aria-label="Create qset">
             Create
           </button>
           <button type="button" class="btn btn-flat" data-dismiss="modal" aria-label="Cancel">
