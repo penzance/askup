@@ -20,7 +20,9 @@ or via your IDE).
 
 * You'll need to define a secret key (via e.g. `bundle exec rake secret`). 
 
-#### Mail settings
+#### Mail settings (optional)
+
+*Note: You only need to define these if you need to test/use the mail components, e.g. in Devise.*
 
 * Mail server settings
 
@@ -50,7 +52,7 @@ or via your IDE).
 ### Database and seed data
 * `bundle exec rake db:setup` to set up your (development) database (this will seed it as well)
 
-#### Running the production environment locally
+#### Running the production environment locally (optional)
 * install postgres
 * run postgres (set up agent, or run manually)
 * `bundle exec rake db:setup RAILS_ENV=production` to set up your production database
