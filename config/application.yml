@@ -1,0 +1,15 @@
+defaults: &defaults
+  devise_mailer_sender: "noreply@askup.net"
+  abilities_unauth_user_can_index_questions: "true"
+
+development:
+  <<: *defaults
+  analytics_log_file: "/log/development_analytics.log"
+
+test:
+  analytics_log_file: "/log/test_analytics.log"
+  <<: *defaults
+
+production:
+  analytics_log_file: "/log/production_analytics.log"
+  <<: *defaults
