@@ -15,9 +15,5 @@
 /log/*.log
 /tmp
 
-# Ignore sensitive settings; only include example sensitive settings files
-/config/*.yml
-!/config/*.example.yml
-
 # Ignore local asset pipline cache files
 /public/assets

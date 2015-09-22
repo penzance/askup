@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: db/development.sqlite3
+  adapter: sqlite3
+
+test:
+  <<: *default
+  database: askup_test
+
+production:
+  <<: *default
+  database: askup_production

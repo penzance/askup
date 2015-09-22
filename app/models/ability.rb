@@ -14,7 +14,7 @@ class Ability
         can :read, Question
         can :create, Question
         can :manage, Question, :user_id => user.id
-        can :read, QuestionGroup
+        can :read, Qset
         can :manage, User, :id => user.id
       end
     end
