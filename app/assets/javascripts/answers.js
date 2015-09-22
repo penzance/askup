@@ -11,9 +11,14 @@ function handleUserFeedback(feedbackActive, feedbackString, feedbackQid) {
   if (feedbackString == 'yes') {
     $('.feedback-alert').removeClass('alert-danger').addClass('alert-success');
     $('.feedback-alert-text').text('Great! Congrats! Try another question.');
-  } else {
+  }
+  if (feedbackString == 'no'){
     $('.feedback-alert').removeClass('alert-success').addClass('alert-danger');
     $('.feedback-alert-text').text("No worries. You'll get it next time. Onwards!");
+  } 
+  if (feedbackString == 'maybe'){
+    $('.feedback-alert').removeClass('alert-success').addClass('alert-maybe');
+    $('.feedback-alert-text').text("You almost have it! Keep practicing!");
   }
   $('.feedback-alert').slideDown();
   $('.response').hide("slow");

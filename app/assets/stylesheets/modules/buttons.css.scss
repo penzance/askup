@@ -43,7 +43,17 @@ a.btn-flat {
   box-shadow: 0px 3px 0px 0px $pink-darker;
   text-decoration: none;
   &:hover {
-    background-color: $pink-lighter;
+    background-color: $pink-darker;
+    text-decoration: none;
+  }
+}
+
+.btn-maybe {
+  background-color: $orange;
+  box-shadow: 0px 3px 0px 0px $orange-darker;
+  text-decoration: none;
+  &:hover {
+    background-color: $orange-darker;
     text-decoration: none;
   }
 }
