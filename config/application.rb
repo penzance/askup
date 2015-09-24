@@ -20,15 +20,8 @@ module AskUp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # Load application ENV vars and merge with existing ENV vars. Loaded here so can use values in initializers.
-    #   https://quickleft.com/blog/simple-rails-app-configuration-settings/
-    # Loaded in before_configuration so it can be used in environments/*
-    #   http://railsapps.github.io/rails-environment-variables.html
-    config.before_configuration do
-      ENV.update YAML.load_file('config/application.yml')[Rails.env] rescue {}
-    end
-
-    # Mail server configuration for all environments, can override these values in config/environments/*.rb
+    # Mail server configuration for all environments
+    # Override these values in config/environments/*.rb
     config.action_mailer.default_url_options = {
       host: ENV['askup_url_options_host'],
       protocol: ENV['askup_url_options_protocol']
