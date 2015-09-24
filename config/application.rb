@@ -8,6 +8,11 @@ Bundler.require(*Rails.groups)
 
 module AskUp
   class Application < Rails::Application
+
+    config.askup = ActiveSupport::OrderedOptions.new
+    config.askup.abilities = ActiveSupport::OrderedOptions.new
+    config.askup.analytics = ActiveSupport::OrderedOptions.new
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -36,5 +41,10 @@ module AskUp
       port: (ENV.fetch('askup_mail_host_port', 587)).to_i,
       user_name: ENV['askup_mail_host_username']
     }
+
+    # if set to true, unauthorized users (i.e. those not signed in)
+    # will be able to see question lists and qset lists
+    config.askup.abilities.unauth_user_can_see_question_lists = false
+    config.askup.analytics.log_file = Rails.root.join('log', "#{Rails.env}_analytics.log")
   end
 end
