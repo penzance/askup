@@ -24,17 +24,17 @@ module AskUp
     # Override these values in config/environments/*.rb
     config.action_mailer.default_url_options = {
       host: ENV['askup_url_options_host'],
-      protocol: ENV['askup_url_options_protocol']
+      protocol: ENV.fetch('askup_url_options_protocol', 'https')
     }
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
       address: ENV['askup_mail_host_address'],
-      port: ENV['askup_mail_host_port'],
+      authentication: ENV.fetch('askup_mail_host_authentication', :plain),
       domain: ENV['askup_mail_host_domain'],
-      authentication: :plain,
-      enable_starttls_auto: true,
-      user_name: ENV['askup_mail_host_username'],
-      password: ENV['askup_mail_host_password']
+      enable_starttls_auto: ENV.fetch('askup_enable_starttls_auto', :true),
+      password: ENV['askup_mail_host_password'],
+      port: (ENV.fetch('askup_mail_host_port', 587)).to_i,
+      user_name: ENV['askup_mail_host_username']
     }
   end
 end
