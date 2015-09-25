@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def analyzer
-    @@analytics_logger ||= Logger.new("#{Rails.root}" + ENV["analytics_log_file"])
+    @@analytics_logger ||= Logger.new(Rails.configuration.askup.analytics.log_file)
   end
 
   protected

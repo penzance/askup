@@ -1,0 +1,18 @@
+# Used by Figaro gem to store secrets for application configuration
+# Please do not check application.yml into the project source library
+
+devise_mailer_sender: "noreply@example.com"
+askup_mail_host_address: "smtp.example.com"
+askup_mail_host_domain: "example.com"
+askup_mail_host_username: "askup@example.com"
+askup_mail_host_password: ""
+askup_url_options_host: "my.askup.site.com"
+
+development:
+  askup_url_options_protocol: "http"
+  askup_url_options_host: "localhost:3000"
+
+# test:
+
+production:
+  askup_secret_key_base: ""

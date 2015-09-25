@@ -17,3 +17,6 @@
 
 # Ignore local asset pipline cache files
 /public/assets
+
+# Ignore application configuration
+/config/application.yml

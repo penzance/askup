@@ -8,6 +8,11 @@ Bundler.require(*Rails.groups)
 
 module AskUp
   class Application < Rails::Application
+
+    config.askup = ActiveSupport::OrderedOptions.new
+    config.askup.abilities = ActiveSupport::OrderedOptions.new
+    config.askup.analytics = ActiveSupport::OrderedOptions.new
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -20,28 +25,26 @@ module AskUp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # Load application ENV vars and merge with existing ENV vars. Loaded here so can use values in initializers.
-    #   https://quickleft.com/blog/simple-rails-app-configuration-settings/
-    # Loaded in before_configuration so it can be used in environments/*
-    #   http://railsapps.github.io/rails-environment-variables.html
-    config.before_configuration do
-      ENV.update YAML.load_file('config/application.yml')[Rails.env] rescue {}
-    end
-
-    # Mail server configuration for all environments, can override these values in config/environments/*.rb
+    # Mail server configuration for all environments
+    # Override these values in config/environments/*.rb
     config.action_mailer.default_url_options = {
       host: ENV['askup_url_options_host'],
-      protocol: ENV['askup_url_options_protocol']
+      protocol: ENV.fetch('askup_url_options_protocol', 'https')
     }
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
       address: ENV['askup_mail_host_address'],
-      port: ENV['askup_mail_host_port'],
+      authentication: ENV.fetch('askup_mail_host_authentication', :plain),
       domain: ENV['askup_mail_host_domain'],
-      authentication: :plain,
-      enable_starttls_auto: true,
-      user_name: ENV['askup_mail_host_username'],
-      password: ENV['askup_mail_host_password']
+      enable_starttls_auto: ENV.fetch('askup_enable_starttls_auto', :true),
+      password: ENV['askup_mail_host_password'],
+      port: (ENV.fetch('askup_mail_host_port', 587)).to_i,
+      user_name: ENV['askup_mail_host_username']
     }
+
+    # if set to true, unauthorized users (i.e. those not signed in)
+    # will be able to see question lists and qset lists
+    config.askup.abilities.unauth_user_can_see_question_lists = false
+    config.askup.analytics.log_file = Rails.root.join('log', "#{Rails.env}_analytics.log")
   end
 end

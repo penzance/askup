@@ -8,6 +8,7 @@ gem 'turbolinks'
 gem 'acts_as_tree'
 gem 'cancancan', '~> 1.10'
 gem 'devise'
+gem 'figaro'
 
 # Use SCSS, bootstrap, and Jquery for client-side code
 gem 'bootstrap-sass'

@@ -4,8 +4,10 @@ class Ability
   def initialize(user)
     unless user  # if the request is from someone who is not logged in
       can :read, Question
-      unless ENV['abilities_unauth_user_can_index_questions'] == 'true'
+      can :read, Qset
+      unless Rails.configuration.askup.abilities.unauth_user_can_see_question_lists
         cannot :index, Question
+        cannot :read, Qset
       end
     else
       if user.role? :admin
