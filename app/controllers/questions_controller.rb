@@ -40,19 +40,12 @@ class QuestionsController < ApplicationController
   end
 
   def feedback
-    # user_knowledge = (params[:correct] == "yes" ? "knew" : "didn't know")
     if ['no', 'yes', 'maybe'].include? params[:correct]
       analyzer.info {"User #{current_user.id} answered #{params[:correct]} for question #{params[:id]}"}
       respond_to do |format|
         format.js { render :nothing => true }
       end
     end 
-    # else 
-    #   analyzer.info {"User #{current_user.id} answered wrongly for question #{params[:id]}"}
-    #   respond_to do |format|
-    #     format.js { render :nothing => true }
-    #   end
-    # end
   end
 
   private

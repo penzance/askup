@@ -9,15 +9,15 @@ function sendFeedback(feedbackUrl, isCorrect) {
 function handleUserFeedback(feedbackActive, feedbackString, feedbackQid) {
   if (feedbackActive) { sendFeedback('/questions/' + feedbackQid + '/feedback', feedbackString);}
   if (feedbackString == 'yes') {
-    $('.feedback-alert').removeClass('alert-danger').removeClass('alert-maybe').addClass('alert-success');
+    $('.feedback-alert').removeClass('alert-danger alert-maybe').addClass('alert-success');
     $('.feedback-alert-text').text('Got it!');
   }
   if (feedbackString == 'no'){
-    $('.feedback-alert').removeClass('alert-success').removeClass('alert-maybe').addClass('alert-danger');
+    $('.feedback-alert').removeClass('alert-success alert-maybe').addClass('alert-danger');
     $('.feedback-alert-text').text("Missed it!");
   } 
   if (feedbackString == 'maybe'){
-    $('.feedback-alert').removeClass('alert-danger').removeClass('alert-success').addClass('alert-maybe');
+    $('.feedback-alert').removeClass('alert-danger alert-success').addClass('alert-maybe');
     $('.feedback-alert-text').text("Sort-of");
   }
   $('.feedback-alert').slideDown();
