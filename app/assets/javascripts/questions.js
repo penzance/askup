@@ -84,4 +84,9 @@ function initEditQuestion() {
 
   // check for valid input each time the user presses a key in the #question_text form field
   $('#question_text, #question_answers_attributes_0_text').keyup(validateEditQuestionInput);
+
+  // track qset user created a question in
+  $('#question_qset_id').change(function() {
+    Cookies.set('new_question_qset_id', this.value, { expires: 1000 });
+  });
 }
