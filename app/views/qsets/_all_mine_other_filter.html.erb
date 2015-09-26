@@ -1,0 +1,13 @@
+<% if current_user %>
+  <span id="all-mine-other-filter" class="btn-group" data-toggle="buttons">
+    <label class="btn btn-primary active" id="all-radio">
+      <input type="radio" name="all-mine-other-options" checked> All
+    </label>
+    <label class="btn btn-primary" id="mine-radio">
+      <input type="radio" name="all-mine-other-options"> Mine
+    </label>
+    <label class="btn btn-primary" id="other-radio">
+      <input type="radio" name="all-mine-other-options"> Other
+    </label>
+  </span>
+<% end %>
