@@ -9,18 +9,16 @@
     </div>
 
     <div class="col-sm-4 right">
-      <% if @question_limitations != "true" %>
-        <span id="all-mine-filter" class="btn-group" data-toggle="buttons">
-          <% if current_user %>
-            <label class="btn btn-primary active" id="mine-radio">
-              <input type="radio" name="options" autocomplete="off"> Mine
-            </label>
-          <% end %>
-          <label class="btn btn-primary <% unless current_user %>active<% end %>" id="other-radio">
-            <input type="radio" name="options" autocomplete="off" checked> Other
+      <span id="all-mine-filter" class="btn-group" data-toggle="buttons">
+        <% if current_user %>
+          <label class="btn btn-primary active" id="mine-radio">
+            <input type="radio" name="options" autocomplete="off"> Mine
           </label>
-        </span>
-      <% end %>
+        <% end %>
+        <label class="btn btn-primary <% unless current_user %>active<% end %>" id="other-radio">
+          <input type="radio" name="options" autocomplete="off" checked> Other
+        </label>
+      </span>
     </div>
   </div>
 
