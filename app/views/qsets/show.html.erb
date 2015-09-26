@@ -9,27 +9,16 @@
     </div>
 
     <div class="col-sm-4 right">
-      <% if @question_limitations != "true" %>
-        <span id="all-mine-filter" class="btn-group" data-toggle="buttons">
-          <% if current_user %>
-            <label class="btn btn-primary active" id="mine-radio">
-              <input type="radio" name="options" autocomplete="off"> Mine
-            </label>
-          <% end %>
-          <label class="btn btn-primary <% unless current_user %>active<% end %>" id="other-radio">
-            <input type="radio" name="options" autocomplete="off" checked> Other
-          </label>
-        </span>
-      <% end %>
+      <%= render "all_mine_other_filter" %>
     </div>
   </div>
 
   <div class="row question_list">
     <% @questions.each_with_index do |question, index| %>
       <% if current_user and question['user_id'] == current_user.id %>
-        <div class = "panel-group my-question">
+        <div class="panel-group my-question">
       <% else %>
-        <div class = 'panel-group other-question <% if current_user %>hidden<% end %>'>
+        <div class="panel-group other-question">
       <% end %>
       <div class="panel panel-default">
         <div class="panel-heading">

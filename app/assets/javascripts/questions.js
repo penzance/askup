@@ -14,6 +14,11 @@ function initQuestionFilter() {
     $('.my-question').addClass('hidden');
     $('.other-question').removeClass('hidden');
   });
+
+  $('#all-radio').click(function(){
+    $('.my-question').removeClass('hidden');
+    $('.other-question').removeClass('hidden');
+  });
 }
 
 function initQuestionDisplayModal($modal, $question_link) {
