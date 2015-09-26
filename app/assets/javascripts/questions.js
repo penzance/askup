@@ -5,20 +5,42 @@ function validateEditQuestionInput() {
 }
 
 function initQuestionFilter() {
+  // recalls preferred filter option
+  var filter = Cookies.get('all_mine_other_filter');
+  if (filter == 'mine') { showMine() }
+  else if (filter == 'other') { showOther() }
+  else showAll();
+
+  // changes to filter 1. show filtered set of questions, and 2. are tracked in a user cookie
+  $('#all-radio').click(function(){
+    Cookies.set('all_mine_other_filter', 'all', { expires: 1000 });
+    showAll();
+  });
+
   $("#mine-radio").click(function(){
-    $('.my-question').removeClass('hidden');
-    $('.other-question').addClass('hidden');
+    Cookies.set('all_mine_other_filter', 'mine', { expires: 1000 });
+    showMine();
   });
 
   $('#other-radio').click(function(){
-    $('.my-question').addClass('hidden');
-    $('.other-question').removeClass('hidden');
+    Cookies.set('all_mine_other_filter', 'other', { expires: 1000 });
+    showOther();
   });
 
-  $('#all-radio').click(function(){
+  function showAll() {
     $('.my-question').removeClass('hidden');
     $('.other-question').removeClass('hidden');
-  });
+  }
+
+  function showMine() {
+    $('.my-question').removeClass('hidden');
+    $('.other-question').addClass('hidden');
+  }
+
+  function showOther() {
+    $('.my-question').addClass('hidden');
+    $('.other-question').removeClass('hidden');
+  }
 }
 
 function initQuestionDisplayModal($modal, $question_link) {
