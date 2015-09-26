@@ -11,6 +11,9 @@ class QsetsController < ApplicationController
   def show
     @feedback_active = !!current_user
     @questions = Question.includes(:answers).where(qset_id: @qset.id).order(created_at: :desc)
+    @filter_mine = true if cookies[:all_mine_other_filter] == 'mine'
+    @filter_other = true if cookies[:all_mine_other_filter] == 'other'
+    @filter_all = true unless @filter_mine or @filter_other
   end
 
   # handles the request to save a new qset

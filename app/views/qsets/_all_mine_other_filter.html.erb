@@ -1,13 +1,13 @@
 <% if current_user %>
   <span id="all-mine-other-filter" class="btn-group" data-toggle="buttons">
-    <label class="btn btn-primary active" id="all-radio">
-      <input type="radio" name="all-mine-other-options" checked> All
+    <label class="btn btn-primary <% if @filter_all %>active<% end %>" id="all-radio">
+      <input type="radio" name="all-mine-other-options" <% if @filter_all %>checked<% end %>> All
     </label>
-    <label class="btn btn-primary" id="mine-radio">
-      <input type="radio" name="all-mine-other-options"> Mine
+    <label class="btn btn-primary <% if @filter_mine %>active<% end %>" id="mine-radio">
+      <input type="radio" name="all-mine-other-options" <% if @filter_mine %>checked<% end %>> Mine
     </label>
-    <label class="btn btn-primary" id="other-radio">
-      <input type="radio" name="all-mine-other-options"> Other
+    <label class="btn btn-primary <% if @filter_other %>active<% end %>" id="other-radio">
+      <input type="radio" name="all-mine-other-options" <% if @filter_other %>checked<% end %>> Other
     </label>
   </span>
 <% end %>

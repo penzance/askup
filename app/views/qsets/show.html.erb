@@ -16,9 +16,9 @@
   <div class="row question_list">
     <% @questions.each_with_index do |question, index| %>
       <% if current_user and question['user_id'] == current_user.id %>
-        <div class="panel-group my-question">
+        <div class="panel-group my-question hidden">
       <% else %>
-        <div class="panel-group other-question">
+        <div class="panel-group other-question hidden">
       <% end %>
       <div class="panel panel-default">
         <div class="panel-heading">
