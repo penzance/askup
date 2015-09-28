@@ -71,3 +71,52 @@ based on Heroku's [getting started guide](https://devcenter.heroku.com/articles/
 * `git push heroku (my git branch):master`
 * `heroku run rake db:setup`
 * `heroku open`
+
+## Vagrant configuration
+
+Work in progress...
+
+In your vagrant shell:
+
+    sudo apt-get update
+    sudo /usr/sbin/update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+    sudo apt-get install postgresql postgresql-contrib libpq-dev
+    sudo -u postgres createuser --superuser $USER
+    sudo -u postgres createdb $USER
+    touch .psql_history
+    sudo -i -u postgres psql
+      ALTER ROLE vagrant WITH CREATEDB LOGIN PASSWORD 'vagrant';
+    
+    # if they don't exist, create RVM environment hints
+    echo "ruby-2.1.4" >> /hvagrant/askup/.ruby-version
+    echo "askup" >> /vagrant/askup/.ruby-gemset  
+    
+    # install RVM
+    cd /vagrant
+    gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+    \curl -sSL https://get.rvm.io | bash -s stable
+    source ~/.rvm/scripts/rvm
+    
+    # fix issue with building ruby-2.1.4 on trusty image
+    # http://stackoverflow.com/questions/23650992/ruby-rvm-apt-get-update-error
+    sudo add-apt-repository --remove http://security.ubuntu.com/ubuntu/dists/trusty-security/main/i18n/Translation-en
+    
+    # set up ruby and gemset environment with rvm
+    rvm install ruby-2.1.4
+    rvm use 2.1.4
+    rvm gemset create askup
+    rvm 2.1.4@askup
+    
+    # install ruby packages
+    gem install bundler
+    bundle install
+    
+    # change application settings
+    cp /vagrant/config/application.example.yml /vagrant/config/application.yml
+    # add user and password for production instance (manually...?)
+    
+    bundle exec rake db:create:all
+    bundle exec rake secret
+    # copy this into secrets.yml or use e.g. `sed -i -e 's/abc/XYZ/g' /tmp/file.txt`
+    bundle exec rake db:setup  # or bundle exec rake db:migrate && bundle exec rake db:seed
+    
