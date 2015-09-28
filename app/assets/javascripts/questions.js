@@ -57,7 +57,7 @@ function initQuestionDisplayModal($modal, $question_link) {
   initUserFeedback();
 
   // Setting up the response buttons to have the correct q_id to send to the analytics.log and to also trigger the right feedback form
-  $('#respond-yes, #respond-no').data('feedback-qid', $question_link.data('qid'));
+  $('#respond-yes, #respond-no, #respond-maybe').data('feedback-qid', $question_link.data('qid'));
 
   // Populates the modal with the data received when the modal was clicked
   $modal.find('.modal-title').text($question_link.data('question'));

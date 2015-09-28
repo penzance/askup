@@ -8,7 +8,7 @@
         <!-- Displays the question at the top of the modal. Javascript finds the "modal-title" class and populates it with the question contents. -->
         <h4 class="modal-title"></h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body center">
 
         <!-- Creates the text box for the user to input their answer. The submit button is only able to be clicked once the user has some content in the text box. -->
         <form accept-charset="UTF-8"
@@ -43,15 +43,22 @@
         <div class="response">
           <br>
           <h4 class="center"><b>Did you know the answer?</b></h4>
-          <div class="row">
-            <div class="col-xs-6 yes">
+          <div class="center row">
+            <div class="col-xs-4">
               <a id="respond-yes" class="btn-flat btn-success feedback-button"
                  data-feedback-active="<%= @feedback_active %>"
                  data-feedback-string="yes">
                 <i class="fa fa-check"></i>
               </a>
             </div>
-            <div class="col-xs-6 no">
+            <div class="col-xs-4">
+              <a id="respond-maybe" class="btn-flat btn-maybe feedback-button"
+                data-feedback-active="<%= @feedback_active %>"
+                data-feedback-string="maybe">
+                <i class="fa fa-question"></i>
+              </a>
+            </div>
+            <div class="col-xs-4">
               <a id="respond-no" class="btn-flat btn-pink feedback-button"
                 data-feedback-active="<%= @feedback_active %>"
                 data-feedback-string="no">
