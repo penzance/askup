@@ -37,7 +37,7 @@ class QuestionsController < ApplicationController
   def update
     @question.user_id = current_user.id
     @question.update(question_params)
-    redirect_to edit_question_path(@question), notice: "Your question has been updated!"
+    redirect_to qset_path(@question.qset_id), notice: "Your question has been updated!"
   end
 
   def destroy
