@@ -2,6 +2,9 @@
   .container {
     width: 50%;
     margin-top: 60px;
+    // prevents parent default margins and padding from squeezing
+    // the container too small to be useful on a small screen
+    min-width: 220px;
   }
 
   .form-elem {

@@ -30,34 +30,35 @@
     </div>
   </div>
 </div>
-<div class="response" style="display:none">
-  <br>
-  <h4 class="center"><b>Did you know the answer?</b></h4>
-  <div class="row bcenter col-centered">
-          <div class="col-md-2 .col-md-offset-3 center">
-            <a class="btn-flat btn-success feedback-button"
-                data-feedback-active="<%= @feedback_active %>"
-                data-feedback-string="yes"
-                data-feedback-qid="<%= @question.id %>">
-                <i class="fa fa-check"></i>
-            </a>
-          </div>
-          <div class="col-md-2 .col-md-offset-3 center">
-            <a class="btn-flat btn-maybe feedback-button"
-               data-feedback-active="<%= @feedback_active %>"
-               data-feedback-string="maybe"
-               data-feedback-qid="<%= @question.id %>">
-              <i class="fa fa-question"></i>
-            </a>
-          </div>
-          <div class="col-md-2 .col-md-offset-3 center">
-            <a class="btn-flat btn-pink feedback-button"
-               data-feedback-active="<%= @feedback_active %>"
-               data-feedback-string="no"
-               data-feedback-qid="<%= @question.id %>">
-              <i class="fa fa-times"></i>
-            </a>
-          </div>
+<div class="prettyform response" style="display:none">
+  <div class="container">
+    <br>
+    <h4 class="center"><b>Did you know the answer?</b></h4>
+    <div class="row row-no-padding">
+      <div class="col-xs-4 center">
+        <a class="btn-flat btn-success feedback-button"
+            data-feedback-active="<%= @feedback_active %>"
+            data-feedback-string="yes"
+            data-feedback-qid="<%= @question.id %>">
+            <i class="fa fa-check"></i>
+        </a>
+      </div>
+      <div class="col-xs-4 center">
+        <a class="btn-flat btn-maybe feedback-button"
+           data-feedback-active="<%= @feedback_active %>"
+           data-feedback-string="maybe"
+           data-feedback-qid="<%= @question.id %>">
+          <i class="fa fa-question"></i>
+        </a>
+      </div>
+      <div class="col-xs-4 center">
+        <a class="btn-flat btn-pink feedback-button"
+           data-feedback-active="<%= @feedback_active %>"
+           data-feedback-string="no"
+           data-feedback-qid="<%= @question.id %>">
+          <i class="fa fa-times"></i>
+        </a>
+      </div>
     </div>
   </div>
 </div>
