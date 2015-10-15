@@ -45,6 +45,7 @@ module AskUp
     # if set to true, unauthorized users (i.e. those not signed in)
     # will be able to see question lists and qset lists
     config.askup.abilities.unauth_user_can_see_question_lists = false
+    print "setting config file"
     config.askup.analytics.log_file = Rails.root.join('log', "#{Rails.env}_analytics.log")
   end
 end
