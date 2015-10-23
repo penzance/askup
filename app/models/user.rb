@@ -17,4 +17,5 @@ class User < ActiveRecord::Base
   def to_s
     self.to_json
   end
+
 end

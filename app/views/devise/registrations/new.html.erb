@@ -20,7 +20,7 @@
         </div>
 
         <div class="styled-select">
-        <%= f.select :organization, [['College','college'],['MedSchool','med'],['EdSchool','ed']], placeholder: "Select Organization" %>
+        <%= f.collection_select(:organization, Qset.where(Qset.parent.nil?), :id, :name) %>
         </div>
 
         <div class="center">
@@ -42,3 +42,4 @@
     </div>
   </div>
 </div>
+

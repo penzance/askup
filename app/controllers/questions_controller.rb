@@ -12,6 +12,9 @@ class QuestionsController < ApplicationController
   def new
     @question.answers.build
     @qsets = Qset.all
+    if self.parent.nil?
+      @organizations = Qset.all
+    end
   end
 
   # handles the request to save a new question (called from the new question page)
