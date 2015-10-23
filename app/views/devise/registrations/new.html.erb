@@ -20,7 +20,7 @@
         </div>
 
         <div class="styled-select">
-        <%= f.collection_select(:organization, Qset.where(Qset.parent.nil?), :id, :name) %>
+        <%= f.collection_select(:organization, Qset.where(parent_id: nil), :id, :name) %>
         </div>
 
         <div class="center">
