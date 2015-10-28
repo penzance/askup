@@ -24,45 +24,22 @@
         <div class="panel-heading">
           <h4 class="panel-title">
             <div class="row valign">
-              <div class="col-sm-11">
+              <div class="col-sm-1">
+                <div class="net-votes"><p id="<%= question.id %>"><%= question.votes_for - question.votes_against %></p><br></div>
+              </div>
+              <div class="col-sm-1">
                 <div class="question-voting">
                   <a class="upvote-button" data-vote="upvote" data-vote-qid="<%= question.id %>">Up</a><br>
-                  <div class="net-votes"><p id="<%= question.id %>"><%= question.votes_for - question.votes_against %></p><br></div>
                   <a class="downvote-button" data-vote="downvote" data-vote-qid="<%= question.id %>">Down</a>
                 </div>
+              </div>
+              <div class="col-sm-6">
                 <!-- Toggles the Question modal. Data that is included: question answer, question text, and question ID -->
                 <div style="cursor:default" class="question-content">
-                  <a data-toggle="modal"
-                    href="#"
-                    data-target="#question_display_Modal"
-                    data-answer="<%= question.answers[0].text %>"
-                    data-qid="<%= question.id %>"
-                    data-question="<%= question.text %>">
-                      <%= question.text %>
-                  </a>
-                <br/>
-                  <!-- Toggles the Twitter modal. Data that is included: share-able url, question text, and hyperlink -->
-                  <a data-toggle="modal"
-                    href="#"
-                    data-target="#social_display_Modal"
-                    data-url= "<%= url_for(controller: 'questions', action: 'show', id:question.id, host:request.base_url) %>"
-                    data-website="Share on Twitter"
-                    data-hyperlink="https://www.twitter.com"
-                    data-hyperlinktext= "Twitter"
-                    data-question="<%= question.text%>">
-                      <i class="fa fa-twitter-square"></i>
-                  </a>
-                  <!-- Toggles the Facebook modal. Data that is included: share-able url, question text, and hyperlink -->
-                   <a data-toggle="modal"
-                    href="#"
-                    data-target="#social_display_Modal"
-                    data-url= "<%= url_for(controller: 'questions', action: 'show', id:question.id, host:request.base_url) %>"
-                    data-website="Share on Facebook"
-                    data-hyperlink="https://www.facebook.com"
-                    data-hyperlinktext="Facebook"
-                    data-question="<%= question.text%>">
-                      <i class="fa fa-facebook-square"></i>
-                  </a>
+                  <%= link_to question_path(question) do%>
+                  <%= question.text %>
+                  <% end %>
+                  <br/>
                   <div class="pull-right">
                       <!-- Creates the edit and delete options for each question -->
                       <% if can? :manage, question %>
@@ -78,6 +55,20 @@
                       <% end %>
                   </div>
                 </div>
+              </div>
+              <div class="col-sm-2">
+                <a href=""><%= question.user.full_name %></a>
+              </div>
+              <div class="col-sm-2">
+                  <a data-toggle="modal"
+                    href="#"
+                    data-target="#question_display_Modal"
+                    data-answer="<%= question.answers[0].text %>"
+                    data-qid="<%= question.id %>"
+                    data-question="<%= question.text %>"
+                    class="btn btn-primary">
+                      Quiz Me
+                  </a>
               </div>
             </div>
           </h4>
