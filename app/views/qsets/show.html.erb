@@ -27,7 +27,7 @@
               <div class="col-sm-11">
                 <div class="question-voting">
                   <a class="upvote-button" data-vote="upvote" data-vote-qid="<%= question.id %>">Up</a><br>
-                  <div class="net-votes"><p><%= question.votes_for - question.votes_against %></p><br></div>
+                  <div class="net-votes"><p id="<%= question.id %>"><%= question.votes_for - question.votes_against %></p><br></div>
                   <a class="downvote-button" data-vote="downvote" data-vote-qid="<%= question.id %>">Down</a>
                 </div>
                 <!-- Toggles the Question modal. Data that is included: question answer, question text, and question ID -->

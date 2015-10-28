@@ -65,7 +65,7 @@ class QuestionsController < ApplicationController
   def downvote
     current_user.vote_against(@question)
     respond_to do |format|
-      format.js { render :nothing => true }
+      format.js { render json: @question.votes_for - @question.votes_against}
     end
   end
 
