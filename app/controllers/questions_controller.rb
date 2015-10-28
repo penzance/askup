@@ -54,6 +54,20 @@ class QuestionsController < ApplicationController
     end 
   end
 
+  def upvote
+    current_user.vote_for(@question)
+    respond_to do |format|
+      format.js { render json: @question.votes_for - @question.votes_against }
+    end
+  end
+
+  def downvote
+    current_user.vote_against(@question)
+    respond_to do |format|
+      format.js { render :nothing => true }
+    end
+  end
+
   private
   def question_params
     # todo: we may need to validate answers_attribute :id so user cannot update someone else's answers

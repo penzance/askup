@@ -76,6 +76,11 @@
   text-decoration: underline;
 }
 
+.question-content, .question-voting {
+  float: left;
+}
 
-
-
+.downvote-button, .upvote-button {
+  color: black;
+  cursor: pointer;
+}
