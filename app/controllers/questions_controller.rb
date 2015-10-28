@@ -5,19 +5,26 @@ class QuestionsController < ApplicationController
   #   can review the answer and specify whether he/she knew the answer
   def show
     @feedback_active = !!current_user
-    @new_answer = Answer.new
+    @new_answer = @question.answers.new
+
   end
 
   # loads the new question page, allowing user to enter a new question/answer combo in a form
   def new
     @question.answers.build
     @qsets = Qset.all
+    prev_cookie_id = cookies[:new_question_qset_id].to_i
+    if @qsets.map(&:id).include?(prev_cookie_id)
+      @question.qset_id = prev_cookie_id
+    else
+      cookies.delete :new_question_qset_id
+    end
   end
 
   # handles the request to save a new question (called from the new question page)
   def create
-    question = Question.new(question_params)
-    question.user_id = current_user.id
+    question = current_user.questions.new(question_params)
+    question.answers.first.creator = current_user
     question.save
     msg = "Your question has been submitted! Enter another if you would like."
     redirect_to new_question_path, notice: msg
@@ -31,12 +38,12 @@ class QuestionsController < ApplicationController
   def update
     @question.user_id = current_user.id
     @question.update(question_params)
-    redirect_to edit_question_path(@question), notice: "Your question has been updated!"
+    redirect_to qset_path(@question.qset), notice: "Your question has been updated!"
   end
 
   def destroy
     @question.destroy
-    redirect_to qset_path(@question.qset_id)
+    redirect_to qset_path(@question.qset)
   end
 
   def feedback

@@ -13,6 +13,12 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  # defaults for action mailer in development mode
+  config.action_mailer.default_url_options = {
+    host: ENV.fetch('askup_url_options_host', 'localhost:3000'),
+    protocol: ENV.fetch('askup_url_options_protocol', 'http')
+  }
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 

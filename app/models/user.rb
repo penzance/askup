@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_many :questions
   belongs_to :organization, class_name: 'Qset', foreign_key: 'org_id'
-  has_many :members, class_name: 'User', foreign_key: 'org_id'
+  has_many :answers, class_name: 'Answer', foreign_key: 'creator_id'
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable,

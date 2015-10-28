@@ -11,14 +11,15 @@ AskUp is an application designed to improve learning and retention.
   to ensure all the gems are available that the app uses.
 
 ### Settings
-You'll need the following environment settings specified (e.g. `export askup_mail_host_username=...` in the shell,
-or via your IDE).
+There are two types of application configuration settings in AskUp.
 
-#### Security
-
-    askup_secret_key_base 
-
-* You'll need to define a secret key (via e.g. `bundle exec rake secret`). 
+1. `Rails.configuration.askup` is defined in `application.rb`, and other application-wide settings
+ can be found in `config/environments/`.
+2. Secrets are handled by [Figaro](https://github.com/laserlemon/figaro). Copy `application.yml.example` to 
+ `application.yml` and edit any settings you need. For deployment to Heroku or running under the production 
+  environment you will need at least `askup_secret_key_base` (used to set the Rails secret key base for the 
+  production environment); the others are needed if you plan to use/test different functions of the app, like
+  sending mail for password resets (via Devise; see below).
 
 #### Mail settings (optional)
 
@@ -45,7 +46,7 @@ or via your IDE).
         askup_url_options_protocol
 
     * When Devise sends out emails to reset password, etc, we need to be able to direct
-      the user to the right server. These settings should be `localhost:3000` and `http`
+      the user to the right server. These settings default to `localhost:3000` and `http`
       for local development, but will need to be the publicly accessible domain and `https` in
       production (e.g. the heroku app domain for staging, or askup.net for production).
 
@@ -57,6 +58,7 @@ or via your IDE).
 * run postgres (set up agent, or run manually)
 * `bundle exec rake db:setup RAILS_ENV=production` to set up your production database
 * `bundle exec rake assets:precompile RAILS_ENV=production` to ensure your JS and CSS files are compiled
+* make sure `askup_secret_key_base` is defined in your `application.yml`
 
 ## Heroku configuration
 
@@ -65,7 +67,7 @@ based on Heroku's [getting started guide](https://devcenter.heroku.com/articles/
 
 * [local workstation setup](https://devcenter.heroku.com/articles/getting-started-with-rails4#local-workstation-setup)
 * `heroku create`
-* `heroku config:set askup_mail_host_username=X askup_mail_host_password=Y secret_key_base=Z ...`
+* `figaro heroku:set -e production`
 * `git push heroku (my git branch):master`
 * `heroku run rake db:setup`
 * `heroku open`
