@@ -90,31 +90,31 @@
 }
 
 
-#new-password{
+#new-password {
   width: 100%;
 }
 
-#new-user{
+#new-user {
   width: 100%;
   margin-top: 10%;
 }
 
 
- .form-control {
-border: 2px solid #bdc3c7;
-color: #34495e;
-line-height: 1.467;
-padding: 8px 12px;
-height: 42px;
--webkit-appearance: none;
-border-radius: 6px;
--webkit-box-shadow: none;
-box-shadow: none;
- -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
-transition: border .25s linear, color .25s linear, background-color .25s linear;
-}
+// .form-control {
+// border: 2px solid #bdc3c7;
+// color: #34495e;
+// line-height: 1.467;
+// padding: 8px 12px;
+// height: 42px;
+// -webkit-appearance: none;
+// border-radius: 6px;
+// -webkit-box-shadow: none;
+// box-shadow: none;
+//  -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+// transition: border .25s linear, color .25s linear, background-color .25s linear;
+// }
 
-.styled-select select{
+.styled-select select {
    border: 2px solid #bdc3c7;
    background: transparent;
    line-height: 1.467;
@@ -124,4 +124,4 @@ transition: border .25s linear, color .25s linear, background-color .25s linear;
    font-size: 15px;
    border-radius: 0;
    height: 42px;
-   }
+}
