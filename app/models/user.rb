@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable
 
-
   #validates_length_of :password, :minimum => 8   
   def full_name
     first_name + " " + last_name
@@ -21,5 +20,4 @@ class User < ActiveRecord::Base
   def to_s
     self.to_json
   end
-
 end
