@@ -5,6 +5,7 @@
     </label>
     <label class="btn btn-primary <% if @filter_mine %>active<% end %>" id="mine-radio">
       <input type="radio" name="all-mine-other-options" <% if @filter_mine %>checked<% end %>> Mine
+      <!-- <%# if !@questions%><p> no questions here!</p><%# end %> -->
     </label>
     <label class="btn btn-primary <% if @filter_other %>active<% end %>" id="other-radio">
       <input type="radio" name="all-mine-other-options" <% if @filter_other %>checked<% end %>> Other
