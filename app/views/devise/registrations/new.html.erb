@@ -19,11 +19,15 @@
         <%= f.email_field :email, class: "center-form form-control", placeholder: "Email"  %>
         </div>
 
+        <div class="styled-select">
+        <%= f.collection_select(:org_id, Qset.where(parent_id: nil), :id, :name) %>
+        </div>
+
         <div class="center">
         <%= f.password_field :password, autocomplete: "off", class: "center-form form-control", placeholder: "Password (minimum 8 characters)"  %>
         </div>
 
-        <div class="center">
+        <div class="center"> 
         <%= f.password_field :password_confirmation, autocomplete: "off", class: "center-form form-control", placeholder: "Confirm password" %>
         </div>
 
@@ -38,3 +42,4 @@
     </div>
   </div>
 </div>
+

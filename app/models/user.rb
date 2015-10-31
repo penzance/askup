@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :questions
+  belongs_to :org_id, class_name: 'Qset', foreign_key: 'org_id'
   has_many :answers, class_name: 'Answer', foreign_key: 'creator_id'
 
   # Include default devise modules. Others available are:
