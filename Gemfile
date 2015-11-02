@@ -9,6 +9,7 @@ gem 'acts_as_tree'
 gem 'cancancan', '~> 1.10'
 gem 'devise'
 gem 'figaro'
+gem 'thumbs_up', github: 'bouchard/thumbs_up', ref: 'f499a7'
 
 # Use SCSS, bootstrap, and Jquery for client-side code
 gem 'bootstrap-sass'

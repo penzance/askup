@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  acts_as_voter
   has_many :questions
   belongs_to :org, class_name: 'Qset', foreign_key: 'org_id'
   has_many :answers, class_name: 'Answer', foreign_key: 'creator_id'
