@@ -84,3 +84,21 @@
   color: black;
   cursor: pointer;
 }
+
+.net-votes p {
+  font-size: 24px;
+  text-align: center;
+  margin: 10px 0 0 0;
+}
+
+.question-content {
+  width: 100%;
+  word-wrap: break-word;
+}
+  .question-content a {
+    font-size: 24px;
+  }
+
+.col-sm-6 {
+  width: 50%; /* override base responsive css that removes this when width < 768px */
+} 
