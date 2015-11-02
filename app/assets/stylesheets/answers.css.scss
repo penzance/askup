@@ -8,12 +8,19 @@
   }
   a {
     border-radius: 50%;
-    width: 90px;
-    height: 90px;
-    line-height: 75px;
     text-align: center;
-    font-size: 40px;
     color: white;
+    // size the buttons and fa icons appropriately for small and large screens
+    @media screen and (max-width: 360px) {
+      width: 20vw;
+      height: 20vw;
+      font-size: 12vw;
+    }
+    @media screen and (min-width: 361px) {
+      width: 1.8em;
+      height: 1.8em;
+      font-size: 4em;
+    }
     &:hover {
       color: white;
     }
@@ -22,6 +29,7 @@
     color: white;
   }
 }
+
 .answers {
   .correct-container {
     width: 95%;
@@ -41,5 +49,11 @@
 
 .feedback-button {
   cursor: pointer;
+  // remove default .btn-flat padding so buttons center evenly in any container,
+  // even when the screen is small
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 

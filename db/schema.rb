@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20151026185333) do
 
   create_table "questions", force: true do |t|
     t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "updated_at" 
     t.text     "text"
     t.integer  "user_id"
     t.integer  "qset_id"
@@ -52,9 +52,11 @@ ActiveRecord::Schema.define(version: 20151026185333) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "role",                   default: "contributor"
+    t.integer  "org_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["org_id"], name: "index_users_on_org_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "votes", force: true do |t|
