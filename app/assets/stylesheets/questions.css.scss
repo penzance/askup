@@ -83,6 +83,7 @@
 .downvote-button, .upvote-button {
   color: black;
   cursor: pointer;
+  display: block;
 }
 
 .net-votes p {
@@ -95,10 +96,22 @@
   float: left;
   width: 100%;
   word-wrap: break-word;
+}
+
+.question-content-inner {
+  float: left;
+  height: 62px;
+  line-height: 62px; /* for vertically aligning inner text */
 
   a {
     font-size: 24px;
   }
+
+  span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
 }
 
 .col-sm-6 {

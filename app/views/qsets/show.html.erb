@@ -29,15 +29,21 @@
               </div>
               <div class="col-sm-1">
                 <div class="question-voting">
-                  <a class="upvote-button" data-vote="upvote" data-vote-qid="<%= question.id %>">Up</a><br>
-                  <a class="downvote-button" data-vote="downvote" data-vote-qid="<%= question.id %>">Down</a>
+                  <!-- <a class="upvote-button" data-vote="upvote" data-vote-qid="<%= question.id %>">Up</a><br> -->
+                  <div class="glyphicon glyphicon-triangle-top upvote-button" data-vote="upvote" data-vote-qid="<%= question.id %>"></div>
+                  <div class="glyphicon glyphicon-triangle-bottom downvote-button" data-vote="downvote" data-vote-qid="<%= question.id %>"></div>
+                  <!-- <a class="downvote-button" data-vote="downvote" data-vote-qid="<%= question.id %>">Down</a> -->
                 </div>
               </div>
               <div class="col-sm-6">
                 <div style="cursor:default" class="question-content">
-                  <%= link_to question_path(question) do%>
-                  <%= question.text %>
-                  <% end %>
+                  <div class="question-content-inner">
+                    <span>
+                      <%= link_to question_path(question) do%>
+                      <%= question.text %>
+                      <% end %>
+                    </span>
+                  </div>
                   <br/>
                   <div class="pull-right">
                       <!-- Creates the edit and delete options for each question -->
