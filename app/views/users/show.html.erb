@@ -1,4 +1,45 @@
-<div class="container">
-  <h2><%= @user.email %>'s Profile</h2>
+<div class="">
 
+  <div class="row">
+  <div class="col-sm-4">
+    <div class="box center dashprofile">
+      <img class="profpiccircle" src="http://api.randomuser.me/portraits/med/women/39.jpg">
+      <br><br>
+      <h3>Gwen Fairfax</h3>
+      <h4>Harvard College</h4>
+      <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Student</p>
+      <br><br>
+      <div class="totalpoints col-centered">
+        <h2 class="vcenter" style="color:white">76</h2>
+      </div>
+
+    </div>
+  </div>
+    <div class="col-sm-8">
+      <h3>My enrolled classes</h3>
+      <div class="box">
+        <h3 class="center">Stat 110</h3>
+      </div>
+      <div class="box">
+        <h3 class="center">Stat 110</h3>
+      </div>
+      <div class="box">
+        <h3 class="center">Stat 110</h3>
+        <div class="spacer10"></div>
+        <div class="row center">
+          <div class="col-sm-4"><b>82</b> total questions</div>
+          <div class="col-sm-4"><b>6</b> contributors</div>
+          <div class="col-sm-4"><b>3</b> unanswered</div>
+        </div>
+      </div>
+      <br>
+      <h3>My recent questions</h3>
+      <div class="box">
+        <h4 class="center">You haven't generated any questions yet!</h4>
+        <div class="center"><%= link_to "Create one now", new_question_path, class: "btn btn-theme btn-lg" %></div>
+      </div>
+    </div>
+
+
+</div>
 </div>

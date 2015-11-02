@@ -15,12 +15,12 @@ body {
   h1 {
     font-family: $headers;
     font-weight: 700;
-    font-size: 3vw;
+    //font-size: 3vw;
   }
   h2 {
     font-family: $headers;
     font-weight: 400;
-    font-size: 2.5vw;
+    //font-size: 2.5vw;
   }
   h3 {
     font-family: $headers;
@@ -72,9 +72,17 @@ a {
     margin: 0 auto;
 }
 
+.profpiccircle {
+  border-radius:50%;
+}
+
+.row {
+  margin: 15px;
+}
+
 .box {
   background: #fff;
-  //margin: 0 0 30px;
+  margin: 0 0 15px;
   border: solid 1px #e6e6e6;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -82,15 +90,20 @@ a {
   padding: 20px;
   -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  //margin:10px;
 
 }
 
 .spacer6 {
-    height: 6vw;
+    height: 60px;
   }
 .spacer3 {
-    height: 3vw;
+    height: 30px;
   }
+
+.spacer10 {
+  height:10px;
+}
 
 .spacer_nav {
   height: 51px;
@@ -120,9 +133,9 @@ a {
       color: white;
     }
     &.offset {
-      color: $peach;
+      color: white;
       &:hover, &:focus {
-        color: $peach;
+        color: white;
       }
     }
   }
@@ -178,6 +191,23 @@ a {
   -webkit-transform: translateY(0px);
   -moz-transform: translateY(0px);
   transform: translateY(0px);
+}
+
+.dashprofile {
+  min-height:600px;
+}
+
+.totalpoints {
+  background-color:$orange-darker;
+
+  //max-width:80px;
+  //text-align: center;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  h2 {
+    margin-top:30px;
+  }
 }
 
 
