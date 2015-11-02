@@ -76,7 +76,7 @@
   text-decoration: underline;
 }
 
-.question-content, .question-voting {
+.question-voting {
   float: left;
 }
 
@@ -92,12 +92,14 @@
 }
 
 .question-content {
+  float: left;
   width: 100%;
   word-wrap: break-word;
-}
-  .question-content a {
+
+  a {
     font-size: 24px;
   }
+}
 
 .col-sm-6 {
   width: 50%; /* override base responsive css that removes this when width < 768px */
