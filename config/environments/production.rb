@@ -44,7 +44,9 @@ Rails.application.configure do
   # Set to :debug to see everything in the log.
   # Set to :warn or higher to avoid issues with Devise leaking password reset tokens
   # (cf https://github.com/plataformatec/devise#password-reset-tokens-and-rails-logs)
-  config.log_level = :warn
+
+  # In production, we want to output :error or higher.
+  config.log_level = :error 
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
