@@ -6,7 +6,7 @@ function sendVote(qid, votestring) {
     data: {"_method": "put"}
   })
     .done(function(data) {
-      $('#' + qid).text(data);
+      $('#question-' + qid + '-net-votes').text(data);
     })
     .fail(function() {
       alert("Cannot vote for the same question more than once.");
@@ -14,15 +14,13 @@ function sendVote(qid, votestring) {
 }
 
 function initVote() {
-  $('.upvote-button').unbind().click(function(ev) {
-    ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
+  $('.upvote-button').click(function(ev) {
     var $upvote = $(ev.target).closest('.upvote-button');
     var upvoteqid = $upvote.data('vote-qid');
     sendVote(upvoteqid, '/upvote');
   });
 
-  $('.downvote-button').unbind().click(function(ev) {
-    ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
+  $('.downvote-button').click(function(ev) {
     var $downvote = $(ev.target).closest('.downvote-button');
     var downvoteqid = $downvote.data('vote-qid');
     sendVote(downvoteqid, '/downvote');
