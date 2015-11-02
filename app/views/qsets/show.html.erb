@@ -25,7 +25,7 @@
           <h4 class="panel-title">
             <div class="row valign">
               <div class="col-sm-1">
-                <div class="net-votes"><p id="<%= question.id %>"><%= question.votes_for - question.votes_against %></p><br></div>
+                <div class="net-votes"><p id="question-<%= question.id %>-net-votes"><%= question.plusminus %></p><br></div>
               </div>
               <div class="col-sm-1">
                 <div class="question-voting">
@@ -34,7 +34,6 @@
                 </div>
               </div>
               <div class="col-sm-6">
-                <!-- Toggles the Question modal. Data that is included: question answer, question text, and question ID -->
                 <div style="cursor:default" class="question-content">
                   <%= link_to question_path(question) do%>
                   <%= question.text %>

@@ -1,5 +1,6 @@
 class Qset < ActiveRecord::Base
   has_many :questions
+  has_many :members, class_name: 'User', foreign_key: 'org_id'
   validates_presence_of :name
   acts_as_tree order: :name
 

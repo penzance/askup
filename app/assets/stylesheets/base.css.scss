@@ -52,6 +52,15 @@ a {
 .right {
   text-align: right;
 }
+
+// removes extra padding in child bootstrap columns
+.row-no-padding {
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
 .vcenter {
   display: inline-block;
   vertical-align: middle;
