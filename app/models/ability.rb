@@ -13,8 +13,7 @@ class Ability
       if user.role? :admin
         can :manage, :all
       elsif user.role? :contributor
-        can :read, Question
-        can :create, Question
+        can [:create, :downvote, :read, :upvote], Question
         can :manage, Question, :user_id => user.id
         can :read, Qset
         can :manage, User, :id => user.id

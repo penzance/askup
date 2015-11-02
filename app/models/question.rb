@@ -1,4 +1,5 @@
 class Question < ActiveRecord::Base
+  acts_as_voteable
   belongs_to :user
   belongs_to :qset
   has_many :answers, :dependent => :destroy

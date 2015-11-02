@@ -76,6 +76,31 @@
   text-decoration: underline;
 }
 
+.question-voting {
+  float: left;
+}
 
+.downvote-button, .upvote-button {
+  color: black;
+  cursor: pointer;
+}
 
+.net-votes p {
+  font-size: 24px;
+  text-align: center;
+  margin: 10px 0 0 0;
+}
 
+.question-content {
+  float: left;
+  width: 100%;
+  word-wrap: break-word;
+
+  a {
+    font-size: 24px;
+  }
+}
+
+.col-sm-6 {
+  width: 50%; /* override base responsive css that removes this when width < 768px */
+} 

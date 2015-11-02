@@ -23,3 +23,4 @@
 //= require jquery.scrollTo
 //= require wow.min
 //= require custom
+//= require votes
