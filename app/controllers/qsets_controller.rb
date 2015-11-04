@@ -3,9 +3,20 @@ class QsetsController < ApplicationController
 
   # shows all qsets
   def index
-    @qsets = @qsets.order(:name)
-    @question_counts = Question.all.group(:qset_id).count
+    # if Qset.parent.nil?
+    #   @qsets = @qsets.order(:name)
+    #   @question_counts = Question.all.group(:qset_id).count
+    # else 
+      @qsets = @qsets.where(parent_id: current_user.org_id)
+      @question_counts = Question.all.group(:qset_id).count
+    # end
   end
+
+  # shows qsets that are part of the organization
+  # def classpage
+  #   @qsets = @qsets.where(parent_id: current_user.org_id)
+  #   @question_counts = Question.all.group(:qset_id).count
+  # end
 
   # handles the request to show all questions in a qset
   def show
