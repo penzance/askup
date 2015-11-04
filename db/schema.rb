@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20151026185333) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "question_id"
-    t.text     "text"
+    t.text     "text",        limit: 255
     t.integer  "creator_id"
   end
 
@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(version: 20151026185333) do
 
   create_table "questions", force: true do |t|
     t.datetime "created_at"
-    t.datetime "updated_at" 
-    t.text     "text"
+    t.datetime "updated_at"
+    t.text     "text",       limit: 255
     t.integer  "user_id"
     t.integer  "qset_id"
   end
