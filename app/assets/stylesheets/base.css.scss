@@ -15,12 +15,10 @@ body {
   h1 {
     font-family: $headers;
     font-weight: 700;
-    font-size: 3vw;
   }
   h2 {
     font-family: $headers;
     font-weight: 400;
-    font-size: 2.5vw;
   }
   h3 {
     font-family: $headers;
@@ -81,9 +79,13 @@ a {
     margin: 0 auto;
 }
 
+.row {
+  margin: 15px;
+}
+
 .box {
   background: #fff;
-  //margin: 0 0 30px;
+  margin: 0 0 15px;
   border: solid 1px #e6e6e6;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -91,15 +93,11 @@ a {
   padding: 20px;
   -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-
 }
 
-.spacer6 {
-    height: 6vw;
-  }
-.spacer3 {
-    height: 3vw;
-  }
+.spacer10 {
+  height:10px;
+}
 
 .spacer_nav {
   height: 51px;
@@ -129,9 +127,9 @@ a {
       color: white;
     }
     &.offset {
-      color: $peach;
+      color: white;
       &:hover, &:focus {
-        color: $peach;
+        color: white;
       }
     }
   }
@@ -188,5 +186,8 @@ a {
   -moz-transform: translateY(0px);
   transform: translateY(0px);
 }
+
+
+
 
 
