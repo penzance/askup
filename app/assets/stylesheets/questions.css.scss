@@ -78,6 +78,7 @@
 
 .question-voting {
   float: left;
+  margin: 12px 10px 0px 10px;
 }
 
 .downvote-button, .upvote-button {
@@ -86,10 +87,15 @@
   display: block;
 }
 
-.net-votes p {
-  font-size: 24px;
-  text-align: center;
-  margin: 10px 0 0 0;
+.net-votes {
+  float: left;
+  margin: 0px 10px 0px 10px;
+
+  p {
+    font-size: 24px;
+    text-align: center;
+    margin: 12px 0 0 0;
+  }
 }
 
 .question-content {
@@ -100,17 +106,16 @@
 
 .question-content-inner {
   float: left;
-  height: 62px;
-  line-height: 62px; /* for vertically aligning inner text */
+  width: 100%;
 
   a {
     font-size: 24px;
   }
 
-  span {
+/*  span {
     display: inline-block;
     vertical-align: middle;
-  }
+  }*/
 
 }
 
