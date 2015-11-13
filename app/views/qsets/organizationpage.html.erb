@@ -1,0 +1,58 @@
+<div class="container">
+  <br>
+  <h3 class="center"><b>AskUp</b></h3><br>
+  <h3 class="center"><b><%= @qset.name %></b></h3><br>
+
+  <h3 class="center"><b>Classes</b></h3><br>
+    <div class="row qset_list">
+    <% @qsets.each_with_index do |qset, index| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <div class="row valign">
+              <div class="col-sm-11">
+                <span style="cursor:default">
+                  <%= link_to(qset) do %>
+                    <%= qset.name %>
+                  <% end %>
+                  <div class="pull-right">
+                    <span class="badge"><%= @question_counts[qset.id] %></span>
+                  </div>
+                </span>
+              </div>
+            </div>
+          </h4>
+        </div>
+      </div>
+    <% end %>
+  </div> <!-- .qset-list -->
+
+
+<h3 class="center"><b>Questions</b></h3><br>
+  <div class="row">
+    <div class="col-sm-20 right">
+      <%= render "all_mine_other_filter" %>
+    </div>
+  </div>
+  <br>
+
+<div class="row question_list">
+      <%= render "question_list" %>
+  </div> <!-- .question-list -->
+  <br>
+</div> <!-- .container -->
+
+<%= render "modal_question" %>
+<%= render "modal_social" %>
+<% if can? :manage, Qset %>
+  <%= render "modal_edit_qset" %>
+  <%= render "modal_new_qset" %>
+<% end %>
+
+<script>
+  $(document).ready(function(){
+    initQsets();
+    initQuestionFilter();
+    initVote();
+  });
+</script>

@@ -3,28 +3,36 @@ class QsetsController < ApplicationController
 
   # shows all qsets
   def index
-    # if Qset.parent.nil?
-    #   @qsets = @qsets.order(:name)
-    #   @question_counts = Question.all.group(:qset_id).count
-    # else 
-      @qsets = @qsets.where(parent_id: current_user.org_id)
-      @question_counts = Question.all.group(:qset_id).count
-    # end
+      #@qsets = @qsets.where(parent_id: current_user.org_id)
+      if current_user.org.nil?
+        redirect_to root_url, alert: "You are not part of an organization."
+      else
+        redirect_to (current_user.org) 
+      end
+      #@questions = Question.includes(:answers).where(qset_id: @qset.id).order(created_at: :desc)
+      #@question_counts = Question.all.group(:qset_id).count
   end
-
-  # shows qsets that are part of the organization
-  # def classpage
-  #   @qsets = @qsets.where(parent_id: current_user.org_id)
-  #   @question_counts = Question.all.group(:qset_id).count
-  # end
-
+ 
   # handles the request to show all questions in a qset
   def show
+    @question_counts = Question.all.group(:qset_id).count
     @feedback_active = !!current_user
     @questions = Question.includes(:answers).where(qset_id: @qset.id).order(created_at: :desc)
     @filter_mine = true if cookies[:all_mine_other_filter] == 'mine'
     @filter_other = true if cookies[:all_mine_other_filter] == 'other'
     @filter_all = true unless @filter_mine or @filter_other
+    if @qset.parent.nil?
+      @qsets = Qset.where(parent_id: current_user.org_id)
+      render :organizationpage
+    else 
+      @qsets = Qset.where(parent_id: current_user.org_id)
+      render :classpage
+    end
+  end
+
+  def classpage
+    @feedback_active = !!current_user
+    @questions = Question.includes(:answers).where(qset_id: @qset.id).order(created_at: :desc)
   end
 
   # handles the request to save a new qset
