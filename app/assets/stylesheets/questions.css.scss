@@ -99,6 +99,7 @@
 }
 
 .question-content {
+  cursor: default;
   float: left;
   width: 100%;
   word-wrap: break-word;
@@ -111,11 +112,6 @@
   a {
     font-size: 24px;
   }
-
-/*  span {
-    display: inline-block;
-    vertical-align: middle;
-  }*/
 
 }
 
