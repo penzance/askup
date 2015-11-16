@@ -25,14 +25,9 @@ class QsetsController < ApplicationController
       @qsets = Qset.where(parent_id: current_user.org_id)
       render :organizationpage
     else 
-      @qsets = Qset.where(parent_id: current_user.org_id)
+      @qsets = Qset.where(parent_id: @qset.id)
       render :classpage
     end
-  end
-
-  def classpage
-    @feedback_active = !!current_user
-    @questions = Question.includes(:answers).where(qset_id: @qset.id).order(created_at: :desc)
   end
 
   # handles the request to save a new qset

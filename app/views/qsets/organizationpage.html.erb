@@ -9,35 +9,4 @@
 <%= render :file => 'qsets/index.html.erb' %>
 
 
-<h3 class="center"><b>Questions</b></h3><br>
-  <div class="row">
-     <div class="col-sm-8">
-      <%= render "qset_context" %>
-    </div>
-    <div class="col-sm-20 right">
-      <%= render "all_mine_other_filter" %>
-    </div>
-  <br>
-
-<div class="row question_list">
-      <%= render "question_list" %>
-  </div> <!-- .question-list -->
-  <br>
-</div> <!-- .container -->
-
-<%= render "modal_question" %>
-<%= render "modal_social" %>
-<% if can? :manage, Qset %>
-  <%= render "modal_edit_qset" %>
-  <%= render "modal_new_qset" %>
-<% end %>
-
-<script>
-  $(document).ready(function(){
-    initQsets();
-    initQuestionFilter();
-    initVote();
-  });
-</script>
-
 </div>

@@ -1,14 +1,15 @@
 <div class="container">
   <br>
-  <h3 class="center"><b><%= @qset.name %></b></h3><br>
-
-  <div class="row">
-     <div class="col-sm-8">
+  <h3 class="center">
       <%= render "qset_context" %>
-    </div>
+  </h3>
+
+  <%= render :file => 'qsets/index.html.erb' %>
+
 
   <br>
-  <div class="col-sm-4 right">
+  <h3 class="center"><b>Questions</b></h3><br>
+  <div class="col-sm-15 right">
       <%= render "all_mine_other_filter" %>
     </div>
   </div> 
