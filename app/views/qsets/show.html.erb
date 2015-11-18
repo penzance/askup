@@ -1,4 +1,3 @@
-
 <div class="container">
   <br>
   <h3 class="center"><b>Questions</b></h3><br>
@@ -13,17 +12,7 @@
     </div>
   </div>
 
-  <div class="row question_list">
-    <%= render "question_list_filter" %>
-  </div>
-
-<!--   <div class="row question_list">
-    <%#= render "no_question_alert" %>
-  </div>
-   -->
-  
-  <!-- everything now in question_list_filter was originally here -->
-
+<%= render "question_list_filter" %>
 <%= render "modal_question" %>
 <%= render "modal_social" %>
 
@@ -31,7 +20,6 @@
   <%= render "modal_edit_qset" %>
   <%= render "modal_new_qset" %>
 <% end %>
-
 
 <script>
   $(document).ready(function(){

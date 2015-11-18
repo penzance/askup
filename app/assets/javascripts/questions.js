@@ -31,12 +31,10 @@ function initQuestionFilter() {
     $('.my-question').removeClass('hidden');
     $('.other-question').removeClass('hidden');
     $('.no-questions').addClass('hidden');
-
   }
 
   function showMine() {
     if ($('.my-question').length == 0) {
-      console.log("No questions for this user");
       $('.no-questions').removeClass('hidden');
       $('.other-question').addClass('hidden');
     }

@@ -1,23 +1,18 @@
 <div class="row question_list">
-
-  <div class="panel-group no-questions hidden panel panel-default" role="dialog">
+  <div class="no-questions hidden panel panel-default">
     <div class="panel-heading">
       <div class="panel-title row valign">
-        <p>You have not created any questions. Generate one here!</p>
+        <p>You have not created any questions.</p>
       </div>
     </div>
-
   </div>
-
+  
     <% @questions.each_with_index do |question, index| %>
-
       <% if current_user and question['user_id'] == current_user.id %>
-        <div class="panel-group my-question hidden">
+        <div class="my-question hidden">
       <% else %>
-        <div class="panel-group other-question hidden">
-
+        <div class="other-question hidden">
       <% end %>
-      
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
@@ -59,15 +54,12 @@
                   <div class="pull-right">
                       <!-- Creates the edit and delete options for each question -->
                       <% if can? :manage, question %>
-
                         <%= link_to edit_question_path(question), class:'btn shortcut-button-link' do%>
                           <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
                         <% end %>
-
                         <%= link_to question_path(question), method: :delete, class:'btn shortcut-button-link' do%>
                           <span class="glyphicon glyphicon-trash shortcut-button-glyphicon"></span>
                         <% end %>
-
                       <% end %>
                   </div>
                 </span>
@@ -76,7 +68,7 @@
           </h4>
         </div>
       </div> <!-- .panel panel-default -->
-      </div> <!-- .panel-group -->
+      </div> 
     <% end %>
   </div> <!-- .question-list -->
   <br>
