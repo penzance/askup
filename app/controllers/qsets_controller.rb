@@ -3,14 +3,11 @@ class QsetsController < ApplicationController
 
   # shows all qsets
   def index
-      #@qsets = @qsets.where(parent_id: current_user.org_id)
       if current_user.org.nil?
         redirect_to root_url, alert: "You are not part of an organization."
       else
         redirect_to (current_user.org) 
       end
-      #@questions = Question.includes(:answers).where(qset_id: @qset.id).order(created_at: :desc)
-      #@question_counts = Question.all.group(:qset_id).count
   end
  
   # handles the request to show all questions in a qset
