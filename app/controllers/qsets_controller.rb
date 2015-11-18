@@ -9,7 +9,7 @@ class QsetsController < ApplicationController
         redirect_to (current_user.org) 
       end
   end
- 
+
   # handles the request to show all questions in a qset
   def show
     @question_counts = Question.all.group(:qset_id).count
