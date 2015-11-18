@@ -30,16 +30,24 @@ function initQuestionFilter() {
   function showAll() {
     $('.my-question').removeClass('hidden');
     $('.other-question').removeClass('hidden');
+    $('.no-questions').addClass('hidden');
   }
 
   function showMine() {
-    $('.my-question').removeClass('hidden');
-    $('.other-question').addClass('hidden');
+     if ($('.my-question').length == 0) {
+      $('.no-questions').removeClass('hidden');
+      $('.other-question').addClass('hidden');
+    }
+    else {
+       $('.no-questions').addClass('hidden');
+       $('.other-question').addClass('hidden');
+    }
   }
 
   function showOther() {
     $('.my-question').addClass('hidden');
     $('.other-question').removeClass('hidden');
+    $('.no-questions').addClass('hidden');
   }
 }
 
