@@ -1,14 +1,18 @@
 <span id="qset_context">
     <h3 class="center"><b><%= @qset.name %></b>
-    <% if can? :update, Qset %>
-      <a class="btn shortcut-button-link"
-         id="edit-qset"
-         data-toggle="modal"
-         data-target="#modal-edit-qset">
-        <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
-      </a>
-       <!-- todo: delete button here? -->
+    <% if @qset.parent.nil? == 'false' %>
+      <% if can? :update, Qset %>
+        <a class="btn shortcut-button-link"
+           id="edit-qset"
+           data-toggle="modal"
+           data-target="#modal-edit-qset">
+          <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
+        </a>
+         <!-- todo: delete button here? -->
+      <% end %>
     <% end %>
+    <br>
+    <br>
     </h3>
   <% if can? :create, Qset %>
     <h3 class="center"><b>Classes</b>
