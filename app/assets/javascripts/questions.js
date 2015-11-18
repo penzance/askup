@@ -34,7 +34,8 @@ function initQuestionFilter() {
   }
 
   function showMine() {
-    if ($('.my-question').length == 0) {
+     if ($('.my-question').length == 0) {
+
       $('.no-questions').removeClass('hidden');
       $('.other-question').addClass('hidden');
     }
@@ -45,9 +46,9 @@ function initQuestionFilter() {
   }
 
   function showOther() {
-       $('.my-question').addClass('hidden');
-       $('.other-question').removeClass('hidden');
-       $('.no-questions').addClass('hidden');
+    $('.my-question').addClass('hidden');
+    $('.other-question').removeClass('hidden');
+    $('.no-questions').addClass('hidden');
   }
 }
 

@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919025822) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20151026185333) do
 
   create_table "answers", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "question_id"
     t.text     "text"
+    t.integer  "creator_id"
   end
+
+  add_index "answers", ["creator_id"], name: "index_answers_on_creator_id"
 
   create_table "qsets", force: true do |t|
     t.string  "name"
@@ -52,9 +52,25 @@ ActiveRecord::Schema.define(version: 20150919025822) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "role",                   default: "contributor"
+    t.integer  "org_id"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["org_id"], name: "index_users_on_org_id"
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "votes", force: true do |t|
+    t.boolean  "vote",          default: false, null: false
+    t.integer  "voteable_id",                   null: false
+    t.string   "voteable_type",                 null: false
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["voteable_id", "voteable_type"], name: "index_votes_on_voteable_id_and_voteable_type"
+  add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], name: "fk_one_vote_per_user_per_entity", unique: true
+  add_index "votes", ["voter_id", "voter_type"], name: "index_votes_on_voter_id_and_voter_type"
 
 end

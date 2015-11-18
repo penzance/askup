@@ -2,6 +2,9 @@
   .container {
     width: 50%;
     margin-top: 60px;
+    // prevents parent default margins and padding from squeezing
+    // the container too small to be useful on a small screen
+    min-width: 220px;
   }
 
   .form-elem {
@@ -90,11 +93,11 @@
 }
 
 
-#new-password{
+#new-password {
   width: 100%;
 }
 
-#new-user{
+#new-user {
   width: 100%;
   margin-top: 10%;
 }
@@ -113,3 +116,15 @@
 // -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
 // transition: border .25s linear, color .25s linear, background-color .25s linear;
 // }
+
+.styled-select select {
+   border: 2px solid #bdc3c7;
+   background: transparent;
+   line-height: 1.467;
+   padding: 8px 12px;
+   height: 42px;
+   width: 268px;
+   font-size: 15px;
+   border-radius: 0;
+   height: 42px;
+}
