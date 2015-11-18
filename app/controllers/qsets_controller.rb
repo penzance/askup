@@ -19,7 +19,7 @@ class QsetsController < ApplicationController
     @filter_other = true if cookies[:all_mine_other_filter] == 'other'
     @filter_all = true unless @filter_mine or @filter_other
     if @qset.parent.nil?
-      @qsets = Qset.where(parent_id: current_user.org_id)
+      @qsets = Qset.where(parent_id: @qset.id)
       render :organizationpage
     else 
       @qsets = Qset.where(parent_id: @qset.id)
