@@ -23,6 +23,7 @@ class QuestionsController < ApplicationController
 
   # handles the request to save a new question (called from the new question page)
   def create
+    # @qsets = Qset.find(current_user.org).self_and_descendants
     question = current_user.questions.new(question_params)
     question.answers.first.creator = current_user
     question.save

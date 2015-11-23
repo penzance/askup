@@ -3,11 +3,11 @@ class QsetsController < ApplicationController
 
   # shows all qsets
   def index
-      if current_user.org.nil?
-        redirect_to root_url, alert: "You are not part of an organization."
-      else
-        redirect_to (current_user.org) 
-      end
+    if current_user.org.nil?
+      redirect_to root_url, alert: "Please contact user support at support@askup.net."
+    else
+      redirect_to (current_user.org) 
+    end
   end
 
   # handles the request to show all questions in a qset
@@ -18,12 +18,9 @@ class QsetsController < ApplicationController
     @filter_mine = true if cookies[:all_mine_other_filter] == 'mine'
     @filter_other = true if cookies[:all_mine_other_filter] == 'other'
     @filter_all = true unless @filter_mine or @filter_other
+    @qsets = Qset.where(parent_id: @qset.id)
     if @qset.parent.nil?
-      @qsets = Qset.where(parent_id: @qset.id)
       render :organizationpage
-    else 
-      @qsets = Qset.where(parent_id: @qset.id)
-      render :classpage
     end
   end
 

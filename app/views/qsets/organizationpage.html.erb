@@ -7,7 +7,7 @@
 <br>
 <br>
 
-<%= render :file => 'qsets/index.html.erb' %>
+<%= render "qset_list" %>
 
 <% if can? :manage, Qset %>
     <%= render "modal_edit_qset" %>
