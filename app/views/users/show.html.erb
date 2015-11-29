@@ -1,23 +1,24 @@
 <div class="row">
   <div class="col-sm-3">
     <div class="box center dash-profile">
-      <img class="prof-pic-circle" src="https://pbs.twimg.com/media/BxIR8zPIAAArhNL.png:large">
+      <img class="prof-pic-circle" src="/assets/person.png">
       <br><br>
-      <h3>Gwen Fairfax</h3>
-      <h4>Harvard College</h4>
-      <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Student</p>
-      <br><br>
+      <h3><%= current_user.first_name %> <%= current_user.last_name %></h3>
+      <h4><%= current_user.email %>
+      <!-- <h4>Harvard College</h4>
+      <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Student</p> -->
+      <br><br><br>
       <div class="total-points col-centered">
-        <h2 class="vcenter">76</h2>
+        <h2 class="vcenter">0</h2>
       </div>
       <br><br>
-      <p>Enrolled in <b>3</b> classes</p>
-      <p><b>28</b> questions</p>
-      <p><b>42</b> answers</p>
+      <!-- <p>Enrolled in <b></b> classes</p> -->
+      <p><%= pluralize(current_user.questions.count, 'question') %></p>
+      <!-- <p><b>42</b> answers</p> -->
     </div>
   </div>
   <div class="col-sm-9">
-    <h3>My enrolled classes</h3>
+    <!-- <h3>My enrolled classes</h3>
     <div class="box">
       <div class="class-bg valign">
         <h3 class="center class-title ">Stat 110: Intro to Probability</h3>
@@ -51,11 +52,16 @@
         <div class="col-sm-4"><b>3</b> unanswered</div>
       </div>
     </div>
-    <br>
-    <h3>My recent questions</h3>
+    <br> -->
+    <h3>Your recent questions</h3>
+    <% if current_user.questions.count < 1 %>
     <div class="box">
       <h4 class="center">You haven't generated any questions yet!</h4>
       <div class="center"><%= link_to "Create one now", new_question_path, class: "btn btn-theme btn-lg" %></div>
     </div>
+    <% else %>
+    <p>Plug in user questions here</p>
+
+    <% end %>
   </div>
 </div>

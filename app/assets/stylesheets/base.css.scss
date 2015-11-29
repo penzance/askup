@@ -2,29 +2,13 @@
 
 body {
   background-color: #f0f0f0;
-  font-family: $base;
+  font-family: $lato;
   color: $gray;
-  a {
-    text-decoration: none;
-    color: inherit;
-    &:hover {
-      color:$blue-reg;
-      text-decoration: none;
-    }
-  }
-  h1 {
-    font-family: $headers;
-    font-weight: 700;
-  }
-  h2 {
-    font-family: $headers;
-    font-weight: 400;
-  }
-  h3 {
-    font-family: $headers;
-    font-weight: 400;
-  }
+}
 
+h1, h2, h3 {
+  font-family:$lato;
+  font-weight:400;
 }
 
 a {
@@ -36,6 +20,12 @@ a {
   -o-transition: background-color .4s linear, color .4s linear;
   -ms-transition: background-color .4s linear, color .4s linear;
   transition: background-color .4s linear, color .4s linear;
+  text-decoration: none;
+    color: inherit;
+    &:hover {
+      color:$blue-reg;
+      text-decoration: none;
+    }
 
 }
 
@@ -79,10 +69,11 @@ a {
     margin: 0 auto;
 }
 
-.row {
-  margin: 15px;
-}
+// .row {
+//   margin: 15px;
+// }
 
+// styling for main box component
 .box {
   background: #fff;
   margin: 0 0 15px;
@@ -95,6 +86,8 @@ a {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
+
+// custom spacers
 .spacer10 {
   height:10px;
 }
@@ -102,6 +95,7 @@ a {
 .spacer_nav {
   height: 51px;
 }
+
 
 .hline-w {
   border-bottom: 2px solid #ffffff;
@@ -118,7 +112,7 @@ a {
   }
   .navbar-brand {
     color: white;
-    font-family: $headers;
+    font-family: $raleway;
     font-weight: 900;
   }
   .navbar-nav > li > a {

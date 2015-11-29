@@ -29,9 +29,9 @@
 }
 
 .btn-success {
-   box-shadow: 0px 3px 0px 0px $green-shadow;
    text-decoration: none;
-   background: $green-reg;
+   background-color: $green-reg;
+   border-color:transparent;
  }
 
 .btn-pink {
@@ -61,7 +61,6 @@ a.btn {
 .btn-theme {
   color: #fff;
   background-color: #384452;
-  //border-color: #384452;
   margin: 4px;
   padding: 6px 12px;
   margin: 0;
@@ -72,6 +71,7 @@ a.btn {
   -ms-transition: background-color .4s linear, color .4s linear;
   transition: background-color .4s linear, color .4s linear;
 }
+
 .btn-theme:hover,
 .btn-theme:focus,
 .btn-theme:active,
@@ -79,7 +79,6 @@ a.btn {
 .open .dropdown-toggle.btn-theme {
   color: #fff;
   background-color: #00b3fe;
-  //border-color: #00b3fe;
 }
 
 .btn-success:hover,
@@ -89,32 +88,6 @@ a.btn {
 .open .dropdown-toggle.btn-success {
   color: #ffffff;
   background-color: $green-hover;
-  border-color: $green-hover;
-  text-decoration: none;
-}
-.btn-success:active,
-.btn-success.active,
-.open .dropdown-toggle.btn-success {
-  background: $green-reg;
-  border-color: $green-reg;
   text-decoration: none;
 }
 
-.btn-sm {
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  font-size: 12px;
-  margin: 4px;
-  border-radius: 3px;
-  .btn-blue {
-    box-shadow: 0px 2px 0px 0px $blue-shadow;
-  }
-}
-
-.btn-xl {
-  padding: 0.6vw 1.6vw;
-  font-size: 1.3vw;
-  margin: 10px;
-}
