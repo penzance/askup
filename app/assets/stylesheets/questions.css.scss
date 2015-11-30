@@ -78,29 +78,43 @@
 
 .question-voting {
   float: left;
+  margin: 12px 10px 0px 10px;
 }
 
 .downvote-button, .upvote-button {
   color: black;
   cursor: pointer;
+  display: block;
 }
 
-.net-votes p {
-  font-size: 24px;
-  text-align: center;
-  margin: 10px 0 0 0;
+.net-votes {
+  float: left;
+  margin: 0px 10px 0px 10px;
+
+  p {
+    font-size: 24px;
+    text-align: center;
+    margin: 12px 0 0 0;
+  }
 }
 
 .question-content {
+  cursor: default;
   float: left;
   width: 100%;
   word-wrap: break-word;
+}
+
+.question-content-inner {
+  float: left;
+  width: 100%;
 
   a {
     font-size: 24px;
   }
+
 }
 
 .col-sm-6 {
   width: 50%; /* override base responsive css that removes this when width < 768px */
-} 
+}
