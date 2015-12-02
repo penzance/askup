@@ -17,20 +17,19 @@
       <%= render "question_list" %>
   </div> <!-- .question-list -->
   <br>
-
-  <%= render "modal_question" %>
-  <%= render "modal_social" %>
-  <% if can? :manage, Qset %>
-    <%= render "modal_edit_qset" %>
-    <%= render "modal_new_qset" %>
-  <% end %>
-
-  <script>
-    $(document).ready(function(){
-      initQsets();
-      initQuestionFilter();
-      initVote();
-    });
-  </script>
-
 </div>
+
+<%= render "modal_question" %>
+<%= render "modal_social" %>
+<% if can? :manage, Qset %>
+  <%= render "modal_edit_qset" %>
+  <%= render "modal_new_qset" %>
+<% end %>
+
+<script>
+  $(document).ready(function(){
+    initQsets();
+    initQuestionFilter();
+    initVote();
+  });
+</script>

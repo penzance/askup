@@ -4,14 +4,12 @@
       <div class="panel-heading">
         <h4 class="panel-title">
           <div class="row valign">
-            <div class="col-sm-11">
+            <div class="col-sm-12">
               <span style="cursor:default">
                 <%= link_to(qset) do %>
                   <%= qset.name %>
                 <% end %>
-                <div class="pull-right">
-                  <span class="badge"><%= @question_counts[qset.id] %></span>
-                </div>
+                <span class="pull-right" class="badge"><%= @question_counts[qset.id] %></span>
               </span>
             </div>
           </div>

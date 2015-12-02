@@ -1,7 +1,7 @@
 class QsetsController < ApplicationController
   load_and_authorize_resource
 
-  # shows all qsets
+  # shows the organization qset that the user is a part of, otherwise displays an error message 
   def index
     if current_user.org.nil?
       redirect_to root_url, alert: "Please contact user support at support@askup.net."
@@ -18,7 +18,7 @@ class QsetsController < ApplicationController
     @filter_mine = true if cookies[:all_mine_other_filter] == 'mine'
     @filter_other = true if cookies[:all_mine_other_filter] == 'other'
     @filter_all = true unless @filter_mine or @filter_other
-    @qsets = Qset.where(parent_id: @qset.id)
+    @qsets = @qset.children
     if @qset.parent.nil?
       render :organizationpage
     end
