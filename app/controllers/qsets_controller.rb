@@ -10,7 +10,8 @@ class QsetsController < ApplicationController
   # handles the request to show all questions in a qset
   def show
     @feedback_active = !!current_user
-    @questions = Question.includes(:answers).where(qset_id: @qset.id).order(created_at: :desc)
+    # sorts by default by net votes; secondary sort by create date
+    @questions = Question.includes(:answers).where(qset_id: @qset.id).plusminus_tally.order(created_at: :desc)
     @filter_mine = true if cookies[:all_mine_other_filter] == 'mine'
     @filter_other = true if cookies[:all_mine_other_filter] == 'other'
     @filter_all = true unless @filter_mine or @filter_other
