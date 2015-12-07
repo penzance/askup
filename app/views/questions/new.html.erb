@@ -8,7 +8,7 @@
             <%= form_for(@question) do |f| %>
               <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>
               <%= f.label :qset_id, 'Qset' %>
-              <%= f.select :qset_id, @qsets.map {|qs| [qs.name, qs.id]} %>
+              <%= f.collection_select(:qset_id, Qset.find(current_user.org).descendants, :id, :name) %>
               <%= f.fields_for :answers do |a| %>
                 <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
               <% end %>

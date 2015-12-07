@@ -1,19 +1,28 @@
 class QsetsController < ApplicationController
   load_and_authorize_resource
 
-  # shows all qsets
+  # shows the organization qset that the user is a part of, otherwise displays an error message 
   def index
-    @qsets = @qsets.order(:name)
-    @question_counts = Question.all.group(:qset_id).count
+    if current_user.org.nil?
+      redirect_to root_url, alert: "Please contact user support at support@askup.net."
+    else
+      redirect_to (current_user.org) 
+    end
   end
 
   # handles the request to show all questions in a qset
   def show
+    @question_counts = Question.all.group(:qset_id).count
     @feedback_active = !!current_user
-    @questions = Question.includes(:answers).where(qset_id: @qset.id).order(created_at: :desc)
+    # sorts by default by net votes; secondary sort by create date
+    @questions = Question.includes(:answers).where(qset_id: @qset.id).plusminus_tally.order(created_at: :desc)
     @filter_mine = true if cookies[:all_mine_other_filter] == 'mine'
     @filter_other = true if cookies[:all_mine_other_filter] == 'other'
     @filter_all = true unless @filter_mine or @filter_other
+    @qsets = @qset.children
+    if @qset.parent.nil?
+      render :organizationpage
+    end
   end
 
   # handles the request to save a new qset
