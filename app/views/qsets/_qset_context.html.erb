@@ -1,26 +1,27 @@
-<span id="qset_context">
+<div id="qset_context">
+  <div class="row">
     <h3 class="center"><b><%= @qset.name %></b>
-    <% if can? :update, Qset %>
-      <a class="btn shortcut-button-link"
-         id="edit-qset"
-         data-toggle="modal"
-         data-target="#modal-edit-qset">
-        <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
-      </a>
-       <!-- todo: delete button here? -->
-    <% end %>
-    <br>
-    <br>
+      <% if can? :update, Qset %>
+        <a class="btn shortcut-button-link"
+           id="edit-qset"
+           data-toggle="modal"
+           data-target="#modal-edit-qset">
+          <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
+        </a>
+         <!-- todo: delete button here? -->
+      <% end %>
     </h3>
-    <h3 class="center"><b>Classes</b></h3>
-  <% if can? :create, Qset %>
-    <a class="btn shortcut-button-link"
-       id="new-qset"
-       data-toggle="modal"
-       data-target="#modal-new-qset">
-      <span class="glyphicon glyphicon-plus-sign shortcut-button-glyphicon"></span>
-    </a>
-    </a>
-  <% end %>
-
-</span>
+  </div>
+  <div class="row">
+    <h5 class="pull-left">Subsets of <%= @qset.name %>
+      <% if can? :create, Qset %>
+        <a class="btn shortcut-button-link"
+           id="new-qset"
+           data-toggle="modal"
+           data-target="#modal-new-qset">
+          <span class="glyphicon glyphicon-plus-sign shortcut-button-glyphicon"></span>
+        </a>
+      <% end %>
+    </h5>
+  </div>
+</div>
