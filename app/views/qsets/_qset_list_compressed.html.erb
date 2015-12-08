@@ -4,9 +4,7 @@
   <ul class="qset-list-compressed">
     <% @qsets.each_with_index do |qset, index| %>
       <li>
-        <%= link_to(qset) do %>
-          <%= qset.name %>
-        <% end %>
+        <%= link_to qset.name, qset %>
         <span class="pull-right badge">
           <%= @question_counts[qset.id] %>
         </span>
