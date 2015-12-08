@@ -2,29 +2,13 @@
 
 body {
   background-color: #f0f0f0;
-  font-family: $base;
+  font-family: $lato;
   color: $gray;
-  a {
-    text-decoration: none;
-    color: inherit;
-    &:hover {
-      color:$blue-reg;
-      text-decoration: none;
-    }
-  }
-  h1 {
-    font-family: $headers;
-    font-weight: 700;
-  }
-  h2 {
-    font-family: $headers;
-    font-weight: 400;
-  }
-  h3 {
-    font-family: $headers;
-    font-weight: 400;
-  }
+}
 
+h1, h2, h3 {
+  font-family:$lato;
+  font-weight:400;
 }
 
 a {
@@ -36,6 +20,12 @@ a {
   -o-transition: background-color .4s linear, color .4s linear;
   -ms-transition: background-color .4s linear, color .4s linear;
   transition: background-color .4s linear, color .4s linear;
+  text-decoration: none;
+    color: inherit;
+    &:hover {
+      color:$blue-reg;
+      text-decoration: none;
+    }
 
 }
 
@@ -79,13 +69,10 @@ a {
     margin: 0 auto;
 }
 
-.row {
-  margin: 15px;
-}
-
+// styling for main box component
 .box {
   background: #fff;
-  margin: 0 0 15px;
+  margin: 10px;
   border: solid 1px #e6e6e6;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -95,8 +82,9 @@ a {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
+// custom spacers
 .spacer10 {
-  height:10px;
+  height: 10px;
 }
 
 .spacer_nav {
@@ -112,14 +100,16 @@ a {
   background-color: $blue-reg;
   border-color: $blue-reg;
   margin-bottom: 0;
-  .container-fluid {
-    margin-left: 30px;
-    margin-right: 20px;
-  }
   .navbar-brand {
     color: white;
-    font-family: $headers;
+    font-family: $raleway;
     font-weight: 900;
+  }
+  .navbar-right {
+    margin-right: 15px;
+  }
+  .navbar-header {
+    margin-left: 15px;
   }
   .navbar-nav > li > a {
     color: white;
@@ -135,59 +125,11 @@ a {
   }
 }
 
-
 .one-edge-shadow {
   -webkit-box-shadow: 0px 1px 10px 0px rgba(50, 50, 50, 0.3);
   -moz-box-shadow:    0px 1px 10px 0px rgba(50, 50, 50, 0.3);
   box-shadow:         0px 1px 10px 0px rgba(50, 50, 50, 0.3);
 }
-
-.text-glow-hover{
-  color: #fff;
-  transition: text-shadow 0.3s ease-in-out;
-  &:hover {
-    text-shadow: 0 0 10px white;
-  }
-}
-
-.text-grow-hover{
-  transition: font-size 0.3s ease-in-out;
-  &:hover {
-    font-size: inherit + 10px;
-  }
-}
-
-/* Effect 3: bottom line slides/fades in */
-// .cl-effect-3 a {
-//   padding: 8px 0;
-// }
-
-.cl-effect-3 a::after {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: rgba(0,0,0,0.1);
-  content: '';
-  opacity: 0;
-  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
-  -moz-transition: opacity 0.3s, -moz-transform 0.3s;
-  transition: opacity 0.3s, transform 0.3s;
-  -webkit-transform: translateY(10px);
-  -moz-transform: translateY(10px);
-  transform: translateY(10px);
-}
-
-.cl-effect-3 a:hover::after,
-.cl-effect-3 a:focus::after {
-  opacity: 1;
-  -webkit-transform: translateY(0px);
-  -moz-transform: translateY(0px);
-  transform: translateY(0px);
-}
-
-
 
 
 

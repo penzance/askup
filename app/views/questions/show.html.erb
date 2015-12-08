@@ -1,78 +1,69 @@
 <div class="alert feedback-alert center" style="display: none;">
   <div class="alert-text feedback-alert-text"> </div>
-   &nbsp;
+  &nbsp;
   <a href="#" class="close-alert grow"><i class="fa fa-times-circle"></i></a>
 </div>
-
-<div class="prettyform">
-  <div class="container">
-    <!--<div class="row">-->
-      <!--<div class="col-sm-7">-->
+<div class="container-fluid">
+  <div class="prettyform">
     <div class="box center">
       <h2 class="title-no-margin"><%= @question.text %></h2>
       <br>
       <%= form_for @new_answer, :url => question_answers_path(@question.id), remote: true do |f| %>
-        <%= f.text_area :text, autofocus: true, placeholder: 'Type your answer here', class: 'form-control answer-text', id: 'single-answer-text' %>
-        <div class="btn-div">
-          <%= f.submit "Submit answer", class: 'btn btn-theme btn-lg submit-answer', id: 'single-submit-answer' %>
-        </div>
-     <%end%>
-    </div>
+      <%= f.text_area :text, autofocus: true, placeholder: 'Type your answer here', class: 'form-control answer-text', id: 'single-answer-text' %>
+      <div class="btn-div">
+        <%= f.submit "Submit answer", class: 'btn btn-theme btn-lg submit-answer', id: 'single-submit-answer' %>
+      </div>
+      <%end%>
+    </div>   
   </div>
-</div>
-<div class="prettyform answers" style="display:none">
-  <div class="container">
+  <div class="prettyform answers" style="display:none">
     <div class="box center">
       <h3>Answer:</h3>
       <div class="correct-container">
         <h4 class="correct"><%= @question.answers[0].text %></h4>
       </div>
-    </div>
+    </div>  
   </div>
-</div>
-<div class="prettyform response" style="display:none">
-  <div class="container">
+  <div class="prettyform response" style="display:none">    
     <br>
     <h4 class="center"><b>Did you know the answer?</b></h4>
     <div class="row row-no-padding">
       <div class="col-xs-4 center">
         <a class="btn-flat btn-success feedback-button"
-            data-feedback-active="<%= @feedback_active %>"
-            data-feedback-string="yes"
-            data-feedback-qid="<%= @question.id %>">
-            <i class="fa fa-check"></i>
+          data-feedback-active="<%= @feedback_active %>"
+          data-feedback-string="yes"
+          data-feedback-qid="<%= @question.id %>">
+          <i class="fa fa-check"></i>
         </a>
       </div>
       <div class="col-xs-4 center">
         <a class="btn-flat btn-maybe feedback-button"
-           data-feedback-active="<%= @feedback_active %>"
-           data-feedback-string="maybe"
-           data-feedback-qid="<%= @question.id %>">
+          data-feedback-active="<%= @feedback_active %>"
+          data-feedback-string="maybe"
+          data-feedback-qid="<%= @question.id %>">
           <i class="fa fa-question"></i>
         </a>
       </div>
       <div class="col-xs-4 center">
         <a class="btn-flat btn-pink feedback-button"
-           data-feedback-active="<%= @feedback_active %>"
-           data-feedback-string="no"
-           data-feedback-qid="<%= @question.id %>">
+          data-feedback-active="<%= @feedback_active %>"
+          data-feedback-string="no"
+          data-feedback-qid="<%= @question.id %>">
           <i class="fa fa-times"></i>
         </a>
       </div>
     </div>
   </div>
 </div>
-
 <script>
-  $(document).ready(function(e) {
-    initAnswerButton();
-    initUserFeedback();
-  });
+$(document).ready(function(e) {
+  initAnswerButton();
+  initUserFeedback();
+});
 </script>
-
 <% if false %>
-  In javascript (see answers.js): call respond method with corresponding response, launch appropriate modal
-    Yes: "Great job! Keep at it" then a button "Answer another question"
-    No: "Keep studying, you can do it!" then a button "Answer another question"
-  Both buttons go to questions index
+In javascript (see answers.js): call respond method with corresponding response, launch appropriate modal
+  Yes: "Great job! Keep at it" then a button "Answer another question"
+  No: "Keep studying, you can do it!" then a button "Answer another question"
+Both buttons go to questions index
 <% end %>

@@ -14,56 +14,52 @@
 <body>
 <div class="container-fluid">
   <div class="navbar navbar-inverse navbar-fixed-top one-edge-shadow" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header=">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          </button>
-            <%= link_to 'AskUp', root_path, class: "navbar-brand float" %>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-left">
-            <li><%= link_to 'Review Questions', qsets_path, class: "float" %></li>
-            <li><%= link_to 'Generate Question', new_question_path, class: "float" %></li>
-            <li><a class="float offset" href="mailto:feedback@askup.net">Feedback</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-           
-            <% if user_signed_in? %>
-            <li>
-              <%= link_to current_user.email, user_path(current_user), class: "float" %>  
-            </li>
-            <li><%= link_to 'Sign Out', destroy_user_session_path, method: 'delete', id: 'sign_out', class: "float" %></li>
-            <% else %>
-            
-            <li><%= link_to 'Sign In', new_user_session_path, class: "float" %></li>
-            <% end %>
-          </ul>
-          
-        </div>
-      </div>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
+        <%= link_to 'AskUp', root_path, class: "navbar-brand float" %>
     </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-left">
+        <li><%= link_to 'Review Questions', qsets_path, class: "float" %></li>
+        <li><%= link_to 'Generate Question', new_question_path, class: "float" %></li>
+        <li><a class="float offset" href="mailto:feedback@askup.net">Feedback</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right"> 
+        <% if user_signed_in? %>
+        <li>
+          <%= link_to current_user.email, user_path(current_user), class: "float" %>  
+        </li>
+        <li><%= link_to 'Sign Out', destroy_user_session_path, method: 'delete', id: 'sign_out', class: "float" %></li>
+        <% else %>        
+        <li><%= link_to 'Sign In', new_user_session_path, class: "float" %></li>
+        <% end %>
+      </ul>      
+    </div>
+  </div>
+</div>
 
 <div class="spacer_nav"></div>
-    <% if flash[:notice] %>
-      <div class="alert alert-success center">
-        <%= flash[:notice] %> &nbsp;
-        <a href="#" class="close-alert grow"><i class="fa fa-times-circle"></i></a>
-      </div>
-      <% end %>
 
-      <% if flash[:alert] %>
-      <div class="alert alert-danger center">
-        <%= flash[:alert] %> &nbsp;
-        <a href="#" class="close-alert grow"><i class="fa fa-times-circle"></i></a>
-      </div>
-    <% end %>
+<% if flash[:notice] %>
+  <div class="alert alert-success center">
+    <%= flash[:notice] %> &nbsp;
+    <a href="#" class="close-alert grow"><i class="fa fa-times-circle"></i></a>
+  </div>
+  <% end %>
+
+  <% if flash[:alert] %>
+  <div class="alert alert-danger center">
+    <%= flash[:alert] %> &nbsp;
+    <a href="#" class="close-alert grow"><i class="fa fa-times-circle"></i></a>
+  </div>
+<% end %>
 
 <%= yield %>
 
-</div>
 </body>
 </html>
