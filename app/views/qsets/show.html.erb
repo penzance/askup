@@ -1,22 +1,19 @@
-<div class="container">
-  <br>
-  <h3 class="center">
-      <%= render "qset_context" %>
-  </h3>
-
-  <%= render "qset_list" %>
-
-  <br>
-  <h3 class="center"><b>Questions</b></h3><br>
-  <div class="col-sm-12 right">
-      <%= render "all_mine_other_filter" %>
+<div class="container-fluid">
+  <%= render "qset_context" %>
+  <div id="all-mine-filter-container">
+    <%= render "all_mine_other_filter" %>
   </div>
- 
-  <br>
-  <div class="row question_list">
+  <div class="row">
+    <div class="col-sm-3">
+      <%= render "qset_list_compressed" %>
+    </div>
+    <div class="col-sm-9">
+      <div id="all-mine-filter-container-xs">
+      <%= render "all_mine_other_filter" %>
+      </div>
       <%= render "question_list" %>
-  </div> <!-- .question-list -->
-  <br>
+    </div>
+  </div>
 </div>
 
 <%= render "modal_question" %>

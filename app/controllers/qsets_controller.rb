@@ -12,7 +12,6 @@ class QsetsController < ApplicationController
 
   # handles the request to show all questions in a qset
   def show
-    @question_counts = Question.all.group(:qset_id).count
     @feedback_active = !!current_user
     # sorts by default by net votes; secondary sort by create date
     @questions = Question.includes(:answers).where(qset_id: @qset.id).plusminus_tally.order(created_at: :desc)
@@ -20,6 +19,7 @@ class QsetsController < ApplicationController
     @filter_other = true if cookies[:all_mine_other_filter] == 'other'
     @filter_all = true unless @filter_mine or @filter_other
     @qsets = @qset.children
+    @question_counts = @qsets.map { |s| [s.id, s.questions.count] }.to_h
     if @qset.parent.nil?
       render :organizationpage
     end

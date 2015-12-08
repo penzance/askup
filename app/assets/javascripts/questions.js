@@ -12,17 +12,17 @@ function initQuestionFilter() {
   else showAll();
 
   // changes to filter 1. show filtered set of questions, and 2. are tracked in a user cookie
-  $('#all-radio').click(function(){
+  $('.all-radio').click(function(){
     Cookies.set('all_mine_other_filter', 'all', { expires: 1000 });
     showAll();
   });
 
-  $("#mine-radio").click(function(){
+  $('.mine-radio').click(function(){
     Cookies.set('all_mine_other_filter', 'mine', { expires: 1000 });
     showMine();
   });
 
-  $('#other-radio').click(function(){
+  $('.other-radio').click(function(){
     Cookies.set('all_mine_other_filter', 'other', { expires: 1000 });
     showOther();
   });

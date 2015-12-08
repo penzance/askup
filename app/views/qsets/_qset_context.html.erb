@@ -12,16 +12,4 @@
       <% end %>
     </h3>
   </div>
-  <div class="row">
-    <h5 class="pull-left">Subsets of <%= @qset.name %>
-      <% if can? :create, Qset %>
-        <a class="btn shortcut-button-link"
-           id="new-qset"
-           data-toggle="modal"
-           data-target="#modal-new-qset">
-          <span class="glyphicon glyphicon-plus-sign shortcut-button-glyphicon"></span>
-        </a>
-      <% end %>
-    </h5>
-  </div>
 </div>
