@@ -1,13 +1,26 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.class-bg {
+	background-color: $gray-lighter;
+	min-height: 70px;
+	color: white;
+	text-shadow: 10px;
+	border-radius: 5px;
+	&:hover {
+		background-color: $gray-lighter;
+	}
+}
 
 .dash-profile {
-  min-height:600px;
+  margin-top: 20px;
 }
 
 .prof-pic-circle {
   border-radius:50%;
+  height: 140px;
+  width: 140px;
+  margin-top: 10px;
 }
 
 .total-points {
