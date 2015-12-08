@@ -1,20 +1,27 @@
-<div class="row qset_list">
+<div>
+  <h5>Subsets of <%= @qset.name %>
+  </h5>
+</div>
+<% if can? :create, Qset %>
+  <div>
+    <a class="btn btn-primary btn-sm"
+       id="new-qset"
+       data-toggle="modal"
+       data-target="#modal-new-qset">
+      New subset
+    </a>
+  </div>
+<% end %>
+<div class="qset-list">
   <% @qsets.each_with_index do |qset, index| %>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <div class="row valign">
-            <div class="col-sm-12">
-              <span style="cursor:default">
-                <%= link_to(qset) do %>
-                  <%= qset.name %>
-                <% end %>
-                <span class="pull-right" class="badge"><%= @question_counts[qset.id] %></span>
-              </span>
-            </div>
-          </div>
-        </h4>
-      </div>
+    <div class="box">
+      <%= link_to(qset) do %>
+        <%= qset.name %>
+      <% end %>
+      <span class="pull-right badge">
+        <%= @question_counts[qset.id] %>
+        <%= 'question'.pluralize(@question_counts[qset.id]) %>
+      </span>
     </div>
   <% end %>
 </div> <!-- .qset-list -->

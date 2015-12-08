@@ -1,17 +1,8 @@
 <div class="container">
-  <br>
-  <h3 class="center"><b>AskUp</b></h3><br>
-
-  <h3 class="center"><b><%= render "qset_context" %></b></h3>
-
-<br>
-<br>
-
-<%= render "qset_list" %>
-
-<% if can? :manage, Qset %>
+  <%= render "qset_context" %>
+  <%= render "qset_list" %>
+  <% if can? :manage, Qset %>
     <%= render "modal_edit_qset" %>
     <%= render "modal_new_qset" %>
-<% end %>
-
+  <% end %>
 </div>
