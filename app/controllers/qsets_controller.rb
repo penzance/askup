@@ -15,12 +15,23 @@ class QsetsController < ApplicationController
     @feedback_active = !!current_user
     # sorts by default by net votes; secondary sort by create date
     @questions = Question.includes(:answers).where(qset_id: @qset.id).plusminus_tally.order(created_at: :desc)
-    @filter_mine = true if cookies[:all_mine_other_filter] == 'mine'
-    @filter_other = true if cookies[:all_mine_other_filter] == 'other'
-    @filter_all = true unless @filter_mine or @filter_other
+    if can? :see_all_questions, @qset
+      @filter_mine = true if cookies[:all_mine_other_filter] == 'mine'
+      @filter_other = true if cookies[:all_mine_other_filter] == 'other'
+      @filter_all = true unless @filter_mine or @filter_other
+    else
+      # show only the current user's questions if the app is configured that way
+      cookies[:all_mine_other_filter] = 'mine'
+      @filter_mine = true
+      @questions = @questions.where(user_id: current_user)
+    end
     @qsets = @qset.children
-    @question_counts = @qsets.map { |s| [s.id, s.questions.count] }.to_h
-    if @qset.parent.nil?
+    @question_counts = @qsets.map do |s|
+      scope = s.questions
+      scope = scope.where(user_id: current_user) if cannot? :see_all_questions, s
+      [s.id, scope.count]
+    end.to_h
+    if @qset.root?
       render :organizationpage
     end
   end
@@ -38,8 +49,18 @@ class QsetsController < ApplicationController
   # (called from the edit qset modal)
   def update
     # note: parent_id is not changeable via this UI
-    update_group_params = params.permit(:id, :name)
+    update_group_params = params.require(:qset).permit(:name)
     @qset.update(update_group_params)
+
+    update_settings_params =  params.require(:qset).require(:permissions).permit(
+        :all_questions_visible,
+        :question_authors_visible,
+        :questions_visible_to_unauth_user
+    )
+    update_settings_params.each do |p_name, p_value|
+      @qset.update_permission p_name.to_sym, p_value == '1', true
+    end
+
     redirect_to qset_path(@qset.id), notice: "Qset '#{@qset.name}' saved."
   end
 
