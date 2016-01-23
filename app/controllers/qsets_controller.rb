@@ -20,16 +20,21 @@ class QsetsController < ApplicationController
       @filter_other = true if cookies[:all_mine_other_filter] == 'other'
       @filter_all = true unless @filter_mine or @filter_other
     else
-      # show only the current user's questions if the app is configured that way
+      # show only the current user's questions
       cookies[:all_mine_other_filter] = 'mine'
       @filter_mine = true
       @questions = @questions.where(user_id: current_user)
     end
     @qsets = @qset.children
+    # a hash of qset question counts keyed by qset id
     @question_counts = @qsets.map do |s|
-      scope = s.questions
-      scope = scope.where(user_id: current_user) if cannot? :see_all_questions, s
-      [s.id, scope.count]
+      count = 0
+      s.self_and_descendants.each do |q|
+        scope = q.questions
+        scope = scope.where(user_id: current_user) if cannot? :see_all_questions, q
+        count += scope.count
+      end
+      [s.id, count]
     end.to_h
     if @qset.root?
       render :organizationpage
