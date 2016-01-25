@@ -11,18 +11,13 @@ a.btn {
 }
 
 .btn-feedback {
-  border:none;
+  border: none;
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
   display: inline-block;
   font-size: 1.3vw;
-  // remove margins, padding so buttons center evenly in any container,
-  // even when the screen is small
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 0;
-  padding-right: 0;
+  padding: 6px 0;
   position: relative;
   text-decoration: none;
   transition: background 0.3s ease-in-out;
@@ -39,14 +34,14 @@ a.btn {
 
 .btn-flat {
   color: #fff;
-  text-decoration: none;
-  padding: 6px 12px;
   margin: 0;
+  padding: 6px 12px;
+  text-decoration: none;
+  transition: background-color .4s linear, color .4s linear;
   -webkit-transition: background-color .4s linear, color .4s linear;
   -moz-transition: background-color .4s linear, color .4s linear;
   -o-transition: background-color .4s linear, color .4s linear;
   -ms-transition: background-color .4s linear, color .4s linear;
-  transition: background-color .4s linear, color .4s linear;
 }
 
 .btn-maybe {
