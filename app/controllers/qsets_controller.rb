@@ -62,6 +62,9 @@ class QsetsController < ApplicationController
         :question_authors_visible,
         :questions_visible_to_unauth_user
     )
+    # todo: this is inefficient -- the DB is accessed once per setting per qset;
+    # it would be better to call once per qset (and update all settings for
+    # that qset at once) or even once (updating all settings on a list of qsets)
     update_settings_params.each do |p_name, p_value|
       @qset.update_permission p_name.to_sym, p_value == '1', true
     end
