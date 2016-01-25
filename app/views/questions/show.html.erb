@@ -29,7 +29,7 @@
     <h4 class="center"><b>Did you know the answer?</b></h4>
     <div class="row row-no-padding">
       <div class="col-xs-4 center">
-        <a class="btn-flat btn-success feedback-button"
+        <a class="btn-feedback btn-success"
           data-feedback-active="<%= @feedback_active %>"
           data-feedback-string="yes"
           data-feedback-qid="<%= @question.id %>">
@@ -37,7 +37,7 @@
         </a>
       </div>
       <div class="col-xs-4 center">
-        <a class="btn-flat btn-maybe feedback-button"
+        <a class="btn-feedback btn-maybe"
           data-feedback-active="<%= @feedback_active %>"
           data-feedback-string="maybe"
           data-feedback-qid="<%= @question.id %>">
@@ -45,7 +45,7 @@
         </a>
       </div>
       <div class="col-xs-4 center">
-        <a class="btn-flat btn-pink feedback-button"
+        <a class="btn-feedback btn-pink"
           data-feedback-active="<%= @feedback_active %>"
           data-feedback-string="no"
           data-feedback-qid="<%= @question.id %>">
