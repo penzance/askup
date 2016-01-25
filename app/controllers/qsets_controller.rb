@@ -62,12 +62,13 @@ class QsetsController < ApplicationController
         :question_authors_visible,
         :questions_visible_to_unauth_user
     )
-    # todo: this is inefficient -- the DB is accessed once per setting per qset;
-    # it would be better to call once per qset (and update all settings for
-    # that qset at once) or even once (updating all settings on a list of qsets)
-    update_settings_params.each do |p_name, p_value|
-      @qset.update_permission p_name.to_sym, p_value == '1', true
-    end
+    permissions = update_settings_params.each do |p_name, p_value|
+      # at the moment all permissions are booleans; HTML checkboxes
+      # represent this as `1` for `true` or `0` for `false`, so cast
+      # those values into an actual boolean
+      [p_name, p_value == '1']
+    end.to_h
+    @qset.update_permissions permissions, true
 
     redirect_to qset_path(@qset.id), notice: "Qset '#{@qset.name}' saved."
   end

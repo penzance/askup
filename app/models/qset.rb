@@ -18,11 +18,14 @@ class Qset < ActiveRecord::Base
   before_destroy :prevent_root_node_destroy
   after_destroy :move_orphans_to_parent
 
-  def update_permission(perm_name_as_symbol, new_value, with_descendents=false)
-    self.settings(:permissions).update_attributes! perm_name_as_symbol => new_value
-    if with_descendents
-      self.children.each do |q|
-        q.update_permission(perm_name_as_symbol, new_value, with_descendents)
+  # update_permissions() expects the argument `permissions` to be a hash
+  # mapping permission names (symbols) to new permission values.
+  # If with_descendants is `true` then it will update all subsets of this qset as well.
+  def update_permissions(permissions, with_descendants=false)
+    self.settings(:permissions).update_attributes! permissions
+    if with_descendants
+      self.descendants.each do |q|
+        q.update_permissions permissions
       end
     end
   end
