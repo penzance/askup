@@ -1,6 +1,10 @@
 <div class="container">
   <h2>Users</h2>
-  <% @users.each do |user| %>
-    <%= link_to "#{user.email}", user_path(user.id) %><br>
+  <ul>
+  <% @users.order('LOWER(last_name)').each do |user| %>
+    <%= link_to user_path(user) do %></li>
+      <li><%= user.full_name %> <i>(<%= user.email %>)</i></li>
+    <% end %>
   <% end %>
+  </ul>
 </div>

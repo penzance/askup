@@ -10,7 +10,7 @@
         <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Student</p> -->
         <br><br><br>
         <div class="total-points col-centered">
-          <h2 class="vcenter">0</h2>
+          <h2 class="vcenter"><%= @user.karma %></h2>
         </div>
         <br><br>
         <!-- <p>Enrolled in <b></b> classes</p> -->
@@ -64,13 +64,17 @@
       <p>Plug in user questions here</p>
 
       <% end %>
-      <%# Note that `can? :manage, User` isn't exclusive enough, as users should be able to :manage their own records %>
-      <% if current_user.role? :admin %>
-        <%= form_for @user do |f| %>
-          <div class="form-group">
-            <%= f.label :org_id, 'Organization' %>
+      <%= form_for @user do |f| %>
+        <div class="form-group">
+          <%= f.label :org_id, 'Organization' %>
+          <%# Note that `can? :manage, User` isn't exclusive enough, as users should be able to :manage their own records %>
+          <% if current_user.role? :admin %>
             <%= f.collection_select(:org_id, Qset.where(parent_id: nil).order(:name), :id, :name) %>
-          </div>
+          <% else %>
+            <%= @user.org.name %>
+          <% end %>
+        </div>
+        <% if current_user.role? :admin %>
           <%= f.submit 'Save', id: 'user-save', class: 'btn btn-theme', data: {disable_with: 'Saving...'} %>
         <% end %>
       <% end %>

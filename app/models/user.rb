@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
   acts_as_voter
-  has_many :questions
   belongs_to :org, class_name: 'Qset', foreign_key: 'org_id'
+  has_karma :questions, as: 'user'
   has_many :answers, class_name: 'Answer', foreign_key: 'creator_id'
+  has_many :questions
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, and :omniauthable
@@ -21,4 +22,5 @@ class User < ActiveRecord::Base
   def to_s
     self.to_json
   end
+
 end
