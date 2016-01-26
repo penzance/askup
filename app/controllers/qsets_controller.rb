@@ -62,13 +62,7 @@ class QsetsController < ApplicationController
         :question_authors_visible,
         :questions_visible_to_unauth_user
     )
-    permissions = update_settings_params.each do |p_name, p_value|
-      # at the moment all permissions are booleans; HTML checkboxes
-      # represent this as `1` for `true` or `0` for `false`, so cast
-      # those values into an actual boolean
-      [p_name, p_value == '1']
-    end.to_h
-    @qset.update_permissions permissions, true
+    @qset.update_permissions update_settings_params, true
 
     redirect_to qset_path(@qset.id), notice: "Qset '#{@qset.name}' saved."
   end

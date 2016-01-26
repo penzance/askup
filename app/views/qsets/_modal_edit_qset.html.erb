@@ -19,15 +19,15 @@
           <%= f.fields_for :permissions, @qset.settings(:permissions) do |permissions| %>
             <div class="form-group">
               <%= permissions.label :all_questions_visible, 'Questions are visible to all logged-in users' %>
-              <%= permissions.check_box :all_questions_visible %>
+              <%= permissions.check_box :all_questions_visible, {}, 'true', 'false' %>
             </div>
             <div class="form-group">
               <%= permissions.label :question_authors_visible, 'Questions authors are visible to all users' %>
-              <%= permissions.check_box :question_authors_visible %>
+              <%= permissions.check_box :question_authors_visible, {}, 'true', 'false' %>
             </div>
             <div class="form-group">
               <%= permissions.label :questions_visible_to_unauth_user, 'Questions are visible to unauthenticated users' %>
-              <%= permissions.check_box :questions_visible_to_unauth_user %>
+              <%= permissions.check_box :questions_visible_to_unauth_user, {}, 'true', 'false' %>
             </div>
           <% end %>
           <%= f.submit 'Save', id: 'edit-qset-save', class: 'btn btn-theme', data: {disable_with: 'Saving...'} %>
