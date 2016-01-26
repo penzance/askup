@@ -3,7 +3,8 @@ class Ability
 
   def initialize(user)
     if user.nil?  # if the request is from someone who is not logged in
-      can :read, Qset do |qset|
+      cannot :index, Qset  # no root org, so wouldn't know where to take the visitor
+      can :show, Qset do |qset|
         qset.settings(:permissions).questions_visible_to_unauth_user
       end
       can :see_all_questions, Qset do |qset|
