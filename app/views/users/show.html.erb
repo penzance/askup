@@ -4,8 +4,8 @@
       <div class="box center dash-profile">
         <img class="prof-pic-circle" src="/assets/person.png">
         <br><br>
-        <h3><%= current_user.first_name %> <%= current_user.last_name %></h3>
-        <h4><%= current_user.email %>
+        <h3><%= @user.first_name %> <%= @user.last_name %></h3>
+        <h4><%= @user.email %>
         <!-- <h4>Harvard College</h4>
         <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Student</p> -->
         <br><br><br>
@@ -14,7 +14,7 @@
         </div>
         <br><br>
         <!-- <p>Enrolled in <b></b> classes</p> -->
-        <p><%= pluralize(current_user.questions.count, 'question') %></p>
+        <p><%= pluralize(@user.questions.count, 'question') %></p>
         <!-- <p><b>42</b> answers</p> -->
       </div>
     </div>
@@ -63,6 +63,16 @@
       <% else %>
       <p>Plug in user questions here</p>
 
+      <% end %>
+      <%# Note that `can? :manage, User` isn't exclusive enough, as users should be able to :manage their own records %>
+      <% if current_user.role? :admin %>
+        <%= form_for @user do |f| %>
+          <div class="form-group">
+            <%= f.label :org_id, 'Organization' %>
+            <%= f.collection_select(:org_id, Qset.where(parent_id: nil).order(:name), :id, :name) %>
+          </div>
+          <%= f.submit 'Save', id: 'user-save', class: 'btn btn-theme', data: {disable_with: 'Saving...'} %>
+        <% end %>
       <% end %>
     </div>
   </div>
