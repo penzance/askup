@@ -4,11 +4,15 @@ function initQsets() {
     window.open($selectedOption.data('qset-url'), '_self');
   });
 
+  $('.modal').on('shown.bs.modal', function (event) {
+    $(this).find('input:text:visible:first').focus().select();
+  });
+
   $('#modal-new-qset').on('show.bs.modal', function (event) {
     $(this).find('input[name="name"]').val('');
   });
 
-  $('#edit-qset').on('click', function (event) {
+  $('#modal-edit-qset').on('show.bs.modal', function (event) {
     $('#delete_confirmation_form_container').hide();
   });
 
@@ -16,4 +20,9 @@ function initQsets() {
   $('#edit-qset-delete').on('click', function (event) {
     $('#delete_confirmation_form_container').show();
   });
+
+  $('form').on('submit', function (event) {
+    $('.modal :button').prop('disabled', true);
+  });
+
 }

@@ -10,8 +10,9 @@ module AskUp
   class Application < Rails::Application
 
     config.askup = ActiveSupport::OrderedOptions.new
-    config.askup.abilities = ActiveSupport::OrderedOptions.new
     config.askup.analytics = ActiveSupport::OrderedOptions.new
+    config.askup.defaults = ActiveSupport::OrderedOptions.new
+    config.askup.defaults.qset = ActiveSupport::OrderedOptions.new
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -42,9 +43,11 @@ module AskUp
       user_name: ENV['askup_mail_host_username']
     }
 
-    # if set to true, unauthorized users (i.e. those not signed in)
-    # will be able to see question lists and qset lists
-    config.askup.abilities.unauth_user_can_see_question_lists = false
+    qset_defaults = config.askup.defaults.qset
+    qset_defaults.all_questions_visible = ENV.fetch('askup_qsets_all_questions_visible', true)
+    qset_defaults.question_authors_visible = ENV.fetch('askup_qsets_question_authors_visible', true)
+    qset_defaults.questions_visible_to_unauth_user = ENV.fetch('askup_qsets_questions_visible_to_unauth_user', false)
+
     config.askup.analytics.log_file = Rails.root.join('log', "#{Rails.env}_analytics.log")
   end
 end
