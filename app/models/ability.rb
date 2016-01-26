@@ -31,6 +31,7 @@ class Ability
           (q.qset.settings(:permissions).question_authors_visible or q.user == user)
         end
         can :manage, User, :id => user.id
+        can :read, User
       end
     end
   end
