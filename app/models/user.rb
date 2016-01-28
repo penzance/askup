@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   #validates_length_of :password, :minimum => 8   
   def full_name
-    if not first_name.blank and not last_name.blank
+    if not first_name.blank? and not last_name.blank?
       first_name + " " + last_name
     end
   end
