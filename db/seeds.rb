@@ -1,3 +1,6 @@
+# Create the root Qset
+Qset.create( name: 'Root' )
+
 # Add the default admin user
 User.create(
   first_name: 'Ask',
@@ -17,6 +20,3 @@ User.create(
   role: 'contributor',
   org_id: 1
 )
-
-# Create the root Qset
-Qset.create( name: 'Root' )
