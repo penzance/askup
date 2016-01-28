@@ -1,47 +1,47 @@
-.btn-flat {
+a.btn {
+  color: white;
+}
+
+.btn-blue {
+  background-color: $blue-reg;
+  box-shadow: 0 5px 0 0 $blue-shadow;
+  &:hover {
+    background-color: $blue-hover;
+  }
+}
+
+.btn-feedback {
+  border: none;
   border-radius: 5px;
-  padding: 0.6vw 1.6vw;
-  font-size: 1.3vw;
-  text-decoration: none;
-  margin: 10px;
   color: #fff;
-  position: relative;
+  cursor: pointer;
   display: inline-block;
-  border:none;
+  font-size: 1.3vw;
+  padding: 6px 0;
+  position: relative;
+  text-decoration: none;
   transition: background 0.3s ease-in-out;
   -webkit-transition: background 0.3s ease-in-out;
   -moz-transition: background 0.3s ease-in-out;
   -ms-transition: background 0.3s ease-in-out;
   -o-transition: background 0.3s ease-in-out;
   &:active {
+    box-shadow: 0 1px 0 0;
     transform: translate(0px, 5px);
     -webkit-transform: translate(0px, 5px);
-    box-shadow: 0px 1px 0px 0px;
   }
 }
 
-.btn-blue {
-  background-color: $blue-reg;
-  box-shadow: 0px 5px 0px 0px $blue-shadow;
-  &:hover {
-    background-color: $blue-hover;
-  }
-}
-
-.btn-success {
-   text-decoration: none;
-   background-color: $green-reg;
-   border-color:transparent;
- }
-
-.btn-pink {
-  background-color: $pink;
-  box-shadow: 0px 3px 0px 0px $pink-darker;
+.btn-flat {
+  color: #fff;
+  margin: 0;
+  padding: 6px 12px;
   text-decoration: none;
-  &:hover {
-    background-color: $pink-darker;
-    text-decoration: none;
-  }
+  transition: background-color .4s linear, color .4s linear;
+  -webkit-transition: background-color .4s linear, color .4s linear;
+  -moz-transition: background-color .4s linear, color .4s linear;
+  -o-transition: background-color .4s linear, color .4s linear;
+  -ms-transition: background-color .4s linear, color .4s linear;
 }
 
 .btn-maybe {
@@ -54,17 +54,42 @@
   }
 }
 
-a.btn {
-  color: white;
+.btn-pink {
+  background-color: $pink;
+  box-shadow: 0 3px 0 0 $pink-darker;
+  text-decoration: none;
+  &:hover {
+    background-color: $pink-darker;
+    text-decoration: none;
+  }
+}
+
+.btn-success {
+  text-decoration: none;
+  background-color: $green-reg;
+  border-color:transparent;
+  &:hover {
+    background-color: $green-shadow;
+    text-decoration: none;
+  }
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.open .dropdown-toggle.btn-success {
+  color: #ffffff;
+  background-color: $green-hover;
+  text-decoration: none;
 }
 
 .btn-theme {
   color: #fff;
   background-color: #384452;
-  margin: 4px;
   padding: 6px 12px;
   margin: 0;
-  text-decoration: none; 
+  text-decoration: none;
   -webkit-transition: background-color .4s linear, color .4s linear;
   -moz-transition: background-color .4s linear, color .4s linear;
   -o-transition: background-color .4s linear, color .4s linear;
@@ -80,14 +105,3 @@ a.btn {
   color: #fff;
   background-color: #00b3fe;
 }
-
-.btn-success:hover,
-.btn-success:focus,
-.btn-success:active,
-.btn-success.active,
-.open .dropdown-toggle.btn-success {
-  color: #ffffff;
-  background-color: $green-hover;
-  text-decoration: none;
-}
-

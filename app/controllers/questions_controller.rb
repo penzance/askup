@@ -6,7 +6,6 @@ class QuestionsController < ApplicationController
   def show
     @feedback_active = !!current_user
     @new_answer = @question.answers.new
-
   end
 
   # loads the new question page, allowing user to enter a new question/answer combo in a form

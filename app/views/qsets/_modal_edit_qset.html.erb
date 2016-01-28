@@ -6,38 +6,45 @@
         <h4 class="modal-title">Edit Qset</h4>
       </div>
       <div class="modal-body">
-        <!-- todo: this can be made more rails-like -->
-        <form role="form" action="/qsets/<%= @qset.id %>" method="post">
-          <input name="_method" type="hidden" value="patch" />
-          <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+        <%= form_for @qset do |f| %>
           <div class="form-group">
-            <label for="text"> Change the name of this qset </label>
-            <input type="text" class="form-control" name="name" value="<%= @qset.name %>" />
+            <%= f.label :name, 'Change the name of this qset' %>
+            <%= f.text_field :name %>
           </div>
-          <button type="submit" class="btn btn-theme" id="edit-qset-submit" aria-label="Save qset">
-            Save
-          </button>
-          <!-- todo: just grey it out and have some popup text showing it's not destroyable -->
-          <% if @qset.is_destroyable? %>
-            <button type="button" class="btn btn-flat" id="edit-qset-delete" aria-label="Delete qset">
-              Delete
-            </button>
+          <div class="form-group">
+            <strong>Qset permissions</strong>: note that these permissions apply only to non-admin users,
+            and clicking 'Save' will change the permissions for this Qset and <strong>all of its children</strong>,
+            without checking whether any permissions values have changed.
+          </div>
+          <%= f.fields_for :permissions, @qset.settings(:permissions) do |permissions| %>
+            <div class="form-group">
+              <%= permissions.label :all_questions_visible, 'Questions are visible to all logged-in users' %>
+              <%= permissions.check_box :all_questions_visible, {}, 'true', 'false' %>
+            </div>
+            <div class="form-group">
+              <%= permissions.label :question_authors_visible, 'Questions authors are visible to all users' %>
+              <%= permissions.check_box :question_authors_visible, {}, 'true', 'false' %>
+            </div>
+            <div class="form-group">
+              <%= permissions.label :questions_visible_to_unauth_user, 'Questions are visible to unauthenticated users' %>
+              <%= permissions.check_box :questions_visible_to_unauth_user, {}, 'true', 'false' %>
+            </div>
           <% end %>
-          <button type="button" class="btn btn-flat" data-dismiss="modal" aria-label="Cancel">
-            Cancel
-          </button>
-        </form>
+          <%= f.submit 'Save', id: 'edit-qset-save', class: 'btn btn-theme', data: {disable_with: 'Saving...'} %>
+          <% if @qset.is_destroyable? %>
+            <%= f.button 'Delete', type: 'button', id:'edit-qset-delete', class: 'btn btn-flat' %>
+          <% end %>
+          <%= f.button 'Cancel', type: 'button', id: 'edit-qset-delete', class: 'btn btn-flat',
+                       data: {dismiss: 'modal'} %>
+        <% end %>
         <% if @qset.is_destroyable? %>
           <div id="delete_confirmation_form_container" style="display:none;">
-            <form role="form" action="/qsets/<%= @qset.id %>" method="post">
-              <input name="_method" type="hidden" value="delete" />
-              <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+            <%= form_for @qset, method: :delete do |f| %>
               <p> Are you sure you want to delete this qset? </p>
               <p><i> All questions in this group will be moved into the parent group. </i></p>
-              <button type="submit" class="btn btn-pink" aria-label="Confirm delete">
-                Confirm delete
-              </button>
-            </form>
+              <%= f.submit 'Confirm delete', id: 'edit-qset-confirm-delete', class: 'btn btn-pink',
+                           data: {disable_with: 'Deleting...'} %>
+            <% end %>
           </div>
         <% end %>
       </div>

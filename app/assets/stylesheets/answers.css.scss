@@ -46,14 +46,3 @@
   }
   
 }
-
-.feedback-button {
-  cursor: pointer;
-  // remove default .btn-flat padding so buttons center evenly in any container,
-  // even when the screen is small
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 0;
-  padding-right: 0;
-}
-

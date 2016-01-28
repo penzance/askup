@@ -30,9 +30,9 @@ function validateAnswer() {
 }
 
 function initUserFeedback() {
-  $('.feedback-button').unbind().click(function(ev) {
+  $('.btn-feedback').unbind().click(function(ev) {
     ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
-    var $button = $(ev.target).closest('.feedback-button');
+    var $button = $(ev.target).closest('.btn-feedback');
     var feedbackActive = $button.data('feedback-active');
     var feedbackString = $button.data('feedback-string');
     var feedbackQid = $button.data('feedback-qid');
