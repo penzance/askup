@@ -9,7 +9,9 @@
         <!-- <h4>Harvard College</h4>
         <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Student</p> -->
         <br><br><br>
-        <div class="total-points col-centered">
+        <div class="total-points col-centered" data-toggle="tooltip"
+             data-placement="bottom" data-trigger="click focus hover"
+             title="User score reflects questions authored and votes received on questions">
           <h2 class="vcenter"><%= @user.karma %></h2>
         </div>
         <br><br>
@@ -81,3 +83,9 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function(){
+    initTooltips();
+  });
+</script>
