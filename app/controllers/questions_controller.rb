@@ -13,7 +13,9 @@ class QuestionsController < ApplicationController
     @question.answers.build
     @qsets = Qset.all
     prev_cookie_id = cookies[:new_question_qset_id].to_i
-    if @qsets.map(&:id).include?(prev_cookie_id)
+    if !params[:qset].nil?
+        @question.qset_id = params[:qset]
+    elsif @qsets.map(&:id).include?(prev_cookie_id)
       @question.qset_id = prev_cookie_id
     else
       cookies.delete :new_question_qset_id
