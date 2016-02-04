@@ -1,5 +1,8 @@
 <div class="container-fluid">
   <%= render "qset_context" %>
+  <div id="generate-question-button-filter">
+  <%= render "generate_question" %>
+  </div>
   <div id="all-mine-filter-container">
     <%= render "all_mine_other_filter" %>
   </div>
@@ -8,6 +11,9 @@
       <%= render "qset_list_compressed" %>
     </div>
     <div class="col-sm-9">
+      <div id ="generate-question-button-filter-xs">
+       <%= render "generate_question" %>
+      </div>
       <div id="all-mine-filter-container-xs">
       <%= render "all_mine_other_filter" %>
       </div>
