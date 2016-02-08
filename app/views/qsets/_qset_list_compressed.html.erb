@@ -11,17 +11,17 @@
       </li>
     <% end %>
   </ul>
-   <div class="button-actions">
+  <div class="button-actions">
     <span>
-  <% if can? :create, Qset %>
-    <a class="btn btn-primary btn-sm"
-       id="new-qset"
-       data-toggle="modal"
-       data-target="#modal-new-qset">
-      New subset
-    </a>
-  <% end %>
-</span>
-</div>
+      <% if can? :create, Qset %>
+        <a class="btn btn-primary btn-sm"
+           id="new-qset"
+           data-toggle="modal"
+           data-target="#modal-new-qset">
+          New subset
+        </a>
+      <% end %>
+    </span>
+  </div>
 </div> <!-- .qset-list -->
 
