@@ -20,7 +20,7 @@
           <div style="display:none">
             <input name="utf8" type="hidden" value="✓" />
           </div>
-          <textarea class="form-control answer-text" name="answer[text]" placeholder="Type your answer here" autofocus></textarea>
+          <textarea class="form-control answer-text" name="answer[text]" placeholder="Type your answer here"></textarea>
           <div class="center btn-div">
             <input class="btn btn-theme btn-lg submit-answer"
                    name="commit"
@@ -86,6 +86,10 @@
     $('#question_display_Modal').on('show.bs.modal', function (event) {
       var $question_link = $(event.relatedTarget); // element that triggered the modal. $question_link is populated with the data from the click
       initQuestionDisplayModal($(this), $question_link);
+    })
+
+    $('#question_display_Modal').on('shown.bs.modal', function (event) {
+      $('textarea').focus();
     })
   });
 </script>
