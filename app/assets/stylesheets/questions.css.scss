@@ -18,6 +18,26 @@
 }
 // End of (All-mine-filter relocation at different screen sizes)
 
+.generate-question-button-filter {
+  margin-left: 12px;  // aligns with left side of question list
+}
+
+// (generate-question-button-filter relocation at different screen sizes)
+// On small screens (bootstrap xs) show generate-question-button-filter
+// just above the question list, since it wraps onto its own .row
+#generate-question-button-filter-xs {
+  display: none;
+}
+@media only screen and (max-width: 767px) {
+  #generate-question-button-filter-xs {
+    display: block;
+  }
+  #generate-question-button-filter {
+    display: none;
+  }
+}
+// End of (generate-question-button-filter relocation at different screen sizes)
+
 ul.qset-list-compressed {
   list-style: none;
   padding-left: 10px;
