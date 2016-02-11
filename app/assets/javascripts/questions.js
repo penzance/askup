@@ -5,6 +5,8 @@ function validateEditQuestionInput() {
 }
 
 function initQuestionFilter() {
+  var qsetId = $('#qset-show-container').data('qset-id');
+
   // recalls preferred filter option
   var filter = Cookies.get('all_mine_other_filter');
   if (filter == 'mine') { showMine() }
@@ -28,18 +30,31 @@ function initQuestionFilter() {
   });
 
   function showAll() {
-    $('.my-question').removeClass('hidden');
-    $('.other-question').removeClass('hidden');
+    var questions = ($('.my-question, .other-question').length > 0);
+    $('.my-question, .other-question').toggleClass('hidden', !questions);
+    $('.no-questions').toggleClass('hidden', questions);
+    showNoQuestionNotification('There are no questions.');
   }
 
   function showMine() {
-    $('.my-question').removeClass('hidden');
+    var questions = ($('.my-question').length > 0);
+    $('.my-question').toggleClass('hidden', !questions);
+    $('.no-questions').toggleClass('hidden', questions);
     $('.other-question').addClass('hidden');
+    showNoQuestionNotification('You have not created any questions.');
   }
 
   function showOther() {
+    var questions = ($('.other-question').length > 0);
+    $('.other-question').toggleClass('hidden', !questions);
+    $('.no-questions').toggleClass('hidden', questions);
     $('.my-question').addClass('hidden');
-    $('.other-question').removeClass('hidden');
+    showNoQuestionNotification('No other users have created any questions.');
+  }
+
+  function showNoQuestionNotification(msg) {
+    var noQuestionsNotification = msg + ' <a href="/questions/new?qset=' + qsetId + '">Create one now!</a>';
+    $('.no-questions > p').html(noQuestionsNotification);
   }
 }
 
