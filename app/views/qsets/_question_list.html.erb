@@ -1,6 +1,10 @@
 <span id="question_list">
 
 <div class="question_list">
+   <div class="box valign no-questions hidden row">
+     <p></p>
+   </div>
+
   <% @questions.each_with_index do |question, index| %>
     <% if current_user and question['user_id'] == current_user.id %>
       <div class="box valign my-question hidden row">
