@@ -48,51 +48,42 @@ function initQuestionDisplayModal($modal, $question_link) {
 }
 
 function initQuestionFilter() {
+  var noQuestionsMessage = {
+    'all': 'There are no questions.',
+    'mine': 'You have not created any questions.',
+    'other': 'No other users have created any questions.'
+  };
   var qsetId = $('#qset-show-container').data('qset-id');
 
   // recalls preferred filter option
-  var filter = Cookies.get('all_mine_other_filter');
-  if (filter == 'mine') { showMine() }
-  else if (filter == 'other') { showOther() }
-  else showAll();
+  filterBy(Cookies.get('all_mine_other_filter'));
 
   // changes to filter 1. show filtered set of questions, and 2. are tracked in a user cookie
-  $('.all-radio').click(function(){
-    Cookies.set('all_mine_other_filter', 'all', { expires: 1000 });
-    showAll();
+  $('.filter-choice').click(function(){
+    var filterType = $(this).find('input')[0].getAttribute('name');  // radio button 'name' value
+    filterBy(filterType);
+    Cookies.set('all_mine_other_filter', filterType, { expires: 1000 });
   });
 
-  $('.mine-radio').click(function(){
-    Cookies.set('all_mine_other_filter', 'mine', { expires: 1000 });
-    showMine();
-  });
-
-  $('.other-radio').click(function(){
-    Cookies.set('all_mine_other_filter', 'other', { expires: 1000 });
-    showOther();
-  });
-
-  function showAll() {
-    var questions = ($('.my-question, .other-question').length > 0);
-    $('.my-question, .other-question').toggleClass('hidden', !questions);
-    $('.no-questions').toggleClass('hidden', questions);
-    showNoQuestionNotification('There are no questions.');
+  function anyQuestions(filterType) {
+    // expecting filterType == 'all', 'mine', or 'other'
+    switch (filterType) {
+      case 'mine':
+        return ($('.my-question').length > 0);
+      case 'other':
+        return ($('.other-question').length > 0);
+      default:  // 'all' or invalid filterType
+        return ($('.my-question, .other-question').length > 0);
+    }
   }
 
-  function showMine() {
-    var questions = ($('.my-question').length > 0);
-    $('.my-question').toggleClass('hidden', !questions);
-    $('.no-questions').toggleClass('hidden', questions);
-    $('.other-question').addClass('hidden');
-    showNoQuestionNotification('You have not created any questions.');
-  }
-
-  function showOther() {
-    var questions = ($('.other-question').length > 0);
-    $('.other-question').toggleClass('hidden', !questions);
-    $('.no-questions').toggleClass('hidden', questions);
-    $('.my-question').addClass('hidden');
-    showNoQuestionNotification('No other users have created any questions.');
+  function filterBy(filterType) {
+    // expecting filterType == 'all', 'mine', or 'other'
+    var anyQuestionsToDisplay = anyQuestions(filterType);
+    if (!anyQuestionsToDisplay) showNoQuestionNotification(noQuestionsMessage[filterType]);
+    $('.no-questions').toggleClass('hidden', anyQuestionsToDisplay);
+    $('.my-question').toggleClass('hidden', filterType == 'other' || !anyQuestionsToDisplay);
+    $('.other-question').toggleClass('hidden', filterType == 'mine' || !anyQuestionsToDisplay);
   }
 
   function showNoQuestionNotification(msg) {

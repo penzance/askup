@@ -27,7 +27,7 @@ class QsetsController < ApplicationController
     end
     @qsets = @qset.children
     # a hash of qset question counts keyed by qset id
-    @question_counts = @qsets.map do |s|
+    @subset_question_counts = @qsets.map do |s|
       count = 0
       s.self_and_descendants.each do |q|
         scope = q.questions
