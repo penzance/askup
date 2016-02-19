@@ -19,8 +19,8 @@
         <%= qset.name %>
       <% end %>
       <span class="pull-right badge">
-        <%= @question_counts[qset.id] %>
-        <%= 'question'.pluralize(@question_counts[qset.id]) %>
+        <%= @subset_question_counts[qset.id] %>
+        <%= 'question'.pluralize(@subset_question_counts[qset.id]) %>
       </span>
     </div>
   <% end %>

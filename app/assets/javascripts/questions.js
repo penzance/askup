@@ -4,66 +4,6 @@ function validateEditQuestionInput() {
   $('.submit-question').attr('disabled', !isValid);
 }
 
-function initQuestionFilter() {
-  // recalls preferred filter option
-  var filter = Cookies.get('all_mine_other_filter');
-  if (filter == 'mine') { showMine() }
-  else if (filter == 'other') { showOther() }
-  else showAll();
-
-  // changes to filter 1. show filtered set of questions, and 2. are tracked in a user cookie
-  $('.all-radio').click(function(){
-    Cookies.set('all_mine_other_filter', 'all', { expires: 1000 });
-    showAll();
-  });
-
-  $('.mine-radio').click(function(){
-    Cookies.set('all_mine_other_filter', 'mine', { expires: 1000 });
-    showMine();
-  });
-
-  $('.other-radio').click(function(){
-    Cookies.set('all_mine_other_filter', 'other', { expires: 1000 });
-    showOther();
-  });
-
-  function showAll() {
-    $('.my-question').removeClass('hidden');
-    $('.other-question').removeClass('hidden');
-  }
-
-  function showMine() {
-    $('.my-question').removeClass('hidden');
-    $('.other-question').addClass('hidden');
-  }
-
-  function showOther() {
-    $('.my-question').addClass('hidden');
-    $('.other-question').removeClass('hidden');
-  }
-}
-
-function initQuestionDisplayModal($modal, $question_link) {
-  // Creates the initial view of the modal.
-
-  // The submit answer button is shown as well as an empty text input box.
-  $('.submit-answer').show();
-
-  // The answer is initially hidden and so is the response + alert divs.
-  $('.answer-text').val('');
-  $('.response, .answers, .feedback-alert').hide();
-
-  initAnswerButton();
-  initUserFeedback();
-
-  // Setting up the response buttons to have the correct q_id to send to the analytics.log and to also trigger the right feedback form
-  $('#respond-yes, #respond-no, #respond-maybe').data('feedback-qid', $question_link.data('qid'));
-
-  // Populates the modal with the data received when the modal was clicked
-  $modal.find('.modal-title').text($question_link.data('question'));
-  $modal.find('.first-answer').text($question_link.data('answer'));
-}
-
 function initSocialModal($modal, $social_link) {
   var title = $social_link.data('website');
   var text_question = $social_link.data('question');

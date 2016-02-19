@@ -10,9 +10,15 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable
 
-  #validates_length_of :password, :minimum => 8   
+  validates_presence_of :first_name, :last_name, :org_id
+
+  # :email does not have to be validated beacuse Devise defaults by
+  # checking email and password presence
+
   def full_name
-    first_name + " " + last_name
+    if not first_name.blank? and not last_name.blank?
+      first_name + " " + last_name
+    end
   end
 
   def role?(role)
