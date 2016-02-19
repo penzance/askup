@@ -1,6 +1,5 @@
 <% if can? :see_all_questions, @qset %>
-  <div class="row">
-    <span class="btn-group pull-right all-mine-other-filter" data-toggle="buttons">
+    <div id="all-mine-other-group" class="btn-group all-mine-other-filter" data-toggle="buttons">
       <label class="btn btn-primary all-radio <% if @filter_all %>active<% end %>">
         <input type="radio" name="all" <% if @filter_all %>checked<% end %>> All
       </label>
@@ -10,6 +9,5 @@
       <label class="btn btn-primary other-radio <% if @filter_other %>active<% end %>">
         <input type="radio" name="other" <% if @filter_other %>checked<% end %>> Other
       </label>
-    </span>
-  </div>
+    </div>
 <% end %>
