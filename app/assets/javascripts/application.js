@@ -19,8 +19,4 @@
 //= require questions
 //= require qsets
 //= require global
-//= require jquery.easing.min
-//= require jquery.scrollTo
-//= require wow.min
-//= require custom
 //= require votes
