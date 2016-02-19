@@ -9,7 +9,8 @@ class Qset < ActiveRecord::Base
     s.key :permissions, :defaults => {
         :all_questions_visible => qset_defaults.all_questions_visible,
         :question_authors_visible => qset_defaults.question_authors_visible,
-        :questions_visible_to_unauth_user => qset_defaults.questions_visible_to_unauth_user
+        :questions_visible_to_unauth_user => qset_defaults.questions_visible_to_unauth_user,
+        :toggle_qsets => qset_defaults.toggle_qsets
     }
   end
 
@@ -46,6 +47,7 @@ class Qset < ActiveRecord::Base
       my_perms.all_questions_visible = parent_perms.all_questions_visible
       my_perms.question_authors_visible = parent_perms.question_authors_visible
       my_perms.questions_visible_to_unauth_user = parent_perms.questions_visible_to_unauth_user
+      my_perms.toggle_qsets = parent_perms.toggle_qsets
       self.save!
     end
   end

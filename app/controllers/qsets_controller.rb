@@ -13,30 +13,31 @@ class QsetsController < ApplicationController
   # handles the request to show all questions in a qset
   def show
     @feedback_active = !!current_user
-    # sorts by default by net votes; secondary sort by create date
-    @questions = Question.includes(:answers).where(qset_id: @qset.id).plusminus_tally.order(created_at: :desc)
-    if can? :see_all_questions, @qset
-      @filter_mine = true if cookies[:all_mine_other_filter] == 'mine'
-      @filter_other = true if cookies[:all_mine_other_filter] == 'other'
-      @filter_all = true unless @filter_mine or @filter_other
-    else
-      # show only the current user's questions
-      cookies[:all_mine_other_filter] = 'mine'
-      @filter_mine = true
-      @questions = @questions.where(user_id: current_user)
-    end
     @qsets = @qset.children
-    # a hash of qset question counts keyed by qset id
-    @subset_question_counts = @qsets.map do |s|
-      count = 0
-      s.self_and_descendants.each do |q|
-        scope = q.questions
-        scope = scope.where(user_id: current_user) if cannot? :see_all_questions, q
-        count += scope.count
+      # a hash of qset question counts keyed by qset id
+      @subset_question_counts = @qsets.map do |s|
+        count = 0
+        s.self_and_descendants.each do |q|
+          scope = q.questions
+          scope = scope.where(user_id: current_user) if cannot? :see_all_questions, q
+          count += scope.count
+        end
+        [s.id, count]
+      end.to_h
+    if @qset.settings(:permissions).toggle_qsets == 'questions'
+      # sorts by default by net votes; secondary sort by create date
+      @questions = Question.includes(:answers).where(qset_id: @qset.id).plusminus_tally.order(created_at: :desc)
+      if can? :see_all_questions, @qset
+        @filter_mine = true if cookies[:all_mine_other_filter] == 'mine'
+        @filter_other = true if cookies[:all_mine_other_filter] == 'other'
+        @filter_all = true unless @filter_mine or @filter_other
+      else
+        # show only the current user's questions
+        cookies[:all_mine_other_filter] = 'mine'
+        @filter_mine = true
+        @questions = @questions.where(user_id: current_user)
       end
-      [s.id, count]
-    end.to_h
-    if @qset.root?
+    elsif @qset.settings(:permissions).toggle_qsets == 'qset'
       render :organizationpage
     end
   end

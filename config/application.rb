@@ -47,6 +47,7 @@ module AskUp
     qset_defaults.all_questions_visible = ENV.fetch('askup_qsets_all_questions_visible', true)
     qset_defaults.question_authors_visible = ENV.fetch('askup_qsets_question_authors_visible', true)
     qset_defaults.questions_visible_to_unauth_user = ENV.fetch('askup_qsets_questions_visible_to_unauth_user', false)
+    qset_defaults.toggle_qsets = ENV.fetch('askup_qsets_toggle_qsets', 'questions')
 
     config.askup.analytics.log_file = Rails.root.join('log', "#{Rails.env}_analytics.log")
   end
