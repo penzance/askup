@@ -12,7 +12,6 @@ class QsetsController < ApplicationController
 
   # handles the request to show all questions in a qset
   def show
-    @feedback_active = !!current_user
     @qsets = @qset.children
       # a hash of qset question counts keyed by qset id
       @subset_question_counts = @qsets.map do |s|
@@ -24,7 +23,9 @@ class QsetsController < ApplicationController
         end
         [s.id, count]
       end.to_h
-    if @qset.settings(:permissions).toggle_qsets == 'questions'
+    # by default show question page
+    if @qset.settings(:permissions).qset_type != 'subset' 
+      @feedback_active = !!current_user
       # sorts by default by net votes; secondary sort by create date
       @questions = Question.includes(:answers).where(qset_id: @qset.id).plusminus_tally.order(created_at: :desc)
       if can? :see_all_questions, @qset
@@ -37,7 +38,7 @@ class QsetsController < ApplicationController
         @filter_mine = true
         @questions = @questions.where(user_id: current_user)
       end
-    elsif @qset.settings(:permissions).toggle_qsets == 'qset'
+    else
       render :organizationpage
     end
   end
