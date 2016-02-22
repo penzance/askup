@@ -24,7 +24,7 @@ class QsetsController < ApplicationController
         [s.id, count]
       end.to_h
     # by default show question page
-    if @qset.settings(:permissions).qset_type != 'subset' 
+    if @qset.settings(:permissions).qset_type != 'subsets'
       @feedback_active = !!current_user
       # sorts by default by net votes; secondary sort by create date
       @questions = Question.includes(:answers).where(qset_id: @qset.id).plusminus_tally.order(created_at: :desc)
