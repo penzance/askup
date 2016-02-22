@@ -11,10 +11,11 @@
   }
 }
 
-@media only screen and (max-width: 450px) {
+
+@media only screen and (max-width: 767px) {
   
   #all-mine-other-group {
-    float: left !important;
+    float: none !important;
     text-align: center;
   }
 
@@ -39,6 +40,7 @@
 #generate-question-offset {
   padding: 20px 0px 10px 10px;
 }
+
 
 ul.qset-list-compressed {
   list-style: none;
