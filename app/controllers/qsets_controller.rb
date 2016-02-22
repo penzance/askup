@@ -62,7 +62,8 @@ class QsetsController < ApplicationController
     update_settings_params =  params.require(:qset).require(:permissions).permit(
         :all_questions_visible,
         :question_authors_visible,
-        :questions_visible_to_unauth_user
+        :questions_visible_to_unauth_user,
+        :qset_type
     )
     @qset.update_permissions update_settings_params, true
 
