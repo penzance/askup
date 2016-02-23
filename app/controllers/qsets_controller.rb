@@ -10,7 +10,7 @@ class QsetsController < ApplicationController
     end
   end
 
-  # handles the request to show all questions in a qset
+  # handles the request to show different views depending on qset type
   def show
     @qsets = @qset.children
       # a hash of qset question counts keyed by qset id
@@ -23,7 +23,7 @@ class QsetsController < ApplicationController
         end
         [s.id, count]
       end.to_h
-    # by default show question page
+    # by default show mixed (questions + subsets) page
     if @qset.settings(:permissions).qset_type != 'subsets'
       @feedback_active = !!current_user
       # sorts by default by net votes; secondary sort by create date
@@ -38,8 +38,12 @@ class QsetsController < ApplicationController
         @filter_mine = true
         @questions = @questions.where(user_id: current_user)
       end
+      # display question-only view
+      if @qset.settings(:permissions).qset_type == 'questions'
+        render :show_questions
+      end
     else
-      render :organizationpage
+      render :show_subsets
     end
   end
 

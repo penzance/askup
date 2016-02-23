@@ -1,0 +1,35 @@
+<div class="container-fluid" id="qset-show-container" data-qset-id="<%= @qset.id %>">
+  <%= render "qset_context" %>
+  <div id="generate-question-button-filter">
+    <%= render "generate_question" %>
+  </div>
+  <div id="all-mine-filter-container">
+    <%= render "all_mine_other_filter" %>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div id ="generate-question-button-filter-xs">
+        <%= render "generate_question" %>
+      </div>
+      <div id="all-mine-filter-container-xs">
+        <%= render "all_mine_other_filter" %>
+      </div>
+      <%= render "question_list" %>
+    </div>
+  </div>
+</div>
+
+<%= render "modal_question" %>
+<%= render "modal_social" %>
+<% if can? :manage, Qset %>
+  <%= render "modal_edit_qset" %>
+  <%= render "modal_new_qset" %>
+<% end %>
+
+<script>
+  $(document).ready(function(){
+    initQsets();
+    initQuestionFilter();
+    initVote();
+  });
+</script>
