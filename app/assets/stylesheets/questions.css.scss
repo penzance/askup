@@ -1,35 +1,4 @@
-// On small screens (bootstrap xs) show-small-screen and replace with show-large-screen otherwise
-#show-small-screen {
-  display: none;
-}
-@media only screen and (max-width: 767px) {
-  #show-small-screen {
-    display: block;
-  }
-  #show-large-screen {
-    display: none;
-  }
-}
-
-
-@media only screen and (max-width: 767px) {
-  
-  #all-mine-other-group {
-    float: none !important;
-    text-align: center;
-  }
-
-  #generate-question-offset {
-    width: 100%;
-
-    a {
-      display: block;
-    }
-  }
-
-}
-
-#all-mine-other-offset {
+#all-mine-other-container {
   padding: 20px 25px 10px 0px;
 }
 
@@ -37,27 +6,22 @@
   float: right;
 }
 
-#generate-question-offset {
-  padding: 20px 0px 10px 10px;
-}
-
-
-ul.qset-list-compressed {
-  list-style: none;
-  padding-left: 10px;
-}
-
-.question-page-title{
-  display: inline-block;
+@media only screen and (max-width: 767px) {
+  #all-mine-other-group {
+    float: none !important; /* !important attribute is necessary to override the initial float right attribute*/
+    text-align: center;
+  }
+  #generate-question-group {
+    float: none !important;
+  }
 }
 
 .btn-div{
   margin-top:1.2em;
 }
 
-.reveal_btn {
-  float:right;
-  text-align: right;
+.col-sm-6 {
+  width: 50%; /* override base responsive css that removes this when width < 768px */
 }
 
 .full-width-container {
@@ -71,29 +35,21 @@ ul.qset-list-compressed {
   }
 }
 
+#generate-question-group{
+  float: left;
+}
+
+#generate-question-container {
+ padding: 20px 0px 10px 25px;
+}
+
+
 .newquestion, .editquestion {
   textarea {
     height: 110px;
   }
   .box {
     min-height: 80%;
-  }
-}
-
-.title-no-margin {
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 0em;
-}
-
-.shortcut-button-link {
-  padding: 0;
-}
-
-.shortcut-button-glyphicon {
-  color:black;
-  &:hover {
-    color: gray;
   }
 }
 
@@ -107,22 +63,16 @@ ul.qset-list-compressed {
   color: #FFFFFF;
 }
 
-.underlined-link {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
+// Question Voting
 .question-voting {
   float: left;
   margin: 12px 10px 0px 10px;
 }
-
 .downvote-button, .upvote-button {
   color: black;
   cursor: pointer;
   display: block;
 }
-
 .net-votes {
   float: left;
   margin: 0px 10px 0px 10px;
@@ -152,6 +102,51 @@ ul.qset-list-compressed {
   cursor:default;  // cursor won't change to caret/text insert over badges
 }
 
-.col-sm-6 {
-  width: 50%; /* override base responsive css that removes this when width < 768px */
+.question-page-title{
+  display: inline-block;
+}
+
+.reveal_btn {
+  float:right;
+  text-align: right;
+}
+
+.shortcut-button-link {
+  padding: 0;
+}
+
+.shortcut-button-glyphicon {
+  color:black;
+  &:hover {
+    color: gray;
+  }
+}
+
+// On small screens (bootstrap xs) show-small-screen and replace with show-large-screen otherwise
+.show-small-screen {
+  display: none;
+}
+@media only screen and (max-width: 767px) {
+  .show-small-screen {
+    display: block;
+  }
+  .show-large-screen {
+    display: none;
+  }
+}
+
+.title-no-margin {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 0em;
+}
+
+ul.qset-list-compressed {
+  list-style: none;
+  padding-left: 10px;
+}
+
+.underlined-link {
+  cursor: pointer;
+  text-decoration: underline;
 }
