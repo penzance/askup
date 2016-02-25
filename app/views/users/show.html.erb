@@ -13,7 +13,7 @@
           <!--<h2 class="vcenter"><%= @user.karma %></h2>-->
         </div>
         <br><br>
-        <p><%= @user.questions.group(:qset_id).length %> question sets</p>
+        <p><%= @user.questions.group(:qset_id).count('questions.id').length %> question sets</p>
         <p><%= pluralize(@user.questions.count, 'question') %></p>
       </div>
     </div>
