@@ -1,9 +1,4 @@
 function initQsets() {
-  $('#qsets').on('change', function(event) {
-    var $selectedOption = $(this.options[this.selectedIndex]);
-    window.open($selectedOption.data('qset-url'), '_self');
-  });
-
   $('.modal').on('shown.bs.modal', function (event) {
     $(this).find('input:text:visible:first').focus().select();
   });

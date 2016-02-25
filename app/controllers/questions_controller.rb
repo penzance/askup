@@ -37,6 +37,10 @@ class QuestionsController < ApplicationController
     redirect_to new_question_path, notice: msg
   end
 
+  def edit
+    flash[:from] = params[:from] if params.has_key? :from
+  end
+
   # handles the request to update an existing question (called from the edit question page)
   # Note: when question or answer is modified (updated_at changes), the other one doesn't necessarily get modified.
   #   If we wanted to change both every time either changed, we could use PUT instead of PATCH. However, we might
@@ -45,7 +49,8 @@ class QuestionsController < ApplicationController
   def update
     @question.user_id = current_user.id
     @question.update(question_params)
-    redirect_to qset_path(@question.qset), notice: "Your question has been updated!"
+    redirect_path = flash.to_hash.fetch('from', qset_path(@question.qset))
+    redirect_to redirect_path, notice: "Your question has been updated!"
   end
 
   def destroy
