@@ -8,7 +8,7 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <div id ="generate-question-button-filter-xs">
+      <div id="generate-question-button-filter-xs">
         <%= render "generate_question" %>
       </div>
       <div id="all-mine-filter-container-xs">
@@ -20,7 +20,6 @@
 </div>
 
 <%= render "modal_question" %>
-<%= render "modal_social" %>
 <% if can? :manage, Qset %>
   <%= render "modal_edit_qset" %>
   <%= render "modal_new_qset" %>
