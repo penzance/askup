@@ -1,22 +1,15 @@
 <div class="container-fluid" id="qset-show-container" data-qset-id="<%= @qset.id %>">
-  <%= render "qset_context" %>
-  <div id="generate-question-button-filter">
-    <%= render "generate_question" %>
+  <div class="show-large-screen">
+    <%= render "question_page_header_large_screen" %>
   </div>
-  <div id="all-mine-filter-container">
-    <%= render "all_mine_other_filter" %>
+  <div class="show-small-screen">
+    <%= render "question_page_header_small_screen" %>
   </div>
   <div class="row">
     <div class="col-sm-3">
       <%= render "qset_list_compressed" %>
     </div>
     <div class="col-sm-9">
-      <div id ="generate-question-button-filter-xs">
-        <%= render "generate_question" %>
-      </div>
-      <div id="all-mine-filter-container-xs">
-        <%= render "all_mine_other_filter" %>
-      </div>
       <%= render "question_list" %>
     </div>
   </div>
