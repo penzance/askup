@@ -1,5 +1,7 @@
 <div class="container">
-  <%= render "qset_context" %>
+  <div class="row">
+    <%= render "qset_context" %>
+  </div>
   <%= render "qset_list" %>
   <% if can? :manage, Qset %>
     <%= render "modal_edit_qset" %>
