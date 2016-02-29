@@ -33,8 +33,14 @@
               <!-- Creates the edit and delete options for each question -->
               <% if can? :manage, question %>
 
-                <%= link_to edit_question_path(question), class:'btn shortcut-button-link' do%>
-                  <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
+                <% if @view_options and @view_options.fetch(:question_list, {}).fetch(:edit_question_from, false) %>
+                  <%= link_to edit_question_path(question, from: @view_options[:question_list][:edit_question_from]), class:'btn shortcut-button-link' do %>
+                    <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
+                  <% end %>
+                <% else %>
+                  <%= link_to edit_question_path(question), class:'btn shortcut-button-link' do %>
+                    <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
+                  <% end %>
                 <% end %>
 
                 <%= link_to question_path(question), method: :delete, class:'btn shortcut-button-link' do%>
@@ -50,10 +56,14 @@
     <div class="col-xs-3">
       <div class="row">
         <div class="col-md-5">
-          <% if can? :see_question_author, question %>
-            <%= link_to_if (can? :read, User), question.user.full_name, user_path(question.user.id) %>
-          <% else %>
-            Another user
+          <% if @view_options and @view_options.fetch(:question_list, {}).fetch(:show_qset_instead_of_author, false) %>
+            <%= link_to question.qset.name, question.qset %>
+          <% else %>  <%# typical display of question list on qset page %>
+             <% if can? :see_question_author, question %>
+              <%= link_to_if (can? :read, User), question.user.full_name, user_path(question.user.id) %>
+            <% else %>
+              Another user
+            <% end %>
           <% end %>
         </div>
         <div class="col-md-7">
