@@ -1,0 +1,6 @@
+<span id="breadcrumbs">
+  <% for qset in @qset.ancestors.reverse %>
+   <%= link_to h(qset.name), qset %> &gt;
+  <% end %>
+  <%= @qset.name %>
+</span>
