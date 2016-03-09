@@ -50,8 +50,10 @@ class QsetsController < ApplicationController
   # handles the request to save a new qset
   # (called from the new qset modal)
   def create
-    create_group_params = params.permit(:name, :parent_id)
+    create_group_params = params.permit(:name, :parent_id, :qset_type)
     @qset = Qset.new(create_group_params)
+    # TODO: if user chose a qset_type, save that as @qset's qset_type; otherwise, default
+    # 'questions'
     @qset.save
     redirect_to qset_path(@qset), notice: "Qset '#{@qset.name}' created."
   end
