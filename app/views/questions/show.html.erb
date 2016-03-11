@@ -19,7 +19,7 @@
   <div class="prettyform answers" style="display:none">
     <div class="box center">
       <h3>Answer:</h3>
-      <div class="net-votes"><p id="@question-<%= @question.id %>-net-votes"><%= @question.plusminus %></p><br></div>
+      <div class="net-votes"><p id="question-<%= @question.id %>-net-votes"><%= @question.plusminus %></p><br></div>
             <div class="question-voting">
               <div class="glyphicon glyphicon-triangle-top upvote-button" data-vote="upvote" data-vote-qid="<%= @question.id %>"></div>
               <div class="glyphicon glyphicon-triangle-bottom downvote-button" data-vote="downvote" data-vote-qid="<%= @question.id %>"></div>
@@ -65,11 +65,6 @@
 $(document).ready(function(e) {
   initAnswerButton();
   initUserFeedback();
-
-  // TODO: add an event handler here so the voting only shows up once they've hit submit (like onclick etc.)
-  // TODO: figure out why this doesn't update immediately like it does on the qsets page to show new vote count 
-  // (it does update in the database and knows not to let you vote again)
-  // is it because another script needs to be called? analogous to initqsets or something, w/ an on.change function?
   initVote();
 });
 </script>
