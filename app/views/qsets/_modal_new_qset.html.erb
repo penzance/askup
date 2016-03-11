@@ -17,14 +17,14 @@
             <%= f.fields_for :permissions, @qset.settings(:permissions) do |permissions| %>
               <div class="form-group">
                 <%= permissions.label :qset_type, 'Qset type:' %>
-                <%= permissions.label :qset_type_mixed, 'Mixed', :class => 'qset-type-padding' %>
-                <%= permissions.radio_button :qset_type, 'mixed' %>
                 <%= permissions.label :qset_type_questions, 'Questions', :class => 'qset-type-padding' %>
                 <%= permissions.radio_button :qset_type, 'questions' %>
                 <%= permissions.label :qset_type_subsets, 'Subsets', :class => 'qset-type-padding' %>
                 <%= permissions.radio_button :qset_type, 'subsets' %>
+                <%= permissions.label :qset_type_mixed, 'Mixed', :class => 'qset-type-padding' %>
+                <%= permissions.radio_button :qset_type, 'mixed' %>
               </div>
-          <% end %>
+            <% end %>
           <% end %>
           <div class="form-group">
             <label for="text"> This qset will be created under the parent group: </label>
