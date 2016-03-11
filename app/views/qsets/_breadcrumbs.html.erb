@@ -1,6 +1,10 @@
-<span id="breadcrumbs">
-  <% for qset in @qset.ancestors.reverse %>
-   <%= link_to h(qset.name), qset %> &gt;
+<h5 class = "center"
+<span id="breadcrumbs" class = "center">
+  <% if not @qset.root? %>
+    <% for qset in @qset.ancestors.reverse %>
+      <%= link_to h(qset.name), qset, style: "color:#00b3fe" %> &gt;
+    <% end %>
+    <%= @qset.name %>
   <% end %>
-  <%= @qset.name %>
 </span>
+</h5>
