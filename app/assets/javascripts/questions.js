@@ -4,7 +4,6 @@ function validateEditQuestionInput() {
   $('.submit-question').attr('disabled', !isValid);
 }
 
-
 function initSocialModal($modal, $social_link) {
   var title = $social_link.data('website');
   var text_question = $social_link.data('question');

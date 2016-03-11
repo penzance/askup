@@ -46,7 +46,6 @@ function initQuestionDisplayModal($modal, $question_link) {
   // Populates the modal with the data received when the modal was clicked
   $modal.find('.modal-title').text($question_link.data('question'));
   $modal.find('.first-answer').text($question_link.data('answer'));
-
 }
 
 function initQuestionFilter() {
