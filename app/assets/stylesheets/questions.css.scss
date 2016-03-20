@@ -86,6 +86,7 @@
 
 .question-content {
   cursor: default;
+  margin: 0px 0px 15px 0px;
   float: left;
   font-size: 24px;
   width: 100%;
@@ -126,11 +127,20 @@
 .show-small-screen {
   display: none;
 }
+.show-small-question {
+  display:none; 
+}
 @media only screen and (max-width: 767px) {
   .show-small-screen {
     display: block;
   }
   .show-large-screen {
+    display: none;
+  }
+  .show-small-question {
+    display: block;
+  }
+  .show-large-question {
     display: none;
   }
 }
