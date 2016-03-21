@@ -11,56 +11,60 @@
     <% else %>
       <div class="box valign other-question hidden row">
     <% end %>
-    <div class="row">
-      <div class = "col-xs-12 question-content center">
-        <%= link_to question_path(question) do%>
-          <%= question.text %>
-        <% end %>
-      </div>
-      <div class="col-xs-6">
-        <div class="net-votes"><p id="question-<%= question.id %>-net-votes"><%= question.plusminus %></p><br></div>
-        <div class="question-voting">
-          <div class="glyphicon glyphicon-triangle-top upvote-button" data-vote="upvote" data-vote-qid="<%= question.id %>"></div>
-          <div class="glyphicon glyphicon-triangle-bottom downvote-button" data-vote="downvote" data-vote-qid="<%= question.id %>"></div>
+    <div class="col-xs-12">
+      <div class="row ">
+        <div class="col-xs-12 question-content center">
+          <%= link_to question_path(question) do%>
+            <%= question.text %>
+          <% end %>
         </div>
       </div>
-      <div class="col-xs-2">
-        <div class="question-actions">
-          <span class="actions pull-right">
-            <!-- Creates the edit and delete options for each question -->
-            <% if can? :manage, question %>
-
-              <%= link_to edit_question_path(question), class:'btn shortcut-button-link' do%>
-                <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
-              <% end %>
-
-              <%= link_to question_path(question), method: :delete, class:'btn shortcut-button-link' do%>
-                <span class="glyphicon glyphicon-trash shortcut-button-glyphicon"></span>
-              <% end %>
-
-            <% end %>
-          </span>
-        </div>
-      </div> <!-- .col-xs-2 -->
-      <div class="col-xs-4">
-        <div class="row">
-          <div class="col-md-5">
-            <% if can? :see_question_author, question %>
-              <%= link_to_if (can? :read, User), question.user.full_name, user_path(question.user.id) %>
-            <% else %>
-              Another user
-            <% end %>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="net-votes"><p id="question-<%= question.id %>-net-votes"><%= question.plusminus %></p><br></div>
+          <div class="question-voting">
+            <div class="glyphicon glyphicon-triangle-top upvote-button" data-vote="upvote" data-vote-qid="<%= question.id %>"></div>
+            <div class="glyphicon glyphicon-triangle-bottom downvote-button" data-vote="downvote" data-vote-qid="<%= question.id %>"></div>
           </div>
-          <div class="col-md-7">
-              <a data-toggle="modal"
-                href="#"
-                data-target="#question_display_Modal"
-                data-answer="<%= question.answers[0].text %>"
-                data-qid="<%= question.id %>"
-                data-question="<%= question.text %>"
-                class="btn btn-primary">
-                  Quiz Me
-              </a>
+        </div>
+        <div class="col-xs-2">
+          <div class="question-actions">
+            <span class="actions pull-right">
+              <!-- Creates the edit and delete options for each question -->
+              <% if can? :manage, question %>
+
+                <%= link_to edit_question_path(question), class:'btn shortcut-button-link' do%>
+                  <span class="glyphicon glyphicon-edit shortcut-button-glyphicon"></span>
+                <% end %>
+
+                <%= link_to question_path(question), method: :delete, class:'btn shortcut-button-link' do%>
+                  <span class="glyphicon glyphicon-trash shortcut-button-glyphicon"></span>
+                <% end %>
+
+              <% end %>
+            </span>
+          </div>
+        </div> <!-- .col-xs-2 -->
+        <div class="col-xs-4">
+          <div class="row">
+            <div class="col-md-5">
+              <% if can? :see_question_author, question %>
+                <%= link_to_if (can? :read, User), question.user.full_name, user_path(question.user.id) %>
+              <% else %>
+                Another user
+              <% end %>
+            </div>
+            <div class="col-md-7">
+                <a data-toggle="modal"
+                  href="#"
+                  data-target="#question_display_Modal"
+                  data-answer="<%= question.answers[0].text %>"
+                  data-qid="<%= question.id %>"
+                  data-question="<%= question.text %>"
+                  class="btn btn-primary">
+                    Quiz Me
+                </a>
+            </div>
           </div>
         </div>
       </div>
