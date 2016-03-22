@@ -1,8 +1,8 @@
-<h5 class = "center">
-  <span id="breadcrumbs" class = "center">
+<h5 class="center">
+  <span id="breadcrumbs" class="center">
     <% if not @qset.root? %>
       <% for qset in @qset.ancestors.reverse %>
-        <%= link_to h(qset.name), qset, style: "color:#00b3fe" %> &gt;
+        <%= link_to h(qset.name), qset, class: "btn-breadcrumb" %> &gt;
       <% end %>
       <%= @qset.name %>
     <% end %>
