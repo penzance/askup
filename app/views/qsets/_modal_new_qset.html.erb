@@ -15,9 +15,12 @@
           </div>
           <div class="form-group">
             <label for="text">Qset Type: </label>
-            Questions<input type="radio" name="qset_type" value="questions" checked>
-            Subsets<input type="radio" name="qset_type" value="subsets">
-            Mixed<input type="radio" name="qset_type" value="mixed">
+            <label class="qset-type-padding" for="questions">Questions</label>
+            <input type="radio" id="questions" name="qset_type" value="questions" checked>
+            <label class="qset-type-padding" for="subsets">Subsets</label>
+            <input type="radio" id="subsets" name="qset_type" value="subsets">
+            <label class="qset-type-padding" for="mixed">Mixed</label>
+            <input type="radio" id="mixed" name="qset_type" value="mixed">
           </div>
           <div class="form-group">
             <label for="text"> This qset will be created under the parent group: </label>
