@@ -39,6 +39,19 @@ class Qset < ActiveRecord::Base
     self.to_json
   end
 
+  def self.contains_questions(qset_id)
+    qsets_containing_questions = []
+    Qset.find(qset_id).descendants.each do |a| 
+      # filter out qsets that only contain subsets
+      if a.settings(:permissions).qset_type != 'subsets'
+        qsets_containing_questions << a
+      end
+    end
+
+    return qsets_containing_questions
+  end
+
+
   private
   def inherit_permissions
     unless self.root?
