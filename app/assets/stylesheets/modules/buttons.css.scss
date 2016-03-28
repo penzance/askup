@@ -11,6 +11,13 @@ a.btn {
   }
 }
 
+.btn-breadcrumb{
+  color: $blue-reg;
+  &:hover {
+    color: $blue-hover;
+  }
+}
+
 .btn-feedback {
   border: none;
   border-radius: 5px;

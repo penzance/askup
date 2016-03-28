@@ -2,6 +2,11 @@
   <div class="row">
     <%= render "qset_context" %>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <%= render "breadcrumbs" %>
+    </div>
+  </div>
   <%= render "qset_list" %>
   <% if can? :manage, Qset %>
     <%= render "modal_edit_qset" %>
