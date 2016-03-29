@@ -23,7 +23,7 @@ class QsetsController < ApplicationController
         end
         [s.id, count]
       end.to_h
-    # by default show mixed (questions + subsets) page
+    # check if view needs to render questions
     if @qset.settings(:permissions).qset_type != 'subsets'
       @feedback_active = !!current_user
       # sorts by default by net votes; secondary sort by create date
@@ -38,7 +38,7 @@ class QsetsController < ApplicationController
         @filter_mine = true
         @questions = @questions.where(user_id: current_user)
       end
-      # display question-only view
+      # display questions view
       if @qset.settings(:permissions).qset_type == 'questions'
         render :show_questions
       end
@@ -52,8 +52,11 @@ class QsetsController < ApplicationController
   def create
     create_group_params = params.permit(:name, :parent_id)
     @qset = Qset.new(create_group_params)
+    qset_type = params.permit(:qset_type)
+    # set qset type from new qset modal
+    @qset.settings(:permissions).qset_type = qset_type[:qset_type]
     @qset.save
-    redirect_to qset_path(@qset), notice: "Qset '#{@qset.name}' created."
+    redirect_to qset_path(@qset.id), notice: "Qset '#{@qset.name}' created."
   end
 
   # handles the request to update an existing qset
