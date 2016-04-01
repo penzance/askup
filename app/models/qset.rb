@@ -39,6 +39,19 @@ class Qset < ActiveRecord::Base
     self.to_json
   end
 
+  def question_count_descendants_helper
+    self.children.each_with_object(self.children.to_a) {|child, arr|
+      if child.settings(:permissions).qset_type == ('mixed' || 'subsets')
+        arr.concat child.question_count_descendants_helper
+      end
+
+    }.uniq
+  end
+
+  def question_count_descendants
+    [self] + question_count_descendants_helper
+  end
+
   private
   def inherit_permissions
     unless self.root?
@@ -65,4 +78,7 @@ class Qset < ActiveRecord::Base
     orphan_questions = Question.where(qset_id: self.id)
     orphan_questions.update_all(qset_id: self.parent.id)
   end
+
+  
+  
 end
