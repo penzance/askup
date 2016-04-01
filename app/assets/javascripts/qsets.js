@@ -10,6 +10,9 @@ function initQsets() {
 
   $('#modal-new-qset').on('show.bs.modal', function (event) {
     $(this).find('input[name="name"]').val('');
+    $(this).find('input[value="questions"]').prop('checked', true);
+    $(this).find('input[value="subsets"]').prop('checked', false);
+    $(this).find('input[value="mixed"]').prop('checked', false);
   });
 
   $('#modal-edit-qset').on('show.bs.modal', function (event) {
