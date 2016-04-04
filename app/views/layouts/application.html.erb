@@ -52,7 +52,7 @@
 
 <% if flash[:notice] %>
   <div class="alert alert-success center">
-    <%= flash[:notice] %> &nbsp;
+    <%= flash[:notice].html_safe %> &nbsp;
     <a href="#" class="close-alert grow"><i class="fa fa-times-circle"></i></a>
   </div>
   <% end %>

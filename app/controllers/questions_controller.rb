@@ -33,7 +33,7 @@ class QuestionsController < ApplicationController
     # (so their karma/score improves as they create questions)
     current_user.vote_for(question)
 
-    msg = "Your question has been submitted! Enter another if you would like."
+    msg = "Your question has been submitted! View it #{view_context.link_to("here", qset_path(question_params[:qset_id]))}"
     redirect_to new_question_path, notice: msg
   end
 
