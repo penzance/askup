@@ -60,7 +60,6 @@ class Qset < ActiveRecord::Base
       my_perms.all_questions_visible = parent_perms.all_questions_visible
       my_perms.question_authors_visible = parent_perms.question_authors_visible
       my_perms.questions_visible_to_unauth_user = parent_perms.questions_visible_to_unauth_user
-      my_perms.qset_type = parent_perms.qset_type
       self.save!
     end
   end
