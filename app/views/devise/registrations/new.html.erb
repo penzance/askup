@@ -21,7 +21,12 @@
 
         <div class="styled-select">
           <%= f.label :org_id, 'Organization' %>
-          <%= f.collection_select(:org_id, Qset.where(parent_id: nil).order(:name), :id, :name) %>
+          <% if not params.nil? and params[:org_id].present? and not Qset.where(parent_id: nil, id:params[:org_id]).blank? %>
+              <%= f.collection_select(:org_id, Qset.where(id:params[:org_id]), :id, :name) %>
+          <% else %>
+              <%= f.collection_select(:org_id, Qset.where(parent_id: nil).order(:name), :id, :name) %>
+          <% end %>
+
         </div>
 
         <div class="center">

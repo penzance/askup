@@ -29,4 +29,15 @@ function initEditQuestion() {
   $('#question_qset_id').change(function() {
     Cookies.set('new_question_qset_id', this.value, { expires: 1000 });
   });
+
+  hasQuestionsIsSelectable();
+
+}
+
+function hasQuestionsIsSelectable() {
+  $('.qset-selectable').click(function() {
+    $('.qset-display').text($(this).find('.qset-name-modal').text());
+    $('.qset-id-input').val($(this).find('.qset-id-modal').text());
+    $('#myModal').modal('hide');
+  });
 }

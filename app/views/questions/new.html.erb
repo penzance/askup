@@ -7,8 +7,43 @@
           <br>
             <%= form_for(@question) do |f| %>
               <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>
-              <%= f.label :qset_id, 'Qset' %>
-              <%= f.collection_select(:qset_id, Qset.contains_questions(current_user.org), :id, :name) %>
+              <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Choose Qset
+              </button>
+              <span class="qset-display"></span>
+              <!-- hidden input field to pass in qset_id into params on submit -->
+              <input type="text" name="question[qset_id]" class="qset-id-input">
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Choose Qset</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class='list-group'>
+                        <% @qsets.each_with_index do |qset, index| %>
+                          <% if qset.settings(:permissions).qset_type == 'subsets' %>
+                            <a href="#" class="list-group-item disabled">
+                              <p class="qset-name-modal"><%= qset.name %></p>
+                            </a>
+                          <% else %>
+                            <a href="#" class="list-group-item qset-selectable">
+                              <p class="qset-name-modal"><%= qset.name %></p>
+                              <p class="qset-id-modal"><%= qset.id %></p>
+                            </a>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Select</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <%= f.fields_for :answers do |a| %>
                 <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
               <% end %>
