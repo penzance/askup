@@ -34,6 +34,7 @@ function initEditQuestion() {
 
 }
 
+// Closes modal and displays qset name next to Choose Qset button when user chooses a selectable qset from modal
 function hasQuestionsIsSelectable() {
   $('.qset-selectable').click(function() {
     $('.qset-display').text($(this).find('.qset-name-modal').text());

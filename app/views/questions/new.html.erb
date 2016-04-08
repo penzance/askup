@@ -22,6 +22,7 @@
                       <h4 class="modal-title" id="myModalLabel">Choose Qset</h4>
                     </div>
                     <div class="modal-body">
+                      <!-- displays qsets in hierarchical order -->
                       <div class="list-group">
                         <% @qsets.walk_tree do |qset, level| %>
                           <% if level > 0 %>

@@ -40,6 +40,7 @@ class Qset < ActiveRecord::Base
     self.to_json
   end
 
+  # returns set of qsets that are not strictly subsets
   def self.contains_questions(qset_id)
     qsets_containing_questions = []
     Qset.find(qset_id).descendants.each do |a| 
