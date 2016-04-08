@@ -22,17 +22,21 @@
                       <h4 class="modal-title" id="myModalLabel">Choose Qset</h4>
                     </div>
                     <div class="modal-body">
-                      <div class='list-group'>
-                        <% @qsets.each_with_index do |qset, index| %>
-                          <% if qset.settings(:permissions).qset_type == 'subsets' %>
-                            <a href="#" class="list-group-item disabled">
-                              <p class="qset-name-modal"><%= qset.name %></p>
-                            </a>
-                          <% else %>
-                            <a href="#" class="list-group-item qset-selectable">
-                              <p class="qset-name-modal"><%= qset.name %></p>
-                              <p class="qset-id-modal"><%= qset.id %></p>
-                            </a>
+                      <div class="list-group">
+                        <% @qsets.walk_tree do |qset, level| %>
+                          <% if level > 0 %>
+                            <% level_viz = '--' * (level - 1) %>
+                            <% if qset.settings(:permissions).qset_type == 'subsets' %>
+                              <a href="#" class="list-group-item disabled">
+                                <p class="qset-name-modal"><%= level_viz.html_safe %><%= qset.name %></p>
+                              </a>
+                            <% else %>
+                              <a href="#" class="list-group-item qset-selectable">
+
+                                <p class="qset-name-modal"><%= level_viz.html_safe %><%= qset.name %></p>
+                                <p class="qset-id-modal"><%= qset.id %></p>
+                              </a>
+                            <% end %>
                           <% end %>
                         <% end %>
                       </div>
