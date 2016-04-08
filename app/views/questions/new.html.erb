@@ -25,7 +25,7 @@
                       <div class="list-group">
                         <% @qsets.walk_tree do |qset, level| %>
                           <% if level > 0 %>
-                            <% level_viz = '&nbsp;&nbsp;&nbsp;' * (level - 1) %>
+                            <% level_viz = '&nbsp;&nbsp;&nbsp;&nbsp;' * (level - 1) %>
                             <% if qset.settings(:permissions).qset_type == 'subsets' %>
                               <a href="#" class="list-group-item disabled">
                                 <%= level_viz.html_safe %>
