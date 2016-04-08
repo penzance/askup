@@ -25,16 +25,27 @@
                       <div class="list-group">
                         <% @qsets.walk_tree do |qset, level| %>
                           <% if level > 0 %>
-                            <% level_viz = '--' * (level - 1) %>
+                            <% level_viz = '&nbsp;&nbsp;&nbsp;' * (level - 1) %>
                             <% if qset.settings(:permissions).qset_type == 'subsets' %>
                               <a href="#" class="list-group-item disabled">
-                                <p class="qset-name-modal"><%= level_viz.html_safe %><%= qset.name %></p>
+                                <%= level_viz.html_safe %>
+                                <span class="glyphicon glyphicon-folder-close"></span>
+                                <p class="qset-name-modal inline-p">
+                                  <%= '&nbsp;&nbsp;'.html_safe %>
+                                  <%= qset.name %>
+                                </p>
                               </a>
                             <% else %>
                               <a href="#" class="list-group-item qset-selectable">
-
-                                <p class="qset-name-modal"><%= level_viz.html_safe %><%= qset.name %></p>
-                                <p class="qset-id-modal"><%= qset.id %></p>
+                                <%= level_viz.html_safe %>
+                                <span class="glyphicon glyphicon-list-alt"></span>
+                                <p class="qset-name-modal inline-p">
+                                  <%= '&nbsp;&nbsp;'.html_safe %>
+                                  <%= qset.name %>
+                                </p>
+                                <p class="qset-id-modal">
+                                  <%= qset.id %>
+                                </p>
                               </a>
                             <% end %>
                           <% end %>
