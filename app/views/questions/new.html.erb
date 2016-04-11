@@ -10,9 +10,17 @@
               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                 Choose Qset
               </button>
-              <span class="qset-display"></span>
+              <span class="qset-display">
+                <% if !params[:qset].nil? %>
+                  <%= @qsets.find(params[:qset]).name %>
+                <% end %>
+              </span>
               <!-- hidden input field to pass in qset_id into params on submit -->
-              <input type="text" name="question[qset_id]" id="qset_id_input">
+              <% if !params[:qset].nil? %>
+                <input type="text" name="question[qset_id]" id="qset_id_input" value="<%= @qsets.find(params[:qset]).id %>">
+              <% else %>
+                <input type="text" name="question[qset_id]" id="qset_id_input">
+              <% end %>
               <!-- Modal -->
               <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
