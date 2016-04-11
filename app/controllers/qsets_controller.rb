@@ -10,7 +10,6 @@ class QsetsController < ApplicationController
     end
   end
 
-
   # handles the request to show different views depending on qset type
   def show
     @qsets = @qset.children

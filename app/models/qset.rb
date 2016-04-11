@@ -44,7 +44,6 @@ class Qset < ActiveRecord::Base
       if child.settings(:permissions).qset_type == ('mixed' || 'subsets')
         arr.concat child.question_count_descendants_helper
       end
-
     }.uniq
   end
 
@@ -78,7 +77,4 @@ class Qset < ActiveRecord::Base
     orphan_questions = Question.where(qset_id: self.id)
     orphan_questions.update_all(qset_id: self.parent.id)
   end
-
-  
-  
 end
