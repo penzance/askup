@@ -10,6 +10,19 @@ class QsetsController < ApplicationController
     end
   end
 
+  def qset_json
+    # params.permit(:filter)
+    answers_json_data = []
+    @raw_questions = Question.includes(:answers).where(qset_id: @qset.id)
+    @raw_questions.each do |raw_question|
+      raw_question_id = raw_question.id
+      raw_answer = Answer.where(question_id: raw_question_id)
+      answers_json_data.push(raw_answer)
+    end
+
+    render :json => {:questions => @raw_questions, :answers => answers_json_data}
+  end
+
   # handles the request to show different views depending on qset type
   def show
     @qsets = @qset.children

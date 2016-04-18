@@ -20,8 +20,6 @@ function handleUserFeedback(feedbackActive, feedbackString, feedbackQid) {
     $('.feedback-alert').removeClass('alert-danger alert-success').addClass('alert-maybe');
     $('.feedback-alert-text').text("Sort-of");
   }
-  $('.feedback-alert').slideDown();
-  $('.response').hide("slow");
 }
 
 // disables/enables submit button depending on if there is text in the answer box
@@ -35,8 +33,24 @@ function initUserFeedback() {
     var $button = $(ev.target).closest('.btn-feedback');
     var feedbackActive = $button.data('feedback-active');
     var feedbackString = $button.data('feedback-string');
-    var feedbackQid = $button.data('feedback-qid');
+    var feedbackQid = quizQuestions.questions[quizAllIndex].id;
     handleUserFeedback(feedbackActive, feedbackString, feedbackQid);
+
+    if (quizQuestions.questions.length > (quizAllIndex + 1)){
+      quizAllIndex = quizAllIndex +1;
+      $('.feedback-alert').slideDown( 1000, function() {
+        initQuestionDisplayModalForQuizAll();
+      });
+      $('.feedback-alert').slideUp(800);
+    }
+    else {
+      $('.feedback-alert').slideDown(1000);
+      $('.feedback-alert').slideUp('slow', function(){
+        $('#question_display_Modal').modal('hide');
+      });
+      quizAllIndex = 0;
+    }
+
   });
 }
 

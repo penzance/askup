@@ -2,6 +2,12 @@
 <div class="modal fade" id="question_display_Modal" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+      <!-- Alert box appears after the user answers whether or not they got the question right  -->
+      <div class="alert feedback-alert center">
+        <div class="feedback-alert-text" id="feedback-dropdown"> </div>
+        <!-- &nbsp; -->
+        <!-- <a class="close-alert grow"><i class="fa fa-times-circle"></i></a> -->
+      </div>
       <div class="modal-header">
         <!-- Close button -->
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -68,13 +74,6 @@
           </div>
         </div>
         <br>
-
-        <!-- Alert box appears after the user answers whether or not they got the question right  -->
-        <div class="alert feedback-alert center">
-          <div class="feedback-alert-text"> </div>
-          &nbsp;
-          <a class="close-alert grow"><i class="fa fa-times-circle"></i></a>
-        </div>
       </div>
     </div>
   </div>
@@ -84,8 +83,7 @@
   $(document).ready(function(){
     // Creates the javascript for the Question modal that allows it to be populated with the data received upon clicking the modal link
     $('#question_display_Modal').on('show.bs.modal', function (event) {
-      var $question_link = $(event.relatedTarget); // element that triggered the modal. $question_link is populated with the data from the click
-      initQuestionDisplayModal($(this), $question_link);
+      initDataForQuizAll();
     })
 
     $('#question_display_Modal').on('shown.bs.modal', function (event) {
