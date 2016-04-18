@@ -1,6 +1,6 @@
 function validateEditQuestionInput() {
   // disables/enables submit button if user chooses a qset and there is text in question and answer boxes
-  var isValid = $('#question_text').val().trim() && $('#question_answers_attributes_0_text').val().trim() && $('#qset_id_input').val().trim();
+  var isValid = $('#question_text').val().trim() && $('#question_answers_attributes_0_text').val().trim() && $('#qset-id-input').val().trim();
   $('.submit-question').attr('disabled', !isValid);
 }
 
@@ -26,7 +26,7 @@ function initEditQuestion() {
   $('#question_text, #question_answers_attributes_0_text').keyup(validateEditQuestionInput);
 
   // track qset user created a question in
-  $('#qset_id_input').change(function() {
+  $('#qset-id-input').change(function() {
     Cookies.set('new_question_qset_id', this.value, { expires: 1000 });
   });
 
@@ -38,7 +38,7 @@ function initEditQuestion() {
 function selectQsetForNewQuestion() {
   $('.qset-selectable').click(function() {
     $('.qset-display').text($(this).find('.qset-name-modal').text());
-    $('#qset_id_input').val($(this).find('.qset-name-modal').data("qset-id"));
+    $('#qset-id-input').val($(this).find('.qset-name-modal').data("qset-id"));
     $('#modal-launch').modal('hide');
 
     validateEditQuestionInput();

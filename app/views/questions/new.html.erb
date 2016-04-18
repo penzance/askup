@@ -20,9 +20,9 @@
                 </span>
                 <!-- hidden input field to pass in qset_id into params on submit -->
                 <% if !params[:qset].nil? %>
-                  <input type="text" name="question[qset_id]" id="qset_id_input" class="hidden" value="<%= @qsets.find(params[:qset]).id %>">
+                  <input type="text" name="question[qset_id]" id="qset-id-input" class="hidden" value="<%= @qsets.find(params[:qset]).id %>">
                 <% else %>
-                  <input type="text" name="question[qset_id]" id="qset_id_input" class="hidden">
+                  <input type="text" name="question[qset_id]" id="qset-id-input" class="hidden">
                 <% end %>
               </div>
               <!-- Modal -->
