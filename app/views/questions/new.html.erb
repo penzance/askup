@@ -13,10 +13,13 @@
                 <button type="button" class="btn btn-primary btn-theme btn-generate-q" data-toggle="modal" data-target="#modal-launch">
                   Choose Qset
                 </button>
-                <span class="qset-display">
-                  <% if !params[:qset].nil? %>
+                <% if !params[:qset].nil? %>
+                  <span class="qset-display qset-chosen">
                     <%= @qsets.find(params[:qset]).name %>
-                  <% end %>
+                  </span>
+                <% else %>
+                  <span class="qset-display no-qset-chosen">Qset Name</span>
+                <% end %>
                 </span>
                 <!-- hidden input field to pass in qset_id into params on submit -->
                 <% if !params[:qset].nil? %>
