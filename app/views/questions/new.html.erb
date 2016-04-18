@@ -17,57 +17,12 @@
               </span>
               <!-- hidden input field to pass in qset_id into params on submit -->
               <% if !params[:qset].nil? %>
-                <input type="text" name="question[qset_id]" id="qset_id_input" class="hide-display" value="<%= @qsets.find(params[:qset]).id %>">
+                <input type="text" name="question[qset_id]" id="qset_id_input" class="hidden" value="<%= @qsets.find(params[:qset]).id %>">
               <% else %>
-                <input type="text" name="question[qset_id]" id="qset_id_input" class="hide-display">
+                <input type="text" name="question[qset_id]" id="qset_id_input" class="hidden">
               <% end %>
               <!-- Modal -->
-              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="myModalLabel">Choose Qset</h4>
-                    </div>
-                    <div class="modal-body">
-                      <!-- displays qsets in hierarchical order -->
-                      <div class="list-group">
-                        <% @qsets.walk_tree do |qset, level| %>
-                          <% if level > 0 %>
-                            <% level_viz = '&nbsp;&nbsp;&nbsp;&nbsp;' * (level - 1) %>
-                            <% if qset.settings(:permissions).qset_type == 'subsets' %>
-                              <a href="#" class="list-group-item disabled">
-                                <%= level_viz.html_safe %>
-                                <span class="glyphicon glyphicon-folder-close"></span>
-                                <p class="qset-name-modal inline-p">
-                                  <%= '&nbsp;&nbsp;'.html_safe %>
-                                  <%= qset.name %>
-                                </p>
-                              </a>
-                            <% else %>
-                              <a href="#" class="list-group-item qset-selectable">
-                                <%= level_viz.html_safe %>
-                                <span class="glyphicon glyphicon-list-alt"></span>
-                                <p class="qset-name-modal inline-p">
-                                  <%= '&nbsp;&nbsp;'.html_safe %>
-                                  <%= qset.name %>
-                                </p>
-                                <p class="hide-display">
-                                  <%= qset.id %>
-                                </p>
-                              </a>
-                            <% end %>
-                          <% end %>
-                        <% end %>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Select</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <%= render(:partial => "new_modal", :locals => {:qsets => @qsets}) %>
               <%= f.fields_for :answers do |a| %>
                 <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
               <% end %>

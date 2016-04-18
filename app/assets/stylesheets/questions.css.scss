@@ -33,10 +33,6 @@
   margin-top: 0px;
 }
 
-.qset-name-modal {
-  margin: 0;
-}
-
 @media (min-width: 992px) {
   .full-width-container {
     margin-top: 60px;
@@ -109,6 +105,11 @@
 
 .qset-list {
   cursor:default;  // cursor won't change to caret/text insert over badges
+}
+
+.qset-name-modal {
+  margin: 0;
+  display: inline;
 }
 
 .question-page-title{
