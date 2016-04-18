@@ -1,16 +1,18 @@
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modal-launch" tabindex="-1" role="dialog" aria-labelledby="modal-launch-title">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Choose Qset</h4>
+        <h4 class="modal-title" id="modal-launch-title">Choose Qset</h4>
       </div>
       <div class="modal-body">
         <!-- displays qsets in hierarchical order -->
         <div class="list-group">
           <% qsets.walk_tree do |qset, level| %>
+            <!-- don't display root qset  -->
             <% if level > 0 %>
               <% level_viz = '&nbsp;&nbsp;&nbsp;&nbsp;' * (level - 1) %>
+              <!-- display disabled subset qsets -->
               <% if qset.settings(:permissions).qset_type == 'subsets' %>
                 <a href="#" class="list-group-item disabled">
                   <%= level_viz.html_safe %>
@@ -20,6 +22,7 @@
                     <%= qset.name %>
                   </p>
                 </a>
+              <!-- display selectable question/mixed qsets -->
               <% else %>
                 <a href="#" class="list-group-item qset-selectable">
                   <%= level_viz.html_safe %>

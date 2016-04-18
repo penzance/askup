@@ -7,7 +7,7 @@
           <br>
             <%= form_for(@question) do |f| %>
               <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>
-              <button type="button" class="btn btn-primary btn-theme btn-generate-q" data-toggle="modal" data-target="#myModal">
+              <button type="button" class="btn btn-primary btn-theme btn-generate-q" data-toggle="modal" data-target="#modal-launch">
                 Choose Qset
               </button>
               <span class="qset-display">
