@@ -1,5 +1,5 @@
 function validateEditQuestionInput() {
-  // disables/enables submit button depending on if there is text in the question and answer boxes
+  // disables/enables submit button if user chooses a qset and there is text in question and answer boxes
   var isValid = $('#question_text').val().trim() && $('#question_answers_attributes_0_text').val().trim() && $('#qset_id_input').val().trim();
   $('.submit-question').attr('disabled', !isValid);
 }

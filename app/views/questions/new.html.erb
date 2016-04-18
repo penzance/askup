@@ -6,28 +6,34 @@
           <h2 class="title-no-margin center">New Question</h2>
           <br>
             <%= form_for(@question) do |f| %>
-              <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>
-              <button type="button" class="btn btn-primary btn-theme btn-generate-q" data-toggle="modal" data-target="#modal-launch">
-                Choose Qset
-              </button>
-              <span class="qset-display">
+              <div class="form-group">
+                <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>
+              </div>
+              <div class="form-group">
+                <button type="button" class="btn btn-primary btn-theme btn-generate-q" data-toggle="modal" data-target="#modal-launch">
+                  Choose Qset
+                </button>
+                <span class="qset-display">
+                  <% if !params[:qset].nil? %>
+                    <%= @qsets.find(params[:qset]).name %>
+                  <% end %>
+                </span>
+                <!-- hidden input field to pass in qset_id into params on submit -->
                 <% if !params[:qset].nil? %>
-                  <%= @qsets.find(params[:qset]).name %>
+                  <input type="text" name="question[qset_id]" id="qset_id_input" class="hidden" value="<%= @qsets.find(params[:qset]).id %>">
+                <% else %>
+                  <input type="text" name="question[qset_id]" id="qset_id_input" class="hidden">
                 <% end %>
-              </span>
-              <!-- hidden input field to pass in qset_id into params on submit -->
-              <% if !params[:qset].nil? %>
-                <input type="text" name="question[qset_id]" id="qset_id_input" class="hidden" value="<%= @qsets.find(params[:qset]).id %>">
-              <% else %>
-                <input type="text" name="question[qset_id]" id="qset_id_input" class="hidden">
-              <% end %>
+              </div>
               <!-- Modal -->
               <%= render(:partial => "new_modal", :locals => {:qsets => @qsets}) %>
               <%= f.fields_for :answers do |a| %>
                 <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
               <% end %>
-              <div class="center btn-div">
-                <%= f.submit "Submit question", class: 'btn btn-theme btn-lg submit-question' %>
+              <div class="form-group">
+                <div class="center btn-div">
+                  <%= f.submit "Submit question", class: 'btn btn-theme btn-lg submit-question' %>
+                </div>
               </div>
             <%end%>
         </div>
