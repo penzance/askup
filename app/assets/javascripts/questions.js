@@ -30,12 +30,12 @@ function initEditQuestion() {
     Cookies.set('new_question_qset_id', this.value, { expires: 1000 });
   });
 
-  hasQuestionsIsSelectable();
+  selectQsetForNewQuestion();
 
 }
 
 // Closes modal, displays qset name next to Choose Qset button, and populates hidden qset-id input
-function hasQuestionsIsSelectable() {
+function selectQsetForNewQuestion() {
   $('.qset-selectable').click(function() {
     $('.qset-display').text($(this).find('.qset-name-modal').text());
     $('#qset_id_input').val($(this).find('.qset-name-modal').data("qset-id"));
