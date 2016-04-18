@@ -13,8 +13,11 @@
   </div>
 <% end %>
 <div class="qset-list">
+  <div class="box valign no-qsets hidden row">
+    <p></p>
+  </div>
   <% @qsets.each_with_index do |qset, index| %>
-    <div class="box">
+    <div class="box qset">
       <%= link_to(qset) do %>
         <%= qset.name %>
       <% end %>

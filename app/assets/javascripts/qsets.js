@@ -94,3 +94,11 @@ function initQuestionFilter() {
     $('.no-questions > p').html(noQuestionsNotification);
   }
 }
+
+function showNoSubsetNotification() {
+  if ($('.qset').length == 0) {
+    $('.no-qsets').removeClass("hidden");
+    var noSubsetsNotification = 'There are no subsets. ' + '<a href="#" data-toggle="modal" data-target="#modal-new-qset">Create one now!</a>';
+    $('.no-qsets > p').html(noSubsetsNotification);
+  }
+}
