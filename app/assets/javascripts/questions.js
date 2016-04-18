@@ -38,7 +38,7 @@ function initEditQuestion() {
 function hasQuestionsIsSelectable() {
   $('.qset-selectable').click(function() {
     $('.qset-display').text($(this).find('.qset-name-modal').text());
-    $('#qset_id_input').val($(this).find('.qset-id-modal').text());
+    $('#qset_id_input').val($(this).find('.qset-name-modal').data("qset-id"));
     $('#modal-launch').modal('hide');
 
     validateEditQuestionInput();

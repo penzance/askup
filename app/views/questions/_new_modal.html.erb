@@ -27,12 +27,9 @@
                 <a href="#" class="list-group-item qset-selectable">
                   <%= level_viz.html_safe %>
                   <span class="glyphicon glyphicon-list-alt"></span>
-                  <p class="qset-name-modal">
+                  <p class="qset-name-modal" data-qset-id = "<%= qset.id %>">
                     <%= '&nbsp;&nbsp;'.html_safe %>
                     <%= qset.name %>
-                  </p>
-                  <p class="hidden">
-                    <%= qset.id %>
                   </p>
                 </a>
               <% end %>
