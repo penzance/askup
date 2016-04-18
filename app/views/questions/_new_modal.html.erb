@@ -1,0 +1,46 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Choose Qset</h4>
+      </div>
+      <div class="modal-body">
+        <!-- displays qsets in hierarchical order -->
+        <div class="list-group">
+          <% qsets.walk_tree do |qset, level| %>
+            <% if level > 0 %>
+              <% level_viz = '&nbsp;&nbsp;&nbsp;&nbsp;' * (level - 1) %>
+              <% if qset.settings(:permissions).qset_type == 'subsets' %>
+                <a href="#" class="list-group-item disabled">
+                  <%= level_viz.html_safe %>
+                  <span class="glyphicon glyphicon-folder-close"></span>
+                  <p class="qset-name-modal">
+                    <%= '&nbsp;&nbsp;'.html_safe %>
+                    <%= qset.name %>
+                  </p>
+                </a>
+              <% else %>
+                <a href="#" class="list-group-item qset-selectable">
+                  <%= level_viz.html_safe %>
+                  <span class="glyphicon glyphicon-list-alt"></span>
+                  <p class="qset-name-modal">
+                    <%= '&nbsp;&nbsp;'.html_safe %>
+                    <%= qset.name %>
+                  </p>
+                  <p class="hidden">
+                    <%= qset.id %>
+                  </p>
+                </a>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Select</button>
+      </div>
+    </div>
+  </div>
+</div>
