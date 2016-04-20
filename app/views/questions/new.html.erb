@@ -5,15 +5,23 @@
         <div class="box">
           <h2 class="title-no-margin center">New Question</h2>
           <br>
-            <%= form_for(@question) do |f| %>
-              <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>
-              <%= f.label :qset_id, 'Qset' %>
-              <%= f.collection_select(:qset_id, Qset.find(current_user.org).descendants, :id, :name) %>
+            <%= form_for @question do |f| %>
+              <div class="form-group">
+                <%= f.text_field :text, placeholder: 'Question', class: 'form-control', autofocus: true %>
+              </div>
+              <div class="form-group">
+                <%= f.label :qset_id, 'Qset', {class: 'control-label'} %>
+                <%= f.collection_select(:qset_id, Qset.find(current_user.org).descendants, :id, :name, {}, {class: 'form-control'}) %>
+              </div>
               <%= f.fields_for :answers do |a| %>
-                <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
+                <div class="form-group">
+                  <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
+                </div>
               <% end %>
-              <div class="center btn-div">
-                <%= f.submit "Submit question", class: 'btn btn-theme btn-lg submit-question' %>
+              <div class="form-group">
+                <div class="center btn-div">
+                  <%= f.submit "Submit question", class: 'btn btn-theme btn-lg submit-question' %>
+                </div>
               </div>
             <%end%>
         </div>

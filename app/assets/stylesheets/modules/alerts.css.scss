@@ -7,8 +7,12 @@
     cursor: pointer;
   }
   a:hover {
-    color: white;
+    color: black;
     
+  }
+  a:enabled {
+    font-weight: bold;
+    text-decoration: underline;
   }
 }
 

@@ -1,6 +1,9 @@
 class QuestionsController < ApplicationController
   load_and_authorize_resource
 
+  before_filter -> { flash.now[:notice] = flash[:notice].html_safe if flash[:html_safe] && flash[:notice] }
+
+
   # loads the page showing details for a single question so that a user
   #   can review the answer and specify whether he/she knew the answer
   def show
@@ -33,8 +36,8 @@ class QuestionsController < ApplicationController
     # (so their karma/score improves as they create questions)
     current_user.vote_for(question)
 
-    msg = "Your question has been submitted! Enter another if you would like."
-    redirect_to new_question_path, notice: msg
+    msg = %Q[Your question has been submitted! View it #{view_context.link_to("here", qset_path(question_params[:qset_id]))}].html_safe
+    redirect_to new_question_path, notice: msg, flash: { html_safe: true }
   end
 
   # handles the request to update an existing question (called from the edit question page)
