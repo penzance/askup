@@ -114,6 +114,7 @@ function initQuestionFilter() {
     // expecting filterType == 'all', 'mine', or 'other'
     var anyQuestionsToDisplay = anyQuestions(filterType);
     if (!anyQuestionsToDisplay) showNoQuestionNotification(noQuestionsMessage[filterType]);
+    $('#quizAllButtonID').attr('disabled', !anyQuestionsToDisplay);
     $('.no-questions').toggleClass('hidden', anyQuestionsToDisplay);
     $('.my-question').toggleClass('hidden', filterType == 'other' || !anyQuestionsToDisplay);
     $('.other-question').toggleClass('hidden', filterType == 'mine' || !anyQuestionsToDisplay);
@@ -126,7 +127,7 @@ function initQuestionFilter() {
 }
 
 function questionJSON(qsetid) {
-  $.getJSON("/qsets/" + qsetid + "/qset_json", function(data) {
+  $.getJSON("/qsets/" + qsetid + "/qset_json?", {filter: Cookies.get('all_mine_other_filter')}, function(data) {
     quizQuestions = data;
     initQuestionDisplayModalForQuizAll();
     // Setting up the response buttons to have the correct q_id to send to the analytics.log and to also trigger the right feedback form

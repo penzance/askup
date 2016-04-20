@@ -11,15 +11,32 @@ class QsetsController < ApplicationController
   end
 
   def qset_json
-    # params.permit(:filter)
+    params.permit(:filter)
+    filter = params[:filter]
     answers_json_data = []
-    @raw_questions = Question.includes(:answers).where(qset_id: @qset.id)
-    @raw_questions.each do |raw_question|
-      raw_question_id = raw_question.id
-      raw_answer = Answer.where(question_id: raw_question_id)
-      answers_json_data.push(raw_answer)
+    $questionCount = 0
+    if filter == 'other'
+      @raw_questions = Question.includes(:answers).where(qset_id: @qset.id).where.not(user_id: current_user)
+      @raw_questions.each do |raw_question|
+        raw_question_id = raw_question.id
+        raw_answer = Answer.where(question_id: raw_question_id)
+        answers_json_data.push(raw_answer)
+      end
+    elsif filter =='mine'
+      @raw_questions = Question.includes(:answers).where(qset_id: @qset.id, user_id: current_user)
+      @raw_questions.each do |raw_question|
+        raw_question_id = raw_question.id
+        raw_answer = Answer.where(question_id: raw_question_id)
+        answers_json_data.push(raw_answer)
+      end
+    else
+      @raw_questions = Question.includes(:answers).where(qset_id: @qset.id)
+      @raw_questions.each do |raw_question|
+        raw_question_id = raw_question.id
+        raw_answer = Answer.where(question_id: raw_question_id)
+        answers_json_data.push(raw_answer)
+      end
     end
-
     render :json => {:questions => @raw_questions, :answers => answers_json_data}
   end
 
