@@ -37,8 +37,8 @@ function initUserFeedback() {
     handleUserFeedback(feedbackActive, feedbackString, feedbackQid);
 
     if (quizQuestions.questions.length > (quizAllIndex + 1)){
-      quizAllIndex = quizAllIndex +1;
-      $('.feedback-alert').slideDown( 1000, function() {
+      quizAllIndex = quizAllIndex + 1;
+      $('.feedback-alert').slideDown(1000, function() {
         initQuestionDisplayModalForQuizAll();
       });
       $('.feedback-alert').slideUp(800);

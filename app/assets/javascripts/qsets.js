@@ -36,27 +36,6 @@ function initQsets() {
   });
 }
 
-// function initQuestionDisplayModal($modal, $question_link) {
-//   // Creates the initial view of the modal.
-
-//   // The submit answer button is shown as well as an empty text input box.
-//   $('.submit-answer').show();
-
-//   // The answer is initially hidden and so is the response + alert divs.
-//   $('.answer-text').val('');
-//   $('.response, .answers, .feedback-alert').hide();
-
-//   initAnswerButton();
-//   initUserFeedback();
-
-//   // Setting up the response buttons to have the correct q_id to send to the analytics.log and to also trigger the right feedback form
-//   $('#respond-yes, #respond-no, #respond-maybe').data('feedback-qid', $question_link.data('qid'));
-
-//   // Populates the modal with the data received when the modal was clicked
-//   $modal.find('.modal-title').text($question_link.data('question'));
-//   $modal.find('.first-answer').text($question_link.data('answer'));
-// }
-
 function initQuestionDisplayModalForQuizAll() {
   // Creates the initial view of the modal.
   var $modal = $('#question_display_Modal');
@@ -73,7 +52,6 @@ function initQuestionDisplayModalForQuizAll() {
 
   $modal.find('.modal-title').text(quizQuestions.questions[quizAllIndex].text);
   $modal.find('.first-answer').text(quizQuestions.answers[quizAllIndex][0].text);
-
 }
 
 function initDataForQuizAll() {
@@ -81,7 +59,6 @@ function initDataForQuizAll() {
   var qset_id = $('#qset-show-container').data('qset-id');
   questionJSON(qset_id);
 }
-
 
 function initQuestionFilter() {
   var noQuestionsMessage = {
@@ -133,8 +110,5 @@ function questionJSON(qsetid) {
   $.getJSON("/qsets/" + qsetid + "/qset_json?", {filter: Cookies.get('all_mine_other_filter')}, function(data) {
     quizQuestions = data;
     initQuestionDisplayModalForQuizAll();
-    // Setting up the response buttons to have the correct q_id to send to the analytics.log and to also trigger the right feedback form
-    // $('#respond-yes, #respond-no, #respond-maybe').data('feedback-qid', $question_link.data('qid'));
-
   });
 }
