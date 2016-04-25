@@ -16,10 +16,12 @@ class QsetsController < ApplicationController
       # a hash of qset question counts keyed by qset id
       @subset_question_counts = @qsets.map do |s|
         count = 0
-        s.self_and_descendants.each do |q|
-          scope = q.questions
-          scope = scope.where(user_id: current_user) if cannot? :see_all_questions, q
-          count += scope.count
+        s.question_count_descendants.each do |q|
+          if q.settings(:permissions).qset_type != 'subsets'
+            scope = q.questions
+            scope = scope.where(user_id: current_user) if cannot? :see_all_questions, q
+            count += scope.count
+          end
         end
         [s.id, count]
       end.to_h
