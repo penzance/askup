@@ -13,16 +13,22 @@
   </div>
 <% end %>
 <div class="qset-list">
-  <% @qsets.each_with_index do |qset, index| %>
-    <div class="box">
-      <%= link_to(qset) do %>
-        <%= qset.name %>
-      <% end %>
-      <span class="pull-right badge">
-        <%= @subset_question_counts[qset.id] %>
-        <%= 'question'.pluralize(@subset_question_counts[qset.id]) %>
-      </span>
+  <% if @qsets.length == 0 %>
+    <div class="box valign row">
+      <p>There are no subsets. <a href="#" data-toggle="modal" data-target="#modal-new-qset">Create one now!</a></p>
     </div>
+  <% else %>
+    <% @qsets.each_with_index do |qset, index| %>
+      <div class="box qset">
+        <%= link_to(qset) do %>
+          <%= qset.name %>
+        <% end %>
+        <span class="pull-right badge">
+          <%= @subset_question_counts[qset.id] %>
+          <%= 'question'.pluralize(@subset_question_counts[qset.id]) %>
+        </span>
+      </div>
+    <% end %>
   <% end %>
 </div> <!-- .qset-list -->
 
