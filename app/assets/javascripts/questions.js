@@ -25,12 +25,11 @@ function initEditQuestion() {
   // check for valid input each time the user presses a key in the #question_text form field
   $('#question_text, #question_answers_attributes_0_text').keyup(validateEditQuestionInput);
 
-  // track qset user created a question in
+  selectQsetForNewQuestion();
+
   $('#qset-id-input').change(function() {
     Cookies.set('new_question_qset_id', this.value, { expires: 1000 });
   });
-
-  selectQsetForNewQuestion();
 
 }
 
@@ -39,9 +38,10 @@ function selectQsetForNewQuestion() {
   $('.qset-selectable').click(function() {
     $('.qset-display').text($(this).find('.qset-name-modal').data("qset-name"));
     $('.qset-display').removeClass("no-qset-chosen");
-    $('#qset-id-input').val($(this).find('.qset-name-modal').data("qset-id"));
+    $('#qset-id-input').val($(this).find('.qset-name-modal').data("qset-id")).trigger("change");
     $('#modal-launch').modal('hide');
 
     validateEditQuestionInput();
+
   });
 }

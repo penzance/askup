@@ -14,11 +14,15 @@
                   Choose Qset
                 </button>
                 <% if !params[:qset].nil? %>
-                  <span class="qset-display qset-chosen">
+                  <span class="qset-display">
                     <%= @qsets.find(params[:qset]).name %>
                   </span>
+                <% elsif !cookies[:new_question_qset_id].nil? %>
+                  <span class="qset-display">
+                    <%= @qsets.find(cookies[:new_question_qset_id]).name %>
+                  </span>
                 <% else %>
-                  <span class="qset-display no-qset-chosen">Qset Name</span>
+                  <span class="qset-display no-qset-chosen">No question set chosen</span>
                 <% end %>
                 </span>
                 <!-- hidden input field to pass in qset_id into params on submit -->
@@ -31,7 +35,9 @@
               <!-- Modal -->
               <%= render(:partial => "new_modal", :locals => {:qsets => @qsets}) %>
               <%= f.fields_for :answers do |a| %>
-                <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
+                <div class="form-group">
+                  <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
+                </div>
               <% end %>
               <div class="form-group">
                 <div class="center btn-div">
