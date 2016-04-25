@@ -37,9 +37,8 @@ function initEditQuestion() {
 // Closes modal, displays qset name next to Choose Qset button, and populates hidden qset-id input
 function selectQsetForNewQuestion() {
   $('.qset-selectable').click(function() {
-    $('.qset-display').text($(this).find('.qset-name-modal').text().trim());
+    $('.qset-display').text($(this).find('.qset-name-modal').data("qset-name"));
     $('.qset-display').removeClass("no-qset-chosen");
-    $('qset-display').addClass("qset-chosen");
     $('#qset-id-input').val($(this).find('.qset-name-modal').data("qset-id"));
     $('#modal-launch').modal('hide');
 
