@@ -27,6 +27,7 @@ function initEditQuestion() {
 
   selectQsetForNewQuestion();
 
+  // track qset_id after selecting qset from modal (uses js-cookie plugin)
   $('#qset-id-input').change(function() {
     Cookies.set('new_question_qset_id', this.value, { expires: 1000 });
   });
