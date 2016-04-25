@@ -1,5 +1,6 @@
-var quizQuestions = [];
-var quizAllIndex = 0;
+// GLOBAL VARIABLES
+var quizQuestions = []; //populated with JSON object that includes the questions and answers for the qset to be quizzed on
+var quizAllIndex = 0; //counts how many questions have been already quizzed and allows modal to close when you reach end of quizQuestions array
 
 function initQsets() {
   $('#qsets').on('change', function(event) {
@@ -30,10 +31,6 @@ function initQsets() {
   $('form').on('submit', function (event) {
     $('.modal :button').prop('disabled', true);
   });
-
-  $('.quiz-all').on('click', function (event) {
-    $('#question_display_Modal').modal('show');
-  });
 }
 
 function initQuestionDisplayModalForQuizAll() {
@@ -43,15 +40,15 @@ function initQuestionDisplayModalForQuizAll() {
   // The submit answer button is shown as well as an empty text input box.
   $('.submit-answer').show();
 
-  // The answer is initially hidden and so is the response + alert divs.
+  // The answer is initially hidden and so is the response.
   $('.answer-text').val('');
   $('.response, .answers').hide();
 
   initAnswerButton();
-  initUserFeedback();
+  initUserFeedbackQuizAll();
 
-  $modal.find('.modal-title').text(quizQuestions.questions[quizAllIndex].text);
-  $modal.find('.first-answer').text(quizQuestions.answers[quizAllIndex][0].text);
+  $modal.find('.modal-title').text(quizQuestions[quizAllIndex].text);
+  $modal.find('.first-answer').text(quizQuestions[quizAllIndex].answers[0].text);
 }
 
 function initDataForQuizAll() {
@@ -94,7 +91,7 @@ function initQuestionFilter() {
     // expecting filterType == 'all', 'mine', or 'other'
     var anyQuestionsToDisplay = anyQuestions(filterType);
     if (!anyQuestionsToDisplay) showNoQuestionNotification(noQuestionsMessage[filterType]);
-    $('#quizAllButtonID').attr('disabled', !anyQuestionsToDisplay);
+    $('.quiz-all').attr('disabled', !anyQuestionsToDisplay);
     $('.no-questions').toggleClass('hidden', anyQuestionsToDisplay);
     $('.my-question').toggleClass('hidden', filterType == 'other' || !anyQuestionsToDisplay);
     $('.other-question').toggleClass('hidden', filterType == 'mine' || !anyQuestionsToDisplay);
@@ -107,7 +104,7 @@ function initQuestionFilter() {
 }
 
 function questionJSON(qsetid) {
-  $.getJSON("/qsets/" + qsetid + "/qset_json?", {filter: Cookies.get('all_mine_other_filter')}, function(data) {
+ $.getJSON("/qsets/" + qsetid, {filter: Cookies.get('all_mine_other_filter')}, function(data) {
     quizQuestions = data;
     initQuestionDisplayModalForQuizAll();
   });
