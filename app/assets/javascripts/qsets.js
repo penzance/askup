@@ -41,7 +41,6 @@ function initQuestionDisplayModal($modal, $question_link) {
 
   initAnswerButton();
   initUserFeedback();
-  initVote();
 
   // Setting up the response buttons to have the correct q_id to send to the analytics.log and to also trigger the right feedback form
   $('#respond-yes, #respond-no, #respond-maybe').data('feedback-qid', $question_link.data('qid'));

@@ -19,7 +19,9 @@
   <div class="prettyform answers" style="display:none">
     <div class="box center">
       <h3>Answer:</h3>
-      <div class="net-votes"><p id="question-<%= @question.id %>-net-votes"><%= @question.plusminus %></p><br></div>
+      <div class="net-votes">
+        <p id="question-<%= @question.id %>-net-votes"><%= @question.plusminus %></p><br>
+      </div>
       <div class="question-voting">
         <div class="glyphicon glyphicon-triangle-top upvote-button" data-vote="upvote" data-vote-qid="<%= @question.id %>"></div>
         <div class="glyphicon glyphicon-triangle-bottom downvote-button" data-vote="downvote" data-vote-qid="<%= @question.id %>"></div>

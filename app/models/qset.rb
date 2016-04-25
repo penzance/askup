@@ -41,14 +41,18 @@ class Qset < ActiveRecord::Base
 
   def question_count_descendants_helper
     self.children.each_with_object(self.children.to_a) {|child, arr|
-      if child.settings(:permissions).qset_type == ('mixed' || 'subsets')
+      if ['mixed', 'subsets'].include?(child.settings(:permissions).qset_type)
         arr.concat child.question_count_descendants_helper
       end
     }.uniq
   end
 
   def question_count_descendants
-    [self] + question_count_descendants_helper
+    if ['mixed', 'subsets'].include?(self.settings(:permissions).qset_type)
+      [self] + question_count_descendants_helper
+    else
+      [self]
+    end
   end
 
   private
