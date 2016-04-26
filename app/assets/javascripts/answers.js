@@ -20,8 +20,6 @@ function handleUserFeedback(feedbackActive, feedbackString, feedbackQid) {
     $('.feedback-alert').removeClass('alert-danger alert-success').addClass('alert-maybe');
     $('.feedback-alert-text').text("Sort-of");
   }
-  $('.feedback-alert').slideDown();
-  $('.response').hide("slow");
 }
 
 // disables/enables submit button depending on if there is text in the answer box
@@ -29,7 +27,35 @@ function validateAnswer() {
   $('.submit-answer').attr('disabled', !$('.answer-text').val().trim());
 }
 
-function initUserFeedback() {
+function initUserFeedbackQuizAll() {
+  $('.btn-feedback').unbind().click(function(ev) {
+    ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
+    var $button = $(ev.target).closest('.btn-feedback');
+    var feedbackActive = $button.data('feedback-active');
+    var feedbackString = $button.data('feedback-string');
+    var feedbackQid = quizQuestions[quizAllIndex].id;
+    handleUserFeedback(feedbackActive, feedbackString, feedbackQid);
+
+    if (quizQuestions.length > (quizAllIndex + 1)){
+      quizAllIndex++;
+      $('.feedback-alert').slideDown(1000, function() {
+        initQuestionDisplayModalForQuizAll();
+      }).delay(1000)
+      .slideUp(800);
+    }
+    else {
+      $('.feedback-alert')
+      .slideDown(1000)
+      .delay(1000)
+      .slideUp('slow', function(){
+        $('#question_display_Modal').modal('hide');
+      });
+      quizAllIndex = 0;
+    }
+  });
+}
+
+function initUserFeedbackQuestionShow() {
   $('.btn-feedback').unbind().click(function(ev) {
     ev.preventDefault(); // prevents bootstrap from automatically adding a hidden attribute
     var $button = $(ev.target).closest('.btn-feedback');
@@ -37,6 +63,9 @@ function initUserFeedback() {
     var feedbackString = $button.data('feedback-string');
     var feedbackQid = $button.data('feedback-qid');
     handleUserFeedback(feedbackActive, feedbackString, feedbackQid);
+
+    $('.feedback-alert').slideDown();
+    $('.response').hide("slow");
   });
 }
 

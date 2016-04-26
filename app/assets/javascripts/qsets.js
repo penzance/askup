@@ -1,3 +1,7 @@
+// GLOBAL VARIABLES
+var quizQuestions = []; //populated with JSON object that includes the questions and answers for the qset to be quizzed on
+var quizAllIndex = 0; //counts how many questions have been already quizzed and allows modal to close when you reach end of quizQuestions array
+
 function initQsets() {
   $('#qsets').on('change', function(event) {
     var $selectedOption = $(this.options[this.selectedIndex]);
@@ -29,25 +33,28 @@ function initQsets() {
   });
 }
 
-function initQuestionDisplayModal($modal, $question_link) {
+function initQuestionDisplayModalForQuizAll() {
   // Creates the initial view of the modal.
+  var $modal = $('#question_display_Modal');
 
   // The submit answer button is shown as well as an empty text input box.
   $('.submit-answer').show();
 
-  // The answer is initially hidden and so is the response + alert divs.
+  // The answer is initially hidden and so is the response.
   $('.answer-text').val('');
-  $('.response, .answers, .feedback-alert').hide();
+  $('.response, .answers').hide();
 
   initAnswerButton();
-  initUserFeedback();
+  initUserFeedbackQuizAll();
 
-  // Setting up the response buttons to have the correct q_id to send to the analytics.log and to also trigger the right feedback form
-  $('#respond-yes, #respond-no, #respond-maybe').data('feedback-qid', $question_link.data('qid'));
+  $modal.find('.modal-title').text(quizQuestions[quizAllIndex].text);
+  $modal.find('.first-answer').text(quizQuestions[quizAllIndex].answers[0].text);
+}
 
-  // Populates the modal with the data received when the modal was clicked
-  $modal.find('.modal-title').text($question_link.data('question'));
-  $modal.find('.first-answer').text($question_link.data('answer'));
+function initDataForQuizAll() {
+  $('.feedback-alert').hide();
+  var qset_id = $('#qset-show-container').data('qset-id');
+  questionJSON(qset_id);
 }
 
 function initQuestionFilter() {
@@ -84,6 +91,7 @@ function initQuestionFilter() {
     // expecting filterType == 'all', 'mine', or 'other'
     var anyQuestionsToDisplay = anyQuestions(filterType);
     if (!anyQuestionsToDisplay) showNoQuestionNotification(noQuestionsMessage[filterType]);
+    $('.quiz-all').attr('disabled', !anyQuestionsToDisplay);
     $('.no-questions').toggleClass('hidden', anyQuestionsToDisplay);
     $('.my-question').toggleClass('hidden', filterType == 'other' || !anyQuestionsToDisplay);
     $('.other-question').toggleClass('hidden', filterType == 'mine' || !anyQuestionsToDisplay);
@@ -93,4 +101,11 @@ function initQuestionFilter() {
     var noQuestionsNotification = msg + ' <a href="/questions/new?qset=' + qsetId + '">Create one now!</a>';
     $('.no-questions > p').html(noQuestionsNotification);
   }
+}
+
+function questionJSON(qsetid) {
+ $.getJSON("/qsets/" + qsetid, {filter: Cookies.get('all_mine_other_filter')}, function(data) {
+    quizQuestions = data;
+    initQuestionDisplayModalForQuizAll();
+  });
 }

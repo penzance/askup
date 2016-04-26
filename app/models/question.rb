@@ -12,4 +12,8 @@ class Question < ActiveRecord::Base
   def to_s
     self.to_json(:include => :answers)
   end
+
+  def as_json(options={})
+    super(:include => {:answers => {}})
+  end
 end

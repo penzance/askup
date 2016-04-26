@@ -10,9 +10,25 @@ class QsetsController < ApplicationController
     end
   end
 
-  # handles the request to show different views depending on qset type
   def show
-    @qsets = @qset.children
+  respond_to do |format|
+    format.html { show_qset_html }
+    format.json { show_qset_json }
+    end
+  end
+
+  # returns ordered list of questions that have been pre-filtered based on current_user's permissions
+  def get_ordered_questions
+    # sorts by default by net votes; secondary sort by create date
+    @questions = Question.includes(:answers).where(qset_id: @qset.id).plusminus_tally.order(created_at: :desc)
+    @questions = @questions.where(user_id: current_user) if cannot? :see_all_questions, @qset
+  end
+
+  # handles the request to show different views depending on qset type
+  def show_qset_html
+    # check if view needs to render question counts for subsets
+    if @qset.settings(:permissions).qset_type != 'questions'
+      @qsets = @qset.children
       # a hash of qset question counts keyed by qset id
       @subset_question_counts = @qsets.map do |s|
         count = 0
@@ -25,11 +41,11 @@ class QsetsController < ApplicationController
         end
         [s.id, count]
       end.to_h
+    end
     # check if view needs to render questions
     if @qset.settings(:permissions).qset_type != 'subsets'
       @feedback_active = !!current_user
-      # sorts by default by net votes; secondary sort by create date
-      @questions = Question.includes(:answers).where(qset_id: @qset.id).plusminus_tally.order(created_at: :desc)
+      get_ordered_questions
       if can? :see_all_questions, @qset
         @filter_mine = true if cookies[:all_mine_other_filter] == 'mine'
         @filter_other = true if cookies[:all_mine_other_filter] == 'other'
@@ -38,7 +54,6 @@ class QsetsController < ApplicationController
         # show only the current user's questions
         cookies[:all_mine_other_filter] = 'mine'
         @filter_mine = true
-        @questions = @questions.where(user_id: current_user)
       end
       # display questions view
       if @qset.settings(:permissions).qset_type == 'questions'
@@ -47,6 +62,17 @@ class QsetsController < ApplicationController
     else
       render :show_subsets
     end
+  end
+
+  def show_qset_json
+    filter = params.permit(:filter).fetch(:filter, '')
+    get_ordered_questions
+    if filter == 'other'
+      @questions = @questions.where.not(user_id: current_user)
+    elsif filter =='mine'
+      @questions = @questions.where(user_id: current_user)
+    end
+    render json: @questions
   end
 
   # handles the request to save a new qset
