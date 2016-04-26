@@ -20,6 +20,10 @@
   margin-top:1.2em;
 }
 
+.btn-generate-q {
+  margin: 10px;
+}
+
 .col-sm-6 {
   width: 50%; /* override base responsive css that removes this when width < 768px */
 }
@@ -105,6 +109,11 @@
 
 .qset-list {
   cursor:default;  // cursor won't change to caret/text insert over badges
+}
+
+.qset-name-modal {
+  margin: 0;
+  display: inline;
 }
 
 .question-page-title{

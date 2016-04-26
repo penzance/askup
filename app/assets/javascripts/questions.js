@@ -1,6 +1,6 @@
 function validateEditQuestionInput() {
-  // disables/enables submit button depending on if there is text in the question and answer boxes
-  var isValid = $('#question_text').val().trim() && $('#question_answers_attributes_0_text').val().trim();
+  // disables/enables submit button if user chooses a qset and there is text in question and answer boxes
+  var isValid = $('#question_text').val().trim() && $('#question_answers_attributes_0_text').val().trim() && $('#qset-id-input').val().trim();
   $('.submit-question').attr('disabled', !isValid);
 }
 
@@ -25,8 +25,24 @@ function initEditQuestion() {
   // check for valid input each time the user presses a key in the #question_text form field
   $('#question_text, #question_answers_attributes_0_text').keyup(validateEditQuestionInput);
 
-  // track qset user created a question in
-  $('#question_qset_id').change(function() {
+  selectQsetForNewQuestion();
+
+  // track qset_id after selecting qset from modal (uses js-cookie plugin)
+  $('#qset-id-input').change(function() {
     Cookies.set('new_question_qset_id', this.value, { expires: 1000 });
+  });
+
+}
+
+// Closes modal, displays qset name next to Choose Qset button, and populates hidden qset-id input
+function selectQsetForNewQuestion() {
+  $('.qset-selectable').click(function() {
+    $('.qset-display').text($(this).find('.qset-name-modal').data("qset-name"));
+    $('.qset-display').removeClass("no-qset-chosen");
+    $('#qset-id-input').val($(this).find('.qset-name-modal').data("qset-id")).trigger("change");
+    $('#modal-launch').modal('hide');
+
+    validateEditQuestionInput();
+
   });
 }

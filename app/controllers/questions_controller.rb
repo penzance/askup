@@ -15,12 +15,18 @@ class QuestionsController < ApplicationController
   def new
     @question.answers.build
     @qsets = Qset.all
+    @qset_id = nil
+    @qset_name = ""
     prev_cookie_id = cookies[:new_question_qset_id].to_i
     if !params[:qset].nil?
       @question.qset_id = params[:qset]
       cookies[:new_question_qset_id] = params[:qset]
+      @qset_id = params[:qset]
+      @qset_name = @qsets.find(params[:qset]).name
     elsif @qsets.map(&:id).include?(prev_cookie_id)
       @question.qset_id = prev_cookie_id
+      @qset_id = prev_cookie_id
+      @qset_name = @qsets.find(prev_cookie_id).name
     else
       cookies.delete :new_question_qset_id
     end

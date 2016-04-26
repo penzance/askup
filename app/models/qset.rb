@@ -1,4 +1,5 @@
 class Qset < ActiveRecord::Base
+  extend ActsAsTree::TreeWalker
   has_many :questions
   has_many :members, class_name: 'User', foreign_key: 'org_id'
   validates_presence_of :name

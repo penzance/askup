@@ -5,14 +5,26 @@
         <div class="box">
           <h2 class="title-no-margin center">New Question</h2>
           <br>
-            <%= form_for @question do |f| %>
+            <%= form_for(@question) do |f| %>
               <div class="form-group">
-                <%= f.text_field :text, placeholder: 'Question', class: 'form-control', autofocus: true %>
+                <%= f.text_field :text, placeholder: 'Question',  class: 'form-control', autofocus: true %>
               </div>
               <div class="form-group">
-                <%= f.label :qset_id, 'Qset', {class: 'control-label'} %>
-                <%= f.collection_select(:qset_id, Qset.find(current_user.org).descendants, :id, :name, {}, {class: 'form-control'}) %>
+                <button type="button" class="btn btn-primary btn-theme btn-generate-q" data-toggle="modal" data-target="#modal-launch">
+                  Choose Qset
+                </button>
+                <% if @qset_id %>
+                  <span class="qset-display">
+                    <%= @qset_name %>
+                  </span>
+                  <input type="text" name="question[qset_id]" id="qset-id-input" class="hidden" value="<%= @qset_id %>">
+                <% else %>
+                  <span class="qset-display no-qset-chosen">No question set chosen</span>
+                  <input type="text" name="question[qset_id]" id="qset-id-input" class="hidden">
+                <% end %>
               </div>
+              <!-- Modal -->
+              <%= render(:partial => "new_modal", :locals => {:qsets => @qsets}) %>
               <%= f.fields_for :answers do |a| %>
                 <div class="form-group">
                   <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
