@@ -46,6 +46,7 @@ function initUserFeedbackQuizAll() {
     else {
       $('.feedback-alert')
       .slideDown(1000)
+      .delay(1000)
       .slideUp('slow', function(){
         $('#question_display_Modal').modal('hide');
       });
