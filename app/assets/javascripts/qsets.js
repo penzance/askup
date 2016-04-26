@@ -66,7 +66,7 @@ function initQuestionFilter() {
   var qsetId = $('#qset-show-container').data('qset-id');
 
   // recalls preferred filter option
-  filterBy(Cookies.get('all_mine_other_filter'));
+  filterBy(Cookies.get('all_mine_other_filter') || 'all');
 
   // changes to filter 1. show filtered set of questions, and 2. are tracked in a user cookie
   $('.filter-choice').click(function(){
