@@ -13,22 +13,13 @@
                 <button type="button" class="btn btn-primary btn-theme btn-generate-q" data-toggle="modal" data-target="#modal-launch">
                   Choose Qset
                 </button>
-                <% if !params[:qset].nil? %>
+                <% if @qset_id %>
                   <span class="qset-display">
-                    <%= @qsets.find(params[:qset]).name %>
+                    <%= @qset_name %>
                   </span>
-                <% elsif !cookies[:new_question_qset_id].nil? %>
-                  <span class="qset-display">
-                    <%= @qsets.find(cookies[:new_question_qset_id]).name %>
-                  </span>
+                  <input type="text" name="question[qset_id]" id="qset-id-input" class="hidden" value="<%= @qset_id %>">
                 <% else %>
                   <span class="qset-display no-qset-chosen">No question set chosen</span>
-                <% end %>
-                </span>
-                <!-- hidden input field to pass in qset_id into params on submit -->
-                <% if !params[:qset].nil? %>
-                  <input type="text" name="question[qset_id]" id="qset-id-input" class="hidden" value="<%= @qsets.find(params[:qset]).id %>">
-                <% else %>
                   <input type="text" name="question[qset_id]" id="qset-id-input" class="hidden">
                 <% end %>
               </div>
