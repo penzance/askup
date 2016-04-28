@@ -6,33 +6,31 @@
         <h4 class="modal-title" id="modal-launch-title">Choose Qset</h4>
       </div>
       <div class="modal-body">
-        <!-- displays qsets in hierarchical order -->
+        <%# displays qsets in hierarchical order %>
+        <%# root/org not included (walk_tree used on an instance does not include that instance in the tree) %>
         <div class="list-group">
-          <% qsets.walk_tree do |qset, level| %>
-            <!-- don't display root qset  -->
-            <% if level > 0 %>
-              <% level_viz = '&nbsp;&nbsp;&nbsp;&nbsp;' * (level - 1) %>
-              <!-- display disabled subset qsets -->
-              <% if qset.settings(:permissions).qset_type == 'subsets' %>
-                <a href="#" class="list-group-item disabled">
-                  <%= level_viz.html_safe %>
-                  <span class="glyphicon glyphicon-folder-close"></span>
-                  <p class="qset-name-modal">
-                    <%= '&nbsp;&nbsp;'.html_safe %>
-                    <%= qset.name %>
-                  </p>
-                </a>
-              <!-- display selectable question/mixed qsets -->
-              <% else %>
-                <a href="#" class="list-group-item qset-selectable">
-                  <%= level_viz.html_safe %>
-                  <span class="glyphicon glyphicon-list-alt"></span>
-                  <p class="qset-name-modal" data-qset-id="<%= qset.id %>" data-qset-name="<%= qset.name %>">
-                    <%= '&nbsp;&nbsp;'.html_safe %>
-                    <%= qset.name %>
-                  </p>
-                </a>
-              <% end %>
+          <% qset.walk_tree do |qset, level| %>
+            <% level_viz = '&nbsp;&nbsp;&nbsp;&nbsp;' * level %>
+            <%# display disabled subset qsets %>
+            <% if qset.settings(:permissions).qset_type == 'subsets' %>
+              <a href="#" class="list-group-item disabled">
+                <%= level_viz.html_safe %>
+                <span class="glyphicon glyphicon-folder-close"></span>
+                <p class="qset-name-modal">
+                  <%= '&nbsp;&nbsp;'.html_safe %>
+                  <%= qset.name %>
+                </p>
+              </a>
+            <%# display selectable question/mixed qsets %>
+            <% else %>
+              <a href="#" class="list-group-item qset-selectable">
+                <%= level_viz.html_safe %>
+                <span class="glyphicon glyphicon-list-alt"></span>
+                <p class="qset-name-modal" data-qset-id="<%= qset.id %>" data-qset-name="<%= qset.name %>">
+                  <%= '&nbsp;&nbsp;'.html_safe %>
+                  <%= qset.name %>
+                </p>
+              </a>
             <% end %>
           <% end %>
         </div>
