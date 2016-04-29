@@ -12,23 +12,35 @@ class QuestionsController < ApplicationController
   end
 
   # loads the new question page, allowing user to enter a new question/answer combo in a form
+  # a GET request to this endpoint with the qset={qset_id} param will set the default qset
+  # in the form; if that is not present, check if there is a default qset specified in the
+  # session cookies (e.g. by a previously created question). If no valid default qset can be
+  # determined, do not set the default qset to anything (make user choose from available qsets)
   def new
     @question.answers.build
-    @qsets = Qset.all
-    @qset_id = nil
-    @qset_name = ""
-    prev_cookie_id = cookies[:new_question_qset_id].to_i
-    if !params[:qset].nil?
-      @question.qset_id = params[:qset]
-      cookies[:new_question_qset_id] = params[:qset]
-      @qset_id = params[:qset]
-      @qset_name = @qsets.find(params[:qset]).name
-    elsif @qsets.map(&:id).include?(prev_cookie_id)
-      @question.qset_id = prev_cookie_id
-      @qset_id = prev_cookie_id
-      @qset_name = @qsets.find(prev_cookie_id).name
+    # user-accessible qsets (qsets in the user's org) that can store questions
+    # (note that the root/org qset is explicitly not included / allowed)
+    @qsets = current_user.org.descendants
+    if params[:qset]
+      # if the request param is valid, use it
+      selected_qset = get_valid_qset(@qsets, params[:qset].to_i)
     else
-      cookies.delete :new_question_qset_id
+      # if we have a cookie, use it
+      # (the to_i call returns nil if it's not a valid integer)
+      cookie_default_qset_id = cookies[:new_question_qset_id].to_i
+      if cookie_default_qset_id
+        selected_qset = get_valid_qset(@qsets, cookie_default_qset_id)
+      else
+        # we don't have a valid cookie value for the default qset, so remove the cookie
+        # (the UI will not set a default for it to be reset by the client)and
+        cookies.delete :new_question_qset_id
+        selected_qset = nil
+      end
+    end
+
+    if selected_qset
+      @question.qset_id = selected_qset.id
+      @qset_name = selected_qset.name
     end
   end
 
@@ -89,5 +101,17 @@ class QuestionsController < ApplicationController
   def question_params
     # todo: we may need to validate answers_attribute :id so user cannot update someone else's answers
     params.require(:question).permit(:text, :qset_id, answers_attributes: [:id, :text, '_destroy'])
+  end
+
+  # helper method for checking if a Qset with a given id is a member of a list of Qsets
+  # returns the matching Qset in an array (list) of Qsets (matches by id)
+  # if no Qset is found for qset_id, returns nil
+  def get_valid_qset(qset_list, qset_id)
+    index = qset_list.find_index {|qset| qset.id == qset_id}
+    if index
+      qset_list[index]
+    else
+      nil
+    end
   end
 end

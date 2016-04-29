@@ -13,18 +13,19 @@
                 <button type="button" class="btn btn-primary btn-theme btn-generate-q" data-toggle="modal" data-target="#modal-launch">
                   Choose Qset
                 </button>
-                <% if @qset_id %>
+                <% if @question.qset_id %>
                   <span class="qset-display">
                     <%= @qset_name %>
                   </span>
-                  <input type="text" name="question[qset_id]" id="qset-id-input" class="hidden" value="<%= @qset_id %>">
+                  <input type="text" name="question[qset_id]" id="qset-id-input" class="hidden" value="<%= @question.qset_id %>">
                 <% else %>
                   <span class="qset-display no-qset-chosen">No question set chosen</span>
                   <input type="text" name="question[qset_id]" id="qset-id-input" class="hidden">
                 <% end %>
               </div>
-              <!-- Modal -->
-              <%= render(:partial => "new_modal", :locals => {:qsets => @qsets}) %>
+              <!-- Start select qset modal -->
+              <%= render(:partial => "new_modal", :locals => {:qset => current_user.org }) %>
+              <!-- End select qset modal -->
               <%= f.fields_for :answers do |a| %>
                 <div class="form-group">
                   <%= a.text_area :text, placeholder: 'Answer',  class: 'form-control' %>
